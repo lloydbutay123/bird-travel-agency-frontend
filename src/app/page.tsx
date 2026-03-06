@@ -14,8 +14,14 @@ import { reviews } from "@/data/reviews";
 import Button from "@/components/ui/Button";
 import TravelSearch from "@/components/search/TravelSearch";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleShowFlights = () => {
+    router.push("/flights/results");
+  };
   return (
     <div className="relative min-h-screen w-full justify-center pt-7.5">
       <div className="relative mx-auto w-full max-w-345 h-149.75 rounded-3xl overflow-hidden">
@@ -42,7 +48,12 @@ export default function Home() {
         </p>
       </div>
 
-      <TravelSearch showTabs={true} />
+      <TravelSearch
+        header="tabs"
+        position="absolute"
+        top={532}
+        onShowFlights={handleShowFlights}
+      />
 
       <div className="flex flex-col justify-center mt-60 mb-20">
         <SectionHeader
@@ -55,7 +66,7 @@ export default function Home() {
             return (
               <div
                 key={i}
-                className="p-4 flex items-center shadow-lg gap-4 rounded-2xl bg-white"
+                className="p-4 flex items-center shadow-[0_4px_16px_rgba(17,34,17,0.05)] gap-4 rounded-2xl bg-white"
               >
                 <div className="relative w-22.5 h-22.5 rounded-lg overflow-hidden">
                   <Image
@@ -157,7 +168,7 @@ export default function Home() {
                   <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-[20px] bg-[#8DD3BB]/40" />
 
                   {/* card */}
-                  <div className="relative h-full rounded-[20px] bg-white shadow-lg p-5 lg:p-6">
+                  <div className="relative h-full rounded-[20px] bg-white shadow-[2px_4px_16px_rgba(17,34,17,0.10)] p-5 lg:p-6">
                     <div className="mb-6">
                       <p className="font-tradegothic line-clamp-2 min-h-20 text-[18px] lg:text-[20px] font-bold leading-snug">
                         &apos;{r.title}&apos;

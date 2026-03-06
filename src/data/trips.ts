@@ -53,3 +53,10 @@ export const trips = [
     type: "Flights • Flights • Flights",
   },
 ];
+
+export const tripTypes = [
+  "Round trip",
+  "On Way",
+  "Multi-City",
+  "My Dates Are Flexible",
+];

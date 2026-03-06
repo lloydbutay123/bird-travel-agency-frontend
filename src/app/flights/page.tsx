@@ -1,10 +1,17 @@
+"use client";
 import TravelSearch from "@/components/search/TravelSearch";
 import Button from "@/components/ui/Button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { destinations } from "@/data/destinations";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function FlightsPage() {
+  const router = useRouter();
+
+  const handleShowFlights = () => {
+    router.push("/flights/results");
+  };
   return (
     <div className="flex flex-col gap-69 min-h-screen">
       <div className="relative h-134.25 w-full pt-20 pb-30 pr-43.5 pl-31.5">
@@ -24,7 +31,12 @@ export default function FlightsPage() {
           </p>
         </div>
       </div>
-      <TravelSearch top="[551px]" />
+      <TravelSearch
+        top={551}
+        onShowFlights={handleShowFlights}
+        header="title"
+        position="absolute"
+      />
       <div className="flex flex-col gap-20 pb-30">
         <div>
           <SectionHeader
