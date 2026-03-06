@@ -72,7 +72,7 @@ export default function Footer() {
                     <Link
                       key={i}
                       href={link.href}
-                      className="text-[#112211]/70 min-w-[175.2px] leading-none"
+                      className="text-[#112211]/70 text-[14px] min-w-[175.2px]"
                     >
                       {link.label}
                     </Link>

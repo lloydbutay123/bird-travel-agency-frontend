@@ -2,7 +2,7 @@ import React from "react";
 
 type ButtonProps = {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
   className?: string;
@@ -26,7 +26,7 @@ export default function Button({
   };
   return (
     <button
-      className={`flex items-center gap-1 font-medium rounded-sm py-2 px-4 ${variants[variant]} ${className}`}
+      className={`flex items-center text-[14px] gap-1 font-medium rounded-sm py-2 px-4 ${variants[variant]} ${className}`}
       disabled={disabled}
       type={type}
       onClick={onClick}
