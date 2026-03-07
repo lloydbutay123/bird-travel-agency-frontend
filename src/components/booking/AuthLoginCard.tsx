@@ -21,7 +21,7 @@ export default function AuthLoginCard() {
           We’ll call or text you to confirm your number. Standard message and
           data rates apply. Privacy Policy
         </p>
-        <Button className="h-12">Continue</Button>
+        <Button>Continue</Button>
       </div>
       <div className="flex items-center gap-6 justify-between">
         <Divider />

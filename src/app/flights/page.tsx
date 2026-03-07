@@ -86,9 +86,7 @@ export default function FlightsPage() {
                       ${destination.price}
                     </p>
                   </div>
-                  <Button className="w-full h-12! flex justify-center">
-                    Book Flight
-                  </Button>
+                  <Button className="w-full">Book Flight</Button>
                 </div>
               </div>
             ))}
@@ -121,12 +119,7 @@ export default function FlightsPage() {
                       </div>
                       <p className="text-[14px]">{destination.description}</p>
                     </div>
-                    <Button
-                      variant="secondary"
-                      className="h-[48px]! flex justify-center"
-                    >
-                      Book Flight
-                    </Button>
+                    <Button variant="secondary">Book Flight</Button>
                   </div>
 
                   <div className="flex-1">

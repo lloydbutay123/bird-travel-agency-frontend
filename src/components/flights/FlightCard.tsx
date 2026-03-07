@@ -75,13 +75,10 @@ export default function FlightCard({
         <Divider />
 
         <div className="flex gap-4">
-          <Button className="w-12 h-12" variant="outline">
+          <Button className="w-12" variant="outline">
             <FaRegHeart size={20} />
           </Button>
-          <Button
-            className="w-full flex justify-center font-semibold"
-            onClick={onViewDetails}
-          >
+          <Button className="w-full" onClick={onViewDetails}>
             View Deals
           </Button>
         </div>

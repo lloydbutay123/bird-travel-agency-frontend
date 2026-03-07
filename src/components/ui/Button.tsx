@@ -26,7 +26,7 @@ export default function Button({
   };
   return (
     <button
-      className={`flex items-center justify-center text-[14px] gap-1 font-medium rounded-sm py-2 px-4 cursor-pointer ${variants[variant]} ${className}`}
+      className={`flex items-center justify-center h-12 text-[14px] gap-1 font-medium rounded-sm py-2 px-4 cursor-pointer ${variants[variant]} ${className}`}
       disabled={disabled}
       type={type}
       onClick={onClick}

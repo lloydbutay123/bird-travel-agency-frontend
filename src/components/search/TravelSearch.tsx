@@ -55,7 +55,7 @@ export default function TravelSearch({
             </div>
           )}
           <div className="flex gap-6 items-end">
-            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-1">
+            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
               <legend className="px-2 text-sm text-gray-500">From - To</legend>
               <div className="flex items-center justify-between">
                 <span className="text-[16px] h-10 flex items-center font-medium text-gray-800">
@@ -66,7 +66,7 @@ export default function TravelSearch({
                 </div>
               </div>
             </fieldset>
-            <fieldset className="w-35 border border-gray-400 rounded-md pl-4 py-1">
+            <fieldset className="w-35 border border-gray-400 rounded-md pl-4 py-0.5">
               <legend className="px-2 text-sm text-gray-500">Trip</legend>
               <div className="flex items-center justify-between">
                 <span className="text-[16px] h-10 flex items-center font-medium text-gray-800">
@@ -77,7 +77,7 @@ export default function TravelSearch({
                 </div>
               </div>
             </fieldset>
-            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-1">
+            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
               <legend className="px-2 text-sm text-gray-500">
                 Depart- Return
               </legend>
@@ -87,7 +87,7 @@ export default function TravelSearch({
                 </span>
               </div>
             </fieldset>
-            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-1">
+            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
               <legend className="px-2 text-sm text-gray-500">
                 Passenger - Class
               </legend>
@@ -98,7 +98,7 @@ export default function TravelSearch({
               </div>
             </fieldset>
             {searchIcon && (
-              <Button className="flex justify-center h-15 w-15">
+              <Button className="h-14 w-14">
                 <FaSearch size={24} />
               </Button>
             )}

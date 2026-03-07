@@ -54,7 +54,7 @@ export default function FlightResults() {
                   />
                 ))}
               </div>
-              <Button className="h-12 bg-[#112211]! text-white flex justify-center">
+              <Button className="bg-[#112211] text-white">
                 Show more results
               </Button>
             </div>

@@ -46,14 +46,14 @@ export default function FlightHeader({
       <div>
         <h3 className="text-[#FF8682] text-[32px] font-bold mb-4">${price}</h3>
         <div className="flex gap-3.75">
-          <Button variant="outline" className="w-12 h-12">
+          <Button variant="outline" className="w-12">
             <FaRegHeart size={20} />
           </Button>
-          <Button variant="outline" className="w-12 h-12">
+          <Button variant="outline" className="w-12">
             <FaShareNodes size={20} />
           </Button>
           <Link href={bookingHref}>
-            <Button className="font-semibold text-[14px] w-37.5 justify-center">
+            <Button className="font-semibold! text-[14px] w-37.5">
               Book Now
             </Button>
           </Link>
