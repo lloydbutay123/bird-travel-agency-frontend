@@ -3,14 +3,10 @@ import FareFeatures from "@/components/flights/FareFeatures";
 import FlightHeader from "@/components/flights/FlightHeader";
 import FlightSegmentCard from "@/components/flights/FlightSegmentCard";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import Divider from "@/components/ui/Divider";
 import { fareClasses } from "@/data/fareClasses";
 import { flightSegments } from "@/data/flightSegment";
 import { policies } from "@/data/policies";
 import Image from "next/image";
-import { FaClock, FaPlane, FaWifi } from "react-icons/fa";
-import { IoFastFood } from "react-icons/io5";
-import { MdAirlineSeatReclineNormal } from "react-icons/md";
 
 export default function FlightDetails() {
   return (
@@ -29,6 +25,7 @@ export default function FlightDetails() {
           ratings={2.4}
           reviews={54}
           price={400}
+          bookingHref={`/flights/${1}/booking`}
         />
 
         <div className="relative w-full h-98.75 rounded-xl overflow-hidden mb-10">

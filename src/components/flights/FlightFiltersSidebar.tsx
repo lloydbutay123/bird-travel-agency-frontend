@@ -1,9 +1,10 @@
-import AirlinesFilter from "../filters/AirlinesFilter";
+import { tripTypes } from "@/data/trips";
+import CheckboxFilterGroup from "../filters/CheckboxFilterGroup";
 import DepartureTimeFilter from "../filters/DepartureTimeFilter";
 import PriceFilter from "../filters/PriceFilter";
 import RatingsFilter from "../filters/RatingsFilter";
-import TripTypesFiler from "../filters/TripTypesFilter";
 import Divider from "../ui/Divider";
+import { airlines } from "@/data/airlines";
 
 export default function FlightFilterSidebar() {
   return (
@@ -15,9 +16,9 @@ export default function FlightFilterSidebar() {
       <Divider />
       <RatingsFilter />
       <Divider />
-      <AirlinesFilter />
+      <CheckboxFilterGroup title="Airlines" options={airlines} />
       <Divider />
-      <TripTypesFiler />
+      <CheckboxFilterGroup title="Trips" options={tripTypes} />
     </div>
   );
 }

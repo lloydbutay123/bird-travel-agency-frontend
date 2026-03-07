@@ -1,7 +1,10 @@
+"use client";
+
 import { FaLocationDot, FaShareNodes } from "react-icons/fa6";
 import RatingBadge from "../ui/RatingBadge";
 import Button from "../ui/Button";
 import { FaRegHeart } from "react-icons/fa";
+import Link from "next/link";
 
 type FlightHeaderProps = {
   title: string;
@@ -9,6 +12,7 @@ type FlightHeaderProps = {
   ratings: number;
   reviews: number;
   price: number;
+  bookingHref: string;
 };
 
 export default function FlightHeader({
@@ -17,6 +21,7 @@ export default function FlightHeader({
   ratings,
   reviews,
   price,
+  bookingHref,
 }: FlightHeaderProps) {
   return (
     <div className="flex justify-between mb-8">
@@ -47,9 +52,11 @@ export default function FlightHeader({
           <Button variant="outline" className="w-12 h-12">
             <FaShareNodes size={20} />
           </Button>
-          <Button className="font-semibold text-[14px] w-37.5 justify-center">
-            Book Now
-          </Button>
+          <Link href={bookingHref}>
+            <Button className="font-semibold text-[14px] w-37.5 justify-center">
+              Book Now
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,8 +1,11 @@
+"use client";
+
 import { FaClock, FaPlane, FaWifi } from "react-icons/fa";
 import Divider from "../ui/Divider";
 import { IoFastFood } from "react-icons/io5";
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 type FlightSegmentCardProps = {
   date: string;
@@ -37,12 +40,27 @@ export default function FlightSegmentCard({
   arrivalTime,
   arrivalAirport,
 }: FlightSegmentCardProps) {
+  const pathname = usePathname();
+
+  const isBooking = pathname.includes("/booking");
+
   return (
     <div className="bg-white rounded-xl shadow-[0_4px_16px_rgba(17,34,17,0.05)] px-6 py-8">
+      {isBooking && (
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-[24px] font-bold font-tradegothic text-[#112211]">
+            Emirates A350 Airbus
+          </h3>
+          <h4 className="text-[32px] text-[#FF8682] font-bold">$240</h4>
+        </div>
+      )}
       <div className="flex items-center justify-between mb-6">
-        <h4 className="font-tradegothic text-[20px] font-bold text-[#112211]">
+        <h4
+          className={`font-tradegothic ${!isBooking ? "text-[20px]" : "text-[16px]"} font-bold text-[#112211]`}
+        >
           {date}
         </h4>
+
         <p className="text-[20px] font-medium text-[#112211]/75">{duration}</p>
       </div>
       <div className="flex  items-center justify-between mb-10">
@@ -68,7 +86,9 @@ export default function FlightSegmentCard({
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-center gap-20">
+      <div
+        className={`flex items-center ${!isBooking ? "justify-center gap-20" : "justify-between"}`}
+      >
         <div className="flex items-center gap-4">
           <h4 className="text-[24px] text-[#112211] font-semibold">
             {departureTime}
