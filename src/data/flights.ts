@@ -1,0 +1,58 @@
+export const flights = [
+  {
+    id: 1,
+    airlineLogo:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/330px-Emirates_logo.svg.png",
+    rating: 4.5,
+    reviews: 54,
+    price: 104,
+    departureTime: "12:00 pm",
+    arrivalTime: "01:28 pm",
+    stops: "non stop",
+    duration: "2h 28m",
+    airline: "Emirates",
+    route: "EWR-BNA",
+  },
+  {
+    id: 2,
+    airlineLogo:
+      "https://logos-world.net/wp-content/uploads/2023/01/Philippine-Airlines-Logo-500x281.png",
+    rating: 4.5,
+    reviews: 54,
+    price: 104,
+    departureTime: "12:00 pm",
+    arrivalTime: "01:28 pm",
+    stops: "non stop",
+    duration: "2h 28m",
+    airline: "PAL",
+    route: "EWR-BNA",
+  },
+  {
+    id: 3,
+    airlineLogo:
+      "https://logos-world.net/wp-content/uploads/2023/01/Cebu-Pacific-Logo-500x281.png",
+    rating: 4.5,
+    reviews: 54,
+    price: 104,
+    departureTime: "12:00 pm",
+    arrivalTime: "01:28 pm",
+    stops: "non stop",
+    duration: "2h 28m",
+    airline: "CEB",
+    route: "EWR-BNA",
+  },
+  {
+    id: 4,
+    airlineLogo:
+      "https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Logo-700x394.png",
+    rating: 4.5,
+    reviews: 54,
+    price: 104,
+    departureTime: "12:00 pm",
+    arrivalTime: "01:28 pm",
+    stops: "non stop",
+    duration: "2h 28m",
+    airline: "Emirates",
+    route: "EWR-BNA",
+  },
+];
