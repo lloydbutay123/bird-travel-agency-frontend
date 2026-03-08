@@ -20,7 +20,7 @@ export const destinations = [
     id: 2,
     city: "Paris",
     title: "A Paris Adventure",
-    price: "600",
+    price: 600,
     image:
       "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     isFeatured: false,
@@ -29,7 +29,7 @@ export const destinations = [
     id: 3,
     city: "London",
     title: "London eye adventure",
-    price: "350",
+    price: 350,
     image:
       "https://images.unsplash.com/photo-1534974790529-3af7cf1c4075?q=80&w=1087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     isFeatured: false,
@@ -38,7 +38,7 @@ export const destinations = [
     id: 4,
     city: "Columbia",
     title: "Amazing streets",
-    price: "700",
+    price: 700,
     image:
       "https://images.unsplash.com/photo-1606298246186-08868ab77562?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     isFeatured: false,

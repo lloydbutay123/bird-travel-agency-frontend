@@ -1,37 +1,20 @@
 "use client";
 
 import AuthLoginCard from "@/components/booking/AuthLoginCard";
-import PaymentOptionCard from "@/components/booking/PaymentOptionCard";
+import PaymentOptionSection from "@/components/booking/PaymentOptionSection";
 import PriceSummaryCard from "@/components/booking/PriceSummaryCard";
 import FlightSegmentCard from "@/components/flights/FlightSegmentCard";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import Container from "@/components/ui/Container";
+import { priceItems } from "@/data/priceItems";
 import { useState } from "react";
-
-const priceItems = [
-  {
-    label: "Base Fare",
-    value: 400,
-  },
-  {
-    label: "Discount",
-    value: 400,
-  },
-  {
-    label: "Taxes",
-    value: 400,
-  },
-  {
-    label: "Service Fee",
-    value: 400,
-  },
-];
 
 export default function BookingDetails() {
   const [paymentOption, setPaymentOption] = useState("full");
 
   return (
     <div className="min-h-screen">
-      <div className="w-full max-w-7xl mx-auto pt-12 pb-30">
+      <Container className="pt-12 pb-30 max-w-7xl!">
         <Breadcrumb
           items={[
             { label: "Turkey" },
@@ -53,24 +36,10 @@ export default function BookingDetails() {
               arrivalTime="12:00 pm"
               arrivalAirport="Nashville (BNA)"
             />
-            <div className="p-4 flex flex-col gap-4 rounded-xl bg-white shadow-[2px_4px_16px_rgba(17,34,17,0.10)]">
-              <PaymentOptionCard
-                title="Pay in full"
-                description="Pay the total and you are all set"
-                value="full"
-                selected={paymentOption === "full"}
-                onSelect={setPaymentOption}
-              />
-
-              <PaymentOptionCard
-                title="Pay part now, part later"
-                description="Pay $207.43 now, and the rest ($207.43) will be automatically charged to the same payment method on Nov 14, 2022. No extra fees."
-                value="partial"
-                moreInfo
-                selected={paymentOption === "partial"}
-                onSelect={setPaymentOption}
-              />
-            </div>
+            <PaymentOptionSection
+              selected={paymentOption}
+              onSelect={setPaymentOption}
+            />
             <AuthLoginCard />
           </div>
           <PriceSummaryCard
@@ -84,7 +53,7 @@ export default function BookingDetails() {
             total={400}
           />
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

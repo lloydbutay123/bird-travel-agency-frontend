@@ -3,6 +3,7 @@ import FareFeatures from "@/components/flights/FareFeatures";
 import FlightSegmentCard from "@/components/flights/FlightSegmentCard";
 import ListingHeader from "@/components/listings/ListingHeader";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import Container from "@/components/ui/Container";
 import { fareClasses } from "@/data/fareClasses";
 import { flightSegments } from "@/data/flightSegment";
 import { policies } from "@/data/policies";
@@ -11,7 +12,7 @@ import Image from "next/image";
 export default function FlightDetails() {
   return (
     <div className="min-h-screen">
-      <div className="mt-12 max-w-308 mx-auto pb-30">
+      <Container className="mt-12 pb-30">
         <Breadcrumb
           items={[
             { label: "Turkey" },
@@ -61,7 +62,7 @@ export default function FlightDetails() {
             />
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

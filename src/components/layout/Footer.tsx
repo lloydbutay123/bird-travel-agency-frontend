@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import Button from "../ui/Button";
+import Container from "../ui/Container";
 
 export default function Footer() {
   return (
     <footer className="relative h-143.25 w-full">
-      <div className="absolute z-10 flex justify-between top-0 px-6 bg-[#CDEAE1] w-full max-w-308 left-1/2 -translate-x-1/2 rounded-[20px]">
+      <Container className="absolute z-10 flex justify-between top-0 px-6 bg-[#CDEAE1] left-1/2 -translate-x-1/2 rounded-[20px]">
         <div className="py-6">
           <p className="font-tradegothic leading-13.5 w-92 mb-6 text-[44px] font-bold">
             Subscribe Newsletter
@@ -28,7 +29,7 @@ export default function Footer() {
               type="submit"
               onClick={() => {}}
               variant="secondary"
-              className="bg-black! text-white!"
+              className="bg-black! text-white! h-14"
             >
               Subscribe
             </Button>
@@ -42,9 +43,9 @@ export default function Footer() {
           height={400}
           className="h-auto w-100"
         />
-      </div>
+      </Container>
       <div className="absolute bottom-0 w-full bg-[#8DD3BB] h-105.5">
-        <div className="absolute flex gap-35 w-full max-w-308 bottom-16 left-1/2 -translate-x-1/2">
+        <Container className="absolute flex gap-35 bottom-16 left-1/2 -translate-x-1/2">
           <div>
             <div className="relative h-12.5 w-25 mb-6">
               <Image
@@ -81,7 +82,7 @@ export default function Footer() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </div>
     </footer>
   );

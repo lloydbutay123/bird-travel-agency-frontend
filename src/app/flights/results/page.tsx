@@ -4,6 +4,7 @@ import FlightFilterSidebar from "@/components/flights/FlightFiltersSidebar";
 import FlightSortBar from "@/components/flights/FlightsSortBar";
 import TravelSearch from "@/components/search/TravelSearch";
 import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
 import Divider from "@/components/ui/Divider";
 import { flights } from "@/data/flights";
 import { useRouter } from "next/navigation";
@@ -23,7 +24,7 @@ export default function FlightResults() {
   return (
     <div className="flex flex-col gap-8 min-h-screen py-12">
       <TravelSearch position="relative" searchIcon={true} showActions={false} />
-      <div className="w-full max-w-308 mx-auto flex gap-6">
+      <Container className="flex gap-6">
         <FlightFilterSidebar />
         <div className="flex-1">
           <div className="h-340 flex gap-[15.5px]">
@@ -60,7 +61,7 @@ export default function FlightResults() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

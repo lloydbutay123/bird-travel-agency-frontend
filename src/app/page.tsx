@@ -15,6 +15,7 @@ import Button from "@/components/ui/Button";
 import TravelSearch from "@/components/search/TravelSearch";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { useRouter } from "next/navigation";
+import Container from "@/components/ui/Container";
 
 export default function Home() {
   const router = useRouter();
@@ -55,13 +56,13 @@ export default function Home() {
         onShowFlights={handleShowFlights}
       />
 
-      <div className="flex flex-col justify-center mt-60 mb-20">
+      <Container className="mt-60 mb-20">
         <SectionHeader
           title="Plan your perfect trip"
           subtitle="Search Flights & Places Hire to our most popular destinations"
           btnLabel="See more places"
         />
-        <div className="grid mx-auto grid-cols-3 gap-8 w-full max-w-308">
+        <div className="grid mx-auto grid-cols-3 gap-8">
           {trips.map((t, i) => {
             return (
               <div
@@ -88,9 +89,9 @@ export default function Home() {
             );
           })}
         </div>
-      </div>
+      </Container>
 
-      <div className="grid mx-auto grid-cols-2 gap-6 w-full max-w-308 mb-17.5">
+      <Container className="grid mx-auto grid-cols-2 gap-6 mb-17.5">
         <div className="relative rounded-[20px] w-full h-139.75">
           <Image
             src="/assets/images/Rectangle40.png"
@@ -137,14 +138,14 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex flex-col gap-10 mb-22.5">
+      </Container>
+      <Container className="gap-10 mb-22.5">
         <SectionHeader
           title="Reviews"
           subtitle="What people says about Golobe facilities"
           btnLabel="See All"
         />
-        <div className="w-full max-w-310 mx-auto">
+        <div>
           <Swiper
             modules={[Pagination]}
             loop
@@ -222,7 +223,7 @@ export default function Home() {
             ))}
           </Swiper>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

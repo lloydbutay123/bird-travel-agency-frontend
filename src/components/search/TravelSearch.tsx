@@ -4,6 +4,7 @@ import { IoIosArrowDown, IoIosSend } from "react-icons/io";
 import { IoBed } from "react-icons/io5";
 import { LuArrowRightLeft } from "react-icons/lu";
 import Button from "../ui/Button";
+import Container from "../ui/Container";
 
 type TravelProps = {
   header?: "tabs" | "title" | "none";
@@ -25,13 +26,13 @@ export default function TravelSearch({
   showActions = true,
 }: TravelProps) {
   return (
-    <div
+    <Container
       style={
         position === "absolute"
           ? { top: typeof top === "number" ? `${top}px` : top }
           : undefined
       }
-      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} shadow-[0_4px_16px_rgba(17,34,17,0.05)] w-full max-w-308 rounded-2xl px-8 pt-4 pb-8 bg-white`}
+      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} shadow-[0_4px_16px_rgba(17,34,17,0.05)] rounded-2xl px-8 pt-4 pb-8 bg-white`}
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-12">
@@ -115,6 +116,6 @@ export default function TravelSearch({
           </div>
         )}
       </div>
-    </div>
+    </Container>
   );
 }
