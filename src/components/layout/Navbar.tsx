@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`${isHome ? "fixed mt-7.5" : "relative bg-white mt-0 shadow-[0_4px_16px_rgba(17,34,17,0.05)]"} flex z-2 items-center justify-center w-full`}
+      className={`${isHome ? "fixed mt-7.5" : "relative bg-white mt-0 card"} flex z-2 items-center justify-center w-full`}
     >
       <Container
         className={`${isHome ? "py-6 max-w-345 px-8" : "py-5.25 px-0"} flex items-center justify-between w-full`}

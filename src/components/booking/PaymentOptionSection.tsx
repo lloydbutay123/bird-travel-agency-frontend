@@ -10,7 +10,7 @@ export default function PaymentOptionSection({
   onSelect,
 }: PaymentOptionSectionProps) {
   return (
-    <div className="p-4 flex flex-col gap-4 rounded-xl bg-white shadow-[2px_4px_16px_rgba(17,34,17,0.10)]">
+    <div className="card p-4 flex flex-col gap-4 rounded-xl bg-white">
       <PaymentOptionCard
         title="Pay in full"
         description="Pay the total and you are all set"

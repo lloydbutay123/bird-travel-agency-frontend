@@ -45,7 +45,7 @@ export default function FlightSegmentCard({
   const isBooking = pathname.includes("/booking");
 
   return (
-    <div className="bg-white rounded-xl shadow-[0_4px_16px_rgba(17,34,17,0.05)] px-6 py-8">
+    <div className="card bg-white rounded-xl px-6 py-8">
       {isBooking && (
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-[24px] font-bold font-tradegothic text-[#112211]">

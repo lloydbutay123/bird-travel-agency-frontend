@@ -29,7 +29,7 @@ export default function PriceSummaryCard({
   total,
 }: PriceSummaryCardProps) {
   return (
-    <div className="flex-1 flex flex-col gap-4 bg-white rounded-xl p-6 shadow-[2px_4px_16px_rgba(17,34,17,0.10)]">
+    <div className="card flex-1 flex flex-col gap-4 bg-white rounded-xl p-6">
       <div className="flex items-center gap-6">
         <div className="h-30 w-30 rounded-xl relative overflow-hidden">
           <Image src={image} alt="" fill className="object-cover" />

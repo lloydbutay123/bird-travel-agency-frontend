@@ -33,7 +33,7 @@ export default function FlightCard({
   onViewDetails,
 }: FlighCardProps) {
   return (
-    <div className="flex bg-white shadow-[0_4px_16px_rgba(17,34,17,0.05)] px-4 py-6 rounded-xl">
+    <div className="card flex bg-white px-4 py-6 rounded-xl">
       <div className="w-40">
         <Image
           src={airlineLogo}

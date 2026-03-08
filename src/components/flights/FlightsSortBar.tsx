@@ -26,7 +26,7 @@ export default function FlightSortBar({
 }: FlightsSortBarProps) {
   return (
     <>
-      <div className="bg-white shadow-[0_4px_16px_rgba(17,34,17,0.05)] flex gap-6 rounded-xl px-6 py-4">
+      <div className="card bg-white flex gap-6 rounded-xl px-6 py-4">
         {options.map((option, i) => (
           <div key={i} className="flex w-full justify-between">
             <div key={i} className="max-w-40 w-full">

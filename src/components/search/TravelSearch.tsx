@@ -32,7 +32,7 @@ export default function TravelSearch({
           ? { top: typeof top === "number" ? `${top}px` : top }
           : undefined
       }
-      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} shadow-[0_4px_16px_rgba(17,34,17,0.05)] rounded-2xl px-8 pt-4 pb-8 bg-white`}
+      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} card rounded-2xl px-8 pt-4 pb-8 bg-white`}
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-12">
