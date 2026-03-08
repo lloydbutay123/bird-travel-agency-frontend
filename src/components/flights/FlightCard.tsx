@@ -46,7 +46,7 @@ export default function FlightCard({
       <div className="flex flex-col flex-1 w-full gap-4 px-6">
         <div className="flex w-full items-start justify-between">
           <div className="flex items-center gap-2">
-            <RatingBadge rating={3.5} />
+            <RatingBadge rating={rating} />
             <p className="text-[12px] font-bold">
               Very Good
               <span className="font-medium"> {reviews} reviews</span>

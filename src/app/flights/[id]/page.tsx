@@ -1,7 +1,7 @@
 import AirlinePolicies from "@/components/flights/AirlinePolicies";
 import FareFeatures from "@/components/flights/FareFeatures";
-import FlightHeader from "@/components/flights/FlightHeader";
 import FlightSegmentCard from "@/components/flights/FlightSegmentCard";
+import ListingHeader from "@/components/listings/ListingHeader";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { fareClasses } from "@/data/fareClasses";
 import { flightSegments } from "@/data/flightSegment";
@@ -19,10 +19,10 @@ export default function FlightDetails() {
             { label: "CVK Park Bosphorus Hotel Istanbul" },
           ]}
         />
-        <FlightHeader
+        <ListingHeader
           title="Emirates A380 Airbus"
           location="Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
-          ratings={2.4}
+          rating={2.4}
           reviews={54}
           price={400}
           bookingHref={`/flights/${1}/booking`}

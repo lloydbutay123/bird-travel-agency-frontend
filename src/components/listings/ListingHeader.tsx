@@ -1,34 +1,42 @@
-"use client";
-
-import { FaLocationDot, FaShareNodes } from "react-icons/fa6";
-import RatingBadge from "../ui/RatingBadge";
+import { FaRegHeart, FaStar } from "react-icons/fa";
 import Button from "../ui/Button";
-import { FaRegHeart } from "react-icons/fa";
+import { FaLocationDot, FaShareNodes } from "react-icons/fa6";
 import Link from "next/link";
+import RatingBadge from "../ui/RatingBadge";
 
-type FlightHeaderProps = {
+type ListingHeaderProps = {
   title: string;
   location: string;
-  ratings: number;
+  rating: number;
   reviews: number;
   price: number;
   bookingHref: string;
+  showHotelStars?: boolean;
 };
 
-export default function FlightHeader({
+export default function ListingHeader({
   title,
   location,
-  ratings,
+  rating,
   reviews,
   price,
   bookingHref,
-}: FlightHeaderProps) {
+  showHotelStars,
+}: ListingHeaderProps) {
   return (
     <div className="flex justify-between mb-8">
       <div>
-        <h2 className="font-tradegothic text-[24px] text-[#112211] font-bold mb-4">
-          {title}
-        </h2>
+        <div className="flex items-center gap-4 mb-4">
+          <h2 className="font-tradegothic text-[24px] text-[#112211] font-bold">
+            {title}
+          </h2>
+          {showHotelStars && (
+            <div className="flex items-center gap-1">
+              <FaStar size={16} color="#FF8682" />
+              <p className="text-[12px] font-medium">5 star hotel</p>
+            </div>
+          )}
+        </div>
         <div className="flex items-center gap-1 mb-2">
           <FaLocationDot size={18} />
           <p className="text-[14px] text-[#112211]/75 font-medium">
@@ -36,7 +44,7 @@ export default function FlightHeader({
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <RatingBadge rating={ratings} />
+          <RatingBadge rating={rating} />
           <p className="text-[12px] text-[#112211] font-bold">
             Very Good
             <span className="font-medium"> {reviews} reviews</span>
