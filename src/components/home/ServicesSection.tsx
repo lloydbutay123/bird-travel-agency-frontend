@@ -11,6 +11,7 @@ export default function ServicesSection() {
           subtitle={service.subtitle}
           image={service.image}
           btnLabel={service.btnLabel}
+          btnHref={service.href}
         />
       ))}
     </div>

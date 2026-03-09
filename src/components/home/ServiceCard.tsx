@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Button from "../ui/Button";
 import { IoIosSend } from "react-icons/io";
+import Link from "next/link";
 
 type ServiceCardProps = {
   image: string;
   title: string;
   subtitle: string;
   btnLabel: string;
+  btnHref: string;
 };
 
 export default function ServiceCard({
@@ -14,6 +16,7 @@ export default function ServiceCard({
   title,
   subtitle,
   btnLabel,
+  btnHref,
 }: ServiceCardProps) {
   return (
     <div className="relative rounded-[20px] overflow-hidden w-full h-139.75">
@@ -26,9 +29,11 @@ export default function ServiceCard({
             </p>
             <p className="text-white text-[16px]">{subtitle}</p>
           </div>
-          <Button onClick={() => {}} variant="primary" className="mx-auto">
-            <IoIosSend size={16} /> {btnLabel}
-          </Button>
+          <Link href={btnHref}>
+            <Button onClick={() => {}} variant="primary" className="mx-auto">
+              <IoIosSend size={16} /> {btnLabel}
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
