@@ -22,9 +22,11 @@ export default function SectionHeader({
           {subtitle}
         </p>
       </div>
-      <Button onClick={onClick} variant="outline">
-        {btnLabel}
-      </Button>
+      {btnLabel && (
+        <Button onClick={onClick} variant="outline">
+          {btnLabel}
+        </Button>
+      )}
     </div>
   );
 }

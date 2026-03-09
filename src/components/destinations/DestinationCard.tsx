@@ -6,6 +6,7 @@ type DestinationCardProps = {
   city: string;
   title: string;
   price: number;
+  btnLabel?: string;
 };
 
 export default function DestinationCard({
@@ -13,6 +14,7 @@ export default function DestinationCard({
   city,
   title,
   price,
+  btnLabel = "Book a flight",
 }: DestinationCardProps) {
   return (
     <div className="relative rounded-xl h-105 overflow-hidden">
@@ -25,7 +27,7 @@ export default function DestinationCard({
           </div>
           <p className="text-[24px] font-semibold text-white">${price}</p>
         </div>
-        <Button className="w-full">Book Flight</Button>
+        <Button className="w-full">{btnLabel}</Button>
       </div>
     </div>
   );

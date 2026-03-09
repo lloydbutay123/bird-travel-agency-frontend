@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import { FaRegHeart } from "react-icons/fa";
 import FlightRoute from "./FlightRoute";
 import RatingBadge from "../ui/RatingBadge";
+import Link from "next/link";
 
 type FlighCardProps = {
   airlineLogo: string;
@@ -16,7 +17,7 @@ type FlighCardProps = {
   duration: string;
   airline: string;
   route: string;
-  onViewDetails: () => void;
+  onViewDetails: string;
 };
 
 export default function FlightCard({
@@ -78,9 +79,9 @@ export default function FlightCard({
           <Button className="w-12" variant="outline">
             <FaRegHeart size={20} />
           </Button>
-          <Button className="w-full" onClick={onViewDetails}>
-            View Deals
-          </Button>
+          <Link href={onViewDetails} className="w-full">
+            <Button className="w-full font-semibold!">View Deals</Button>
+          </Link>
         </div>
       </div>
     </div>

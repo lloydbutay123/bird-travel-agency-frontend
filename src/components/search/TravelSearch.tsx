@@ -1,12 +1,14 @@
 "use client";
 import { FaPlane, FaSearch } from "react-icons/fa";
-import { IoIosArrowDown, IoIosSend } from "react-icons/io";
+import { IoIosSend } from "react-icons/io";
 import { IoBed } from "react-icons/io5";
-import { LuArrowRightLeft } from "react-icons/lu";
 import Button from "../ui/Button";
 import Container from "../ui/Container";
+import TravelSearchFields from "./FlightsSearchFields";
+import StaySearchFields from "./StaySearchFields";
 
 type TravelProps = {
+  mode?: "flights" | "stays";
   header?: "tabs" | "title" | "none";
   top?: string | number;
   position?: "absolute" | "relative";
@@ -14,9 +16,12 @@ type TravelProps = {
   onAddPromoCode?: () => void;
   searchIcon?: boolean;
   showActions?: boolean;
+  btnIcon?: React.ReactNode;
+  btnLabel?: string;
 };
 
 export default function TravelSearch({
+  mode = "flights",
   header = "none",
   top = 133,
   position = "absolute",
@@ -24,6 +29,8 @@ export default function TravelSearch({
   onAddPromoCode,
   searchIcon,
   showActions = true,
+  btnIcon = <IoIosSend size={16} />,
+  btnLabel = "Show Flights",
 }: TravelProps) {
   return (
     <Container
@@ -52,52 +59,17 @@ export default function TravelSearch({
 
           {header === "title" && (
             <div className="pt-4.5 font-semibold text-[20px] ">
-              <p>Where are you flying? </p>
+              <p>
+                {mode === "flights"
+                  ? "Where are you flying?"
+                  : "Where are you staying"}{" "}
+              </p>
             </div>
           )}
           <div className="flex gap-6 items-end">
-            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
-              <legend className="px-2 text-sm text-gray-500">From - To</legend>
-              <div className="flex items-center justify-between">
-                <span className="text-[16px] h-10 flex items-center font-medium text-gray-800">
-                  Lahore - Karachi
-                </span>
-                <div className="px-3">
-                  <LuArrowRightLeft size={24} />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset className="w-35 border border-gray-400 rounded-md pl-4 py-0.5">
-              <legend className="px-2 text-sm text-gray-500">Trip</legend>
-              <div className="flex items-center justify-between">
-                <span className="text-[16px] h-10 flex items-center font-medium text-gray-800">
-                  Return
-                </span>
-                <div className="px-3">
-                  <IoIosArrowDown size={24} />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
-              <legend className="px-2 text-sm text-gray-500">
-                Depart- Return
-              </legend>
-              <div className="flex items-center justify-between">
-                <span className="text-[16px] h-10 flex items-center font-medium text-gray-800">
-                  07 Nov 22 - 13 Nov 22
-                </span>
-              </div>
-            </fieldset>
-            <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
-              <legend className="px-2 text-sm text-gray-500">
-                Passenger - Class
-              </legend>
-              <div className="flex items-center justify-between">
-                <span className="text-[16px] h-10 flex items-center font-medium text-gray-800">
-                  1 Passenger, Economy
-                </span>
-              </div>
-            </fieldset>
+            {mode === "flights" && <TravelSearchFields />}
+            {mode === "stays" && <StaySearchFields />}
+
             {searchIcon && (
               <Button className="h-14 w-14">
                 <FaSearch size={24} />
@@ -111,7 +83,7 @@ export default function TravelSearch({
               + Add Promo Code
             </Button>
             <Button onClick={onShowFlights} variant="primary">
-              <IoIosSend size={16} /> Show Flights
+              {btnIcon} {btnLabel}
             </Button>
           </div>
         )}

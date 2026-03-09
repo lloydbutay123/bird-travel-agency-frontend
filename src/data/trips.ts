@@ -4,6 +4,7 @@ export const trips = [
     image: "/assets/images/Rectangle3.png",
     name: "Istanbul, Turkey",
     type: "Flights • Flights • Flights",
+    recent: true,
   },
   {
     id: 2,
@@ -11,6 +12,7 @@ export const trips = [
       "https://images.unsplash.com/photo-1711525515144-2bee3b742c49?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8U3lkbmV5JTJDJTIwQXVzdHJhbGlhfGVufDB8fDB8fHww",
     name: "Sydney, Australia",
     type: "Flights • Flights • Flights",
+    recent: true,
   },
   {
     id: 3,
@@ -18,6 +20,7 @@ export const trips = [
       "https://images.unsplash.com/photo-1735853473991-81550e348103?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8QmFrdSUyQyUyMEF6ZXJiYWlqYW58ZW58MHx8MHx8fDA%3D",
     name: "Baku, Azerbaijan",
     type: "Flights • Flights • Flights",
+    recent: true,
   },
   {
     id: 4,
@@ -25,6 +28,7 @@ export const trips = [
       "https://images.unsplash.com/photo-1517246252-86d7e3e054c7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TWFsJUMzJUE5JTJDJTIwTWFsZGl2ZXN8ZW58MHx8MHx8fDA%3D",
     name: "Malé, Maldives",
     type: "Flights • Flights • Flights",
+    recent: true,
   },
   {
     id: 5,

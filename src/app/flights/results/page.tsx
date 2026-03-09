@@ -1,4 +1,3 @@
-"use client";
 import FlightCard from "@/components/flights/FlightCard";
 import FlightFilterSidebar from "@/components/flights/FlightFiltersSidebar";
 import FlightSortBar from "@/components/flights/FlightsSortBar";
@@ -7,7 +6,6 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Divider from "@/components/ui/Divider";
 import { flights } from "@/data/flights";
-import { useRouter } from "next/navigation";
 
 const sortOptions = [
   { label: "Cheapest", value: "cheapest", price: 99, duration: "2h 18m" },
@@ -16,11 +14,6 @@ const sortOptions = [
 ];
 
 export default function FlightResults() {
-  const router = useRouter();
-
-  const handleViewDetails = (id: number) => {
-    router.push(`/flights/${id}`);
-  };
   return (
     <div className="flex flex-col gap-8 min-h-screen py-12">
       <TravelSearch position="relative" searchIcon={true} showActions={false} />
@@ -51,7 +44,7 @@ export default function FlightResults() {
                     duration={flight.duration}
                     airline={flight.airline}
                     route={flight.route}
-                    onViewDetails={() => handleViewDetails(flight.id)}
+                    onViewDetails={`/flights/${flight.id}`}
                   />
                 ))}
               </div>

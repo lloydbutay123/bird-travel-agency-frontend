@@ -1,3 +1,5 @@
+"use client";
+
 import Accordion from "../ui/Accordion";
 import { useState } from "react";
 import SliderCoponent from "../ui/Slider";
