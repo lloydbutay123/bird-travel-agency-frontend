@@ -1,5 +1,4 @@
-import { BsStars } from "react-icons/bs";
-import StaysSectionHeader from "./StaysSectionHeader";
+import StaysDetailsSectionHeader from "./StaysDetailsSectionHeader";
 
 type ListingSectionProps = {
   title: string;
@@ -15,7 +14,7 @@ export default function ListingSection({
   return (
     <div>
       <div>
-        <StaysSectionHeader title={title} action={action} />
+        <StaysDetailsSectionHeader title={title} action={action} />
       </div>
       {children}
     </div>

@@ -3,7 +3,7 @@ type SectionHeaderProps = {
   action?: React.ReactNode;
 };
 
-export default function StaysSectionHeader({
+export default function StaysDeatilsSectionHeader({
   title,
   action,
 }: SectionHeaderProps) {

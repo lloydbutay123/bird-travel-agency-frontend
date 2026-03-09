@@ -1,7 +1,7 @@
 import AmenityItem from "@/components/listings/AmenityItem";
 import ListingGallery from "@/components/listings/ListingGallery";
-import ListingHeader from "@/components/listings/ListingHeader";
-import ListingSection from "@/components/listings/ListingSection";
+import StayHeader from "@/components/stays/StayHeader";
+import StaySection from "@/components/stays/StaySection";
 import OverviewFeatureCard from "@/components/listings/OverviewFeatureCard";
 import RatingOverviewCard from "@/components/listings/RatingOverviewCard";
 import ReviewCard from "@/components/listings/ReviewCard";
@@ -17,10 +17,10 @@ import React from "react";
 import { FaCoffee } from "react-icons/fa";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-export default function StayDetails() {
+export default function StayDetailsPage() {
   return (
     <div className="min-h-screen">
-      <Container className="pt-7 pb-30">
+      <Container className="pt-12 pb-30">
         <Breadcrumb
           items={[
             { label: "Turkey" },
@@ -28,7 +28,7 @@ export default function StayDetails() {
             { label: "CVK Park Bosphorus Hotel Istanbul" },
           ]}
         />
-        <ListingHeader
+        <StayHeader
           title="CVK Park Bosphorus Hotel Istanbul"
           location="Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
           rating={30}
@@ -42,7 +42,7 @@ export default function StayDetails() {
         <div className="flex flex-col gap-16">
           <Divider />
 
-          <ListingSection title="Overview">
+          <StaySection title="Overview">
             <div className="flex flex-col gap-8">
               <p className="text-[16px] font-medium text-[#112211]/75">
                 Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park
@@ -70,11 +70,11 @@ export default function StayDetails() {
                 ))}
               </div>
             </div>
-          </ListingSection>
+          </StaySection>
 
           <Divider />
 
-          <ListingSection title="Available Rooms">
+          <StaySection title="Available Rooms">
             <div className="flex flex-col gap-4">
               {rooms.map((room, index) => (
                 <React.Fragment key={room.id}>
@@ -87,11 +87,11 @@ export default function StayDetails() {
                 </React.Fragment>
               ))}
             </div>
-          </ListingSection>
+          </StaySection>
 
           <Divider />
 
-          <ListingSection
+          <StaySection
             title="Location/Map"
             action={<Button>View on google maps</Button>}
           >
@@ -102,11 +102,11 @@ export default function StayDetails() {
                 loading="lazy"
               ></iframe>
             </div>
-          </ListingSection>
+          </StaySection>
 
           <Divider />
 
-          <ListingSection title="Amenities">
+          <StaySection title="Amenities">
             <div className="w-full grid grid-cols-2 gap-x-75 gap-y-6">
               {amenities.map((amenity) => (
                 <AmenityItem
@@ -116,11 +116,11 @@ export default function StayDetails() {
                 />
               ))}
             </div>
-          </ListingSection>
+          </StaySection>
 
           <Divider />
 
-          <ListingSection
+          <StaySection
             title="Reviews"
             action={<Button>Give your review</Button>}
           >
@@ -145,7 +145,7 @@ export default function StayDetails() {
                 </div>
               </div>
             </div>
-          </ListingSection>
+          </StaySection>
         </div>
       </Container>
     </div>

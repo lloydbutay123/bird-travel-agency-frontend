@@ -7,7 +7,7 @@ import Link from "next/link";
 import RatingBadge from "../ui/RatingBadge";
 import { usePathname } from "next/navigation";
 
-type ListingHeaderProps = {
+type StayHeaderProps = {
   title: string;
   location: string;
   rating: number;
@@ -18,7 +18,7 @@ type ListingHeaderProps = {
   hotelStars?: number;
 };
 
-export default function ListingHeader({
+export default function StayHeader({
   title,
   location,
   rating,
@@ -27,7 +27,7 @@ export default function ListingHeader({
   bookingHref,
   showHotelStars,
   hotelStars = 5,
-}: ListingHeaderProps) {
+}: StayHeaderProps) {
   const pathname = usePathname();
   const isStays = pathname.includes("/stays");
 

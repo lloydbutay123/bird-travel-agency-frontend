@@ -34,7 +34,7 @@ export default function PriceSummaryCard({
         <div className="h-30 w-30 rounded-xl relative overflow-hidden">
           <Image src={image} alt="" fill className="object-cover" />
         </div>
-        <div>
+        <div className="flex-1">
           <p className="text-[16px] font-medium mb-1">{category}</p>
           <h4 className="text-[20px] font-semibold text-[#112211] mb-5">
             {title} {subtitle}

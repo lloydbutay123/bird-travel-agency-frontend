@@ -1,7 +1,7 @@
 import AirlinePolicies from "@/components/flights/AirlinePolicies";
 import FareFeatures from "@/components/flights/FareFeatures";
 import FlightSegmentCard from "@/components/flights/FlightSegmentCard";
-import ListingHeader from "@/components/listings/ListingHeader";
+import ListingHeader from "@/components/stays/StayHeader";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Container from "@/components/ui/Container";
 import { fareClasses } from "@/data/fareClasses";
