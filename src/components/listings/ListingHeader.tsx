@@ -3,22 +3,21 @@
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import Button from "../ui/Button";
 import { FaLocationDot, FaShareNodes } from "react-icons/fa6";
-import Link from "next/link";
 import RatingBadge from "../ui/RatingBadge";
 import { usePathname } from "next/navigation";
 
-type StayHeaderProps = {
+type ListingHeaderProps = {
   title: string;
   location: string;
   rating: number;
   reviews: number;
   price: number;
-  bookingHref: string;
+  bookingHref: () => void;
   showHotelStars?: boolean;
   hotelStars?: number;
 };
 
-export default function StayHeader({
+export default function ListingHeader({
   title,
   location,
   rating,
@@ -27,7 +26,7 @@ export default function StayHeader({
   bookingHref,
   showHotelStars,
   hotelStars = 5,
-}: StayHeaderProps) {
+}: ListingHeaderProps) {
   const pathname = usePathname();
   const isStays = pathname.includes("/stays");
 
@@ -75,11 +74,13 @@ export default function StayHeader({
           <Button variant="outline" className="w-12">
             <FaShareNodes size={20} />
           </Button>
-          <Link href={bookingHref}>
-            <Button className="font-semibold text-[14px] w-37.5">
-              Book Now
-            </Button>
-          </Link>
+
+          <Button
+            className="font-semibold text-[14px] w-37.5"
+            onClick={bookingHref}
+          >
+            Book Now
+          </Button>
         </div>
       </div>
     </div>

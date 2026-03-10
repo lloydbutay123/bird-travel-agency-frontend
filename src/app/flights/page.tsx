@@ -8,7 +8,6 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { destinations } from "@/data/destinations";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { IoIosSend } from "react-icons/io";
 
 export default function FlightsPage() {
   const router = useRouter();

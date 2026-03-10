@@ -18,6 +18,7 @@ type FlightSegmentCardProps = {
   departureAirport: string;
   arrivalTime: string;
   arrivalAirport: string;
+  showPriceHeader?: boolean;
 };
 
 const featureIcons: Record<string, React.ReactNode> = {
@@ -39,14 +40,11 @@ export default function FlightSegmentCard({
   departureAirport,
   arrivalTime,
   arrivalAirport,
+  showPriceHeader,
 }: FlightSegmentCardProps) {
-  const pathname = usePathname();
-
-  const isBooking = pathname.includes("/booking");
-
   return (
     <div className="card bg-white rounded-xl px-6 py-8">
-      {isBooking && (
+      {showPriceHeader && (
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-[24px] font-bold font-tradegothic text-[#112211]">
             Emirates A350 Airbus
@@ -56,7 +54,7 @@ export default function FlightSegmentCard({
       )}
       <div className="flex items-center justify-between mb-6">
         <h4
-          className={`font-tradegothic ${!isBooking ? "text-[20px]" : "text-[16px]"} font-bold text-[#112211]`}
+          className={`font-tradegothic ${!showPriceHeader ? "text-[20px]" : "text-[16px]"} font-bold text-[#112211]`}
         >
           {date}
         </h4>
@@ -87,7 +85,7 @@ export default function FlightSegmentCard({
         </div>
       </div>
       <div
-        className={`flex items-center ${!isBooking ? "justify-center gap-20" : "justify-between"}`}
+        className={`flex items-center ${!showPriceHeader ? "justify-center gap-20" : "justify-between"}`}
       >
         <div className="flex items-center gap-4">
           <h4 className="text-[24px] text-[#112211] font-semibold">
