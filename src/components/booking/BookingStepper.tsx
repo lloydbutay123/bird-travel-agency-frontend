@@ -1,7 +1,7 @@
-import { BookingStep } from "@/features/booking/bookingSlice";
+import { BookingStep } from "@/features/booking/types";
 
 type BookingStepperProps = {
-  steps: BookingStep[];
+  steps: BookingStep<string>[];
   currentStepIndex: number;
 };
 
