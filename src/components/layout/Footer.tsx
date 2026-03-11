@@ -5,10 +5,14 @@ import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import Button from "../ui/Button";
 import Container from "../ui/Container";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isAuth = pathname.includes("/auth");
+
   return (
-    <footer className="relative h-143.25 w-full">
+    <footer className={`relative h-143.25 w-full ${isAuth && "hidden"}`}>
       <Container className="absolute z-10 flex justify-between top-0 px-6 bg-[#CDEAE1] left-1/2 -translate-x-1/2 rounded-[20px]">
         <div className="py-6">
           <p className="font-tradegothic leading-13.5 w-92 mb-6 text-[44px] font-bold">
