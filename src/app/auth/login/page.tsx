@@ -1,44 +1,55 @@
+"use client";
+
+import AuthDivider from "@/components/auth/AuthDivider";
+import AuthFooterText from "@/components/auth/AuthFooterText";
+import AuthHeader from "@/components/auth/AuthHeader";
+import SocialAuthButtons from "@/components/auth/SocialAuthButton";
 import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
-import Divider from "@/components/ui/Divider";
+import TextField from "@/components/ui/TextField";
 import Image from "next/image";
-import Link from "next/link";
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import { useState } from "react";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
+const images = [
+  "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop",
+];
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <div className="flex h-screen w-full items-center justify-center gap-26 p-25.5">
+    <div className="flex min-h-screen w-full items-center justify-center gap-26 p-25.5">
       <div className="w-full max-w-lg">
-        <Link href="/">
-          <Image
-            src="/assets/images/logo-dark.png"
-            width={100}
-            height={50}
-            alt=""
-          />
-        </Link>
-        <div className="mb-12">
-          <h1 className="font-tradegothic text-[40px] font-bold mb-4">Login</h1>
-          <p className="text-[16px]">Login to access your Golobe account</p>
-        </div>
+        <AuthHeader
+          title="Login"
+          subtitle="Login to access your Golobe account"
+        />
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
-            <fieldset className="border border-[#79747E] px-4 py-2 rounded-sm">
-              <legend className="text-[14px]">Email</legend>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="text-[16px] w-full"
-              />
-            </fieldset>
-            <fieldset className="border border-[#79747E] px-4 py-2 rounded-sm">
-              <legend className="text-[14px]">Password</legend>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="text-[16px] w-full"
-              />
-            </fieldset>
+            <TextField
+              label="Email"
+              name="email"
+              type="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              label="Pasword"
+              name="password"
+              type="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <div className="flex items-center justify-between">
               <Checkbox label="Remember me" />
               <Button variant="ghost" className="text-[#FF8682]">
@@ -48,38 +59,38 @@ export default function LoginPage() {
           </div>
           <div>
             <Button className="w-full mb-4">Login</Button>
-            <p className="text-[14px] font-medium text-center">
-              Don’t have an account?{" "}
-              <span className="text-[#FF8682] font-medium text-center">
-                Sign up
-              </span>
-            </p>
+            <AuthFooterText
+              title="Don’t have an account?"
+              linkText="Sign up"
+              href="/auth/signup"
+            />
           </div>
-          <div className="flex items-center gap-4">
-            <Divider />
-            <p className="text-[14px]">Or login with</p>
-            <Divider />
-          </div>
-          <div className="flex gap-4 justify-between">
-            <Button className="w-full" variant="outline">
-              <FaFacebook size={24} />
-            </Button>
-            <Button className="w-full" variant="outline">
-              <FaGoogle size={24} />
-            </Button>
-            <Button className="w-full" variant="outline">
-              <FaApple size={24} />
-            </Button>
-          </div>
+          <AuthDivider text="Or login with" />
+          <SocialAuthButtons />
         </div>
       </div>
-      <div className="relative w-full h-full max-w-154.5 max-h-[816px] overflow-hidden rounded-[30px]">
-        <Image
-          src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          fill
-          className="object-cover"
-        />
+      <div className="w-full h-full min-h-204 overflow-hidden rounded-[30px]">
+        <Swiper
+          modules={[Pagination, Autoplay]}
+          slidesPerView={1}
+          loop
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          className="h-full min-h-204"
+        >
+          {images.map((src, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative w-full h-full min-h-204">
+                <Image
+                  src={src}
+                  alt={`Auth image ${index + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

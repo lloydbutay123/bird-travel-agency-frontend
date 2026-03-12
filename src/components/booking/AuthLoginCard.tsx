@@ -2,6 +2,7 @@ import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import Button from "../ui/Button";
 import { MdEmail } from "react-icons/md";
 import Divider from "../ui/Divider";
+import AuthDivider from "../auth/AuthDivider";
 
 export default function AuthLoginCard() {
   return (
@@ -23,11 +24,7 @@ export default function AuthLoginCard() {
         </p>
         <Button>Continue</Button>
       </div>
-      <div className="flex items-center gap-6 justify-between">
-        <Divider />
-        <p className="text-[16px] font-medium text-[#112211]">Or</p>
-        <Divider />
-      </div>
+      <AuthDivider text="Or" />
       <div>
         <div className="flex gap-4 justify-between mb-4">
           <Button variant="outline" className="flex-1 h-14">
