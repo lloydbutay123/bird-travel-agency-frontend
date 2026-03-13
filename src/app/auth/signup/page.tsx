@@ -14,6 +14,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import { useRouter } from "next/navigation";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -22,6 +23,8 @@ const images = [
 ];
 
 export default function SignupPage() {
+  const router = useRouter();
+
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,6 +32,10 @@ export default function SignupPage() {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleCreateAccount = () => {
+    router.push("/auth/signup/payment-method");
+  };
 
   return (
     <div className="flex w-full min-h-screen items-center justify-center gap-26 p-22.5">
@@ -54,6 +61,7 @@ export default function SignupPage() {
         <AuthHeader
           title="Sign Up"
           subtitle="Let’s get you all st up so you can access your personal account."
+          href="/auth/login"
         />
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
@@ -118,7 +126,10 @@ export default function SignupPage() {
             <Checkbox label="I agree to all the Terms and Privacy Policies" />
           </div>
           <div>
-            <Button className="w-full mb-4 font-semibold">
+            <Button
+              className="w-full mb-4 font-semibold"
+              onClick={handleCreateAccount}
+            >
               Create account
             </Button>
             <AuthFooterText

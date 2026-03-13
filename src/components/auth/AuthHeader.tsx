@@ -6,12 +6,16 @@ type AuthHeaderProps = {
   title: string;
   subtitle: string;
   hasBackButton?: boolean;
+  btnLabel?: string;
+  href?: string;
 };
 
 export default function AuthHeader({
   title,
   subtitle,
   hasBackButton,
+  btnLabel = "Back to login",
+  href = "/auth/login",
 }: AuthHeaderProps) {
   return (
     <>
@@ -27,8 +31,8 @@ export default function AuthHeader({
         {hasBackButton && (
           <div className="flex items-center gap-1">
             <FaAngleLeft size={24} />
-            <Link href="/auth/login">
-              <p className="text-[14px] font-medium">Back to login</p>
+            <Link href={href}>
+              <p className="text-[14px] font-medium">{btnLabel}</p>
             </Link>
           </div>
         )}
