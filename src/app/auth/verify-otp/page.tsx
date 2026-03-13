@@ -1,11 +1,7 @@
 "use client";
 
-import AuthDivider from "@/components/auth/AuthDivider";
-import AuthFooterText from "@/components/auth/AuthFooterText";
 import AuthHeader from "@/components/auth/AuthHeader";
-import SocialAuthButtons from "@/components/auth/SocialAuthButton";
 import Button from "@/components/ui/Button";
-import Checkbox from "@/components/ui/Checkbox";
 import TextField from "@/components/ui/TextField";
 import Image from "next/image";
 import { useState } from "react";
@@ -22,70 +18,41 @@ const images = [
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop",
 ];
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function VerifyOtpPage() {
+  const [otp, setOtp] = useState("");
 
   const router = useRouter();
 
-  const handleForgotPassword = () => {
-    router.push("/auth/forgot-password");
-  };
-
-  const handleLogin = () => {
-    router.push("/");
+  const handleVerify = () => {
+    router.push("/auth/reset-password");
   };
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center gap-26 p-25.5">
       <div className="w-full max-w-lg">
         <AuthHeader
-          title="Login"
-          subtitle="Login to access your Golobe account"
+          title="Verify Code"
+          subtitle="An authentication code has been sent to your email."
+          hasBackButton
         />
         <div className="flex flex-col gap-10">
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <TextField
-              label="Email"
-              name="email"
+              label="Enter Code"
+              name="otp"
               type="email"
-              value={email}
-              required
+              value={otp}
               placeholder="Enter your email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setOtp(e.target.value)}
             />
-            <TextField
-              label="Pasword"
-              name="password"
-              type="password"
-              value={password}
-              required
-              placeholder="Enter your password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className="flex items-center justify-between">
-              <Checkbox label="Remember me" />
-              <Button
-                variant="ghost"
-                className="text-[#FF8682]"
-                onClick={handleForgotPassword}
-              >
-                Forgot password
-              </Button>
-            </div>
+            <p className=" text-[14px] font-medium ">
+              Didn’t receive a code?{" "}
+              <span className="text-[#FF8682]">Resend</span>
+            </p>
           </div>
-          <div>
-            <Button className="w-full mb-4" onClick={handleLogin}>
-              Login
-            </Button>
-            <AuthFooterText
-              title="Don’t have an account?"
-              linkText="Sign up"
-              href="/auth/signup"
-            />
-          </div>
-          <AuthDivider text="Or login with" />
-          <SocialAuthButtons />
+          <Button className="w-full" onClick={handleVerify}>
+            Verify
+          </Button>
         </div>
       </div>
       <div className="w-full h-full max-w-154.5 min-h-204 overflow-hidden rounded-[30px]">

@@ -22,26 +22,22 @@ const images = [
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop",
 ];
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const router = useRouter();
 
-  const handleForgotPassword = () => {
-    router.push("/auth/forgot-password");
-  };
-
-  const handleLogin = () => {
-    router.push("/");
+  const handleSubmit = () => {
+    router.push("/auth/verify-otp");
   };
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center gap-26 p-25.5">
       <div className="w-full max-w-lg">
         <AuthHeader
-          title="Login"
-          subtitle="Login to access your Golobe account"
+          title="Forgot your password?"
+          subtitle="Don’t worry, happens to all of us. Enter your email below to recover your password"
+          hasBackButton
         />
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
@@ -50,39 +46,14 @@ export default function LoginPage() {
               name="email"
               type="email"
               value={email}
-              required
               placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <TextField
-              label="Pasword"
-              name="password"
-              type="password"
-              value={password}
-              required
-              placeholder="Enter your password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className="flex items-center justify-between">
-              <Checkbox label="Remember me" />
-              <Button
-                variant="ghost"
-                className="text-[#FF8682]"
-                onClick={handleForgotPassword}
-              >
-                Forgot password
-              </Button>
-            </div>
           </div>
           <div>
-            <Button className="w-full mb-4" onClick={handleLogin}>
-              Login
+            <Button className="w-full" onClick={handleSubmit}>
+              Submit
             </Button>
-            <AuthFooterText
-              title="Don’t have an account?"
-              linkText="Sign up"
-              href="/auth/signup"
-            />
           </div>
           <AuthDivider text="Or login with" />
           <SocialAuthButtons />

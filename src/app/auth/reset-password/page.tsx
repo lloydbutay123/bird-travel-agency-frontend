@@ -1,11 +1,7 @@
 "use client";
 
-import AuthDivider from "@/components/auth/AuthDivider";
-import AuthFooterText from "@/components/auth/AuthFooterText";
 import AuthHeader from "@/components/auth/AuthHeader";
-import SocialAuthButtons from "@/components/auth/SocialAuthButton";
 import Button from "@/components/ui/Button";
-import Checkbox from "@/components/ui/Checkbox";
 import TextField from "@/components/ui/TextField";
 import Image from "next/image";
 import { useState } from "react";
@@ -22,70 +18,45 @@ const images = [
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop",
 ];
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
+export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const router = useRouter();
 
-  const handleForgotPassword = () => {
-    router.push("/auth/forgot-password");
-  };
-
-  const handleLogin = () => {
-    router.push("/");
+  const handleSetPassword = () => {
+    router.push("/auth/login");
   };
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center gap-26 p-25.5">
       <div className="w-full max-w-lg">
         <AuthHeader
-          title="Login"
-          subtitle="Login to access your Golobe account"
+          title="Set a password"
+          subtitle="Your previous password has been reseted. Please set a new password for your account."
         />
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <TextField
-              label="Email"
-              name="email"
-              type="email"
-              value={email}
-              required
-              placeholder="Enter your email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              label="Pasword"
+              label="Create Password"
               name="password"
               type="password"
               value={password}
-              required
-              placeholder="Enter your password"
+              placeholder="Enter your current password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className="flex items-center justify-between">
-              <Checkbox label="Remember me" />
-              <Button
-                variant="ghost"
-                className="text-[#FF8682]"
-                onClick={handleForgotPassword}
-              >
-                Forgot password
-              </Button>
-            </div>
-          </div>
-          <div>
-            <Button className="w-full mb-4" onClick={handleLogin}>
-              Login
-            </Button>
-            <AuthFooterText
-              title="Don’t have an account?"
-              linkText="Sign up"
-              href="/auth/signup"
+            <TextField
+              label="Re-enter Password"
+              name="retypepassword"
+              type="password"
+              value={confirmPassword}
+              placeholder="Re-enter your password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <AuthDivider text="Or login with" />
-          <SocialAuthButtons />
+          <Button className="w-full mb-4" onClick={handleSetPassword}>
+            Set password
+          </Button>
         </div>
       </div>
       <div className="w-full h-full max-w-154.5 min-h-204 overflow-hidden rounded-[30px]">
