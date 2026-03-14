@@ -39,7 +39,7 @@ export default function TravelSearch({
           ? { top: typeof top === "number" ? `${top}px` : top }
           : undefined
       }
-      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} card rounded-2xl px-8 pt-4 pb-8 bg-white`}
+      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} w-81.75! lg:w-full! card rounded-2xl px-8 pt-4 pb-8 bg-white z-10`}
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-12">
@@ -47,12 +47,16 @@ export default function TravelSearch({
             <div className="flex items-center gap-8">
               <div className="flex ">
                 <FaPlane size={24} color="black" className="mr-2" />
-                <p className="text-black font-semibold text-[16px]">Flights</p>
+                <p className="text-black font-semibold text-[14px] lg:text-[16px]">
+                  Flights
+                </p>
               </div>
               <div className="w-px bg-[#D7E2EE] h-12" />
               <div className="flex ">
                 <IoBed size={24} color="black" className="mr-2" />
-                <p className="text-black font-semibold text-[16px]">Stays</p>
+                <p className="text-black font-semibold text-[14px] lg:text-[16px]">
+                  Stays
+                </p>
               </div>
             </div>
           )}
@@ -66,7 +70,7 @@ export default function TravelSearch({
               </p>
             </div>
           )}
-          <div className="flex gap-6 items-end">
+          <div className="lg:flex gap-6 items-end">
             {mode === "flights" && <TravelSearchFields />}
             {mode === "stays" && <StaySearchFields />}
 
@@ -79,10 +83,18 @@ export default function TravelSearch({
         </div>
         {showActions && (
           <div className="flex justify-end gap-6">
-            <Button onClick={onAddPromoCode} variant="ghost">
+            <Button
+              onClick={onAddPromoCode}
+              variant="ghost"
+              className="hidden lg:block"
+            >
               + Add Promo Code
             </Button>
-            <Button onClick={onShowFlights} variant="primary">
+            <Button
+              onClick={onShowFlights}
+              variant="primary"
+              className="w-full"
+            >
               {btnIcon} {btnLabel}
             </Button>
           </div>

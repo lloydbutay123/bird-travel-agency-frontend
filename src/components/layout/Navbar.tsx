@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { FaPlane } from "react-icons/fa";
 import { IoBed } from "react-icons/io5";
 import Container from "../ui/Container";
+import { MdMenu } from "react-icons/md";
 
 const actions = [
   { label: "Login", href: "/auth/login" },
@@ -37,9 +38,9 @@ export default function Navbar() {
       className={`${isHome ? "fixed mt-7.5" : "relative bg-white mt-0 card"} ${isAuth && "hidden"} flex z-2 items-center justify-center w-full`}
     >
       <Container
-        className={`${isHome ? "py-6 max-w-345 px-8" : "py-5.25 px-0"} flex items-center justify-between w-full`}
+        className={`${isHome ? "py-6 max-w-345 px-6 lg:px-8" : "py-5.25 px-6"} flex items-center justify-between`}
       >
-        <div className="flex gap-8">
+        <div className="hidden lg:flex gap-8">
           {navItems.map((nav) => {
             const isActive = nav.match(pathname);
             const Icon = nav.icon;
@@ -58,7 +59,7 @@ export default function Navbar() {
                   </p>
                 </Link>
                 {isActive && (
-                  <div className="absolute -bottom-8.25 left-0 w-full h-[5px] bg-[#8DD3BB]" />
+                  <div className="absolute -bottom-8.25 left-0 w-full h-1.25 bg-[#8DD3BB]" />
                 )}
               </div>
             );
@@ -72,7 +73,11 @@ export default function Navbar() {
             className="object-cover"
           />
         </Link>
-        <div className="flex items-center gap-8">
+        <MdMenu
+          size={24}
+          className={`block lg:hidden ${!isHome && "text-black"}`}
+        />
+        <div className="hidden lg:flex items-center gap-8">
           {actions.map((action) => (
             <Link
               key={action.label}

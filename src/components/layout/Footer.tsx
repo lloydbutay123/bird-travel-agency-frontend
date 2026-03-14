@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <footer className={`relative h-143.25 w-full ${isAuth && "hidden"}`}>
       <Container className="absolute z-10 flex justify-between top-0 px-6 bg-[#CDEAE1] left-1/2 -translate-x-1/2 rounded-[20px]">
-        <div className="py-6">
+        <div className="hidden lg:block py-6">
           <p className="font-tradegothic leading-13.5 w-92 mb-6 text-[44px] font-bold">
             Subscribe Newsletter
           </p>
@@ -45,7 +45,7 @@ export default function Footer() {
           alt=""
           width={400}
           height={400}
-          className="h-auto w-100"
+          className="hidden lg:block h-auto w-100"
         />
       </Container>
       <div className="absolute bottom-0 w-full bg-[#8DD3BB] h-105.5">
@@ -66,7 +66,7 @@ export default function Footer() {
               <FaInstagram size={20} />
             </div>
           </div>
-          <div className="flex gap-6">
+          <div className="hidden xl:flex gap-6">
             {footerSections.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
                 <h1 className="font-tradegothic text-[16px] font-bold text-[#112211]">

@@ -19,7 +19,7 @@ export default function Home() {
     router.push("/flights/results");
   };
   return (
-    <div className="relative min-h-screen w-full justify-center pt-7.5">
+    <div className="relative min-h-screen w-full justify-center lg:pt-7.5">
       <HeroBanner />
       <TravelSearch
         header="tabs"

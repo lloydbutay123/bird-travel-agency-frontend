@@ -6,7 +6,7 @@ import { reviews } from "@/data/reviews";
 
 export default function ReviewsSection() {
   return (
-    <div className="gap-10">
+    <div className="gap-10 px-6 xl:px-0">
       <SectionHeader
         title="Reviews"
         subtitle="What people says about Golobe facilities"
@@ -25,7 +25,7 @@ export default function ReviewsSection() {
           speed={450}
           breakpoints={{
             768: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 24 },
+            1024: { slidesPerView: 2, spaceBetween: 24 },
           }}
           className=""
         >

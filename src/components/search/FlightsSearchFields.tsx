@@ -15,7 +15,7 @@ export default function TravelSearchFields() {
           </div>
         </div>
       </fieldset>
-      <fieldset className="w-35 border border-gray-400 rounded-md pl-4 py-0.5">
+      <fieldset className="hidden lg:flex w-35 border border-gray-400 rounded-md pl-4 py-0.5">
         <legend className="px-2 text-sm text-gray-500">Trip</legend>
         <div className="flex items-center justify-between">
           <span className="text-[16px] h-10 flex items-center font-medium text-gray-800">
@@ -34,7 +34,7 @@ export default function TravelSearchFields() {
           </span>
         </div>
       </fieldset>
-      <fieldset className="flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
+      <fieldset className="hidden lg:flex flex-1 border border-gray-400 rounded-md pl-4 py-0.5">
         <legend className="px-2 text-sm text-gray-500">
           Passenger - Class
         </legend>

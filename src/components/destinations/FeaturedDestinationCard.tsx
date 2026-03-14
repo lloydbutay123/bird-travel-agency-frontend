@@ -15,11 +15,11 @@ export default function FeaturedDestinationCard({
   gallery,
 }: FeaturedDestinationCardProps) {
   return (
-    <div className="flex w-full gap-6">
+    <div className="flex flex-col lg:flex-row w-full gap-6">
       <div className="flex flex-col justify-between h-106 p-6  bg-[#8DD3BB] rounded-[20px]">
-        <div className="w-full max-w-126">
+        <div className="w-full lg:max-w-126">
           <div className="flex justify-between items-start mb-6">
-            <h1 className="font-tradegothic text-[#112211] font-bold text-[40px] max-w-90 leading-tight">
+            <h1 className="font-tradegothic text-[#112211] font-bold text-[22px] md:text-[40px] max-w-90 leading-tight">
               {title}
             </h1>
             <div className="flex flex-col gap-1 p-2 text-center bg-white rounded-lg">

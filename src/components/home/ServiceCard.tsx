@@ -19,10 +19,10 @@ export default function ServiceCard({
   btnHref,
 }: ServiceCardProps) {
   return (
-    <div className="relative rounded-[20px] overflow-hidden w-full h-139.75">
+    <div className="relative rounded-[20px] overflow-hidden w-full h-105 lg:h-139.75">
       <Image src={image} alt={title} fill className="absolute" />
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-        <div className="w-97.25 text-center">
+        <div className="w-75 lg:w-97.25 text-center">
           <div className="mb-4">
             <p className="font-tradegothic text-white text-[40px] font-bold">
               {title}

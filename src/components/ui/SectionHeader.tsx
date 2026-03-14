@@ -15,15 +15,15 @@ export default function SectionHeader({
   btnLabel,
 }: SearchButtonProps) {
   return (
-    <div className="flex mx-auto items-center justify-between mb-10">
-      <div>
+    <div className="lg:flex mx-auto items-center justify-between mb-10">
+      <div className="mb-4 lg:mb-0">
         <p className="mb-4 text-[32px] font-semibold">{title}</p>
         <p className="text-[16px] text-[#112211] w-full max-w-212.75">
           {subtitle}
         </p>
       </div>
       {btnLabel && (
-        <Button onClick={onClick} variant="outline">
+        <Button onClick={onClick} variant="outline" className="ml-auto">
           {btnLabel}
         </Button>
       )}
