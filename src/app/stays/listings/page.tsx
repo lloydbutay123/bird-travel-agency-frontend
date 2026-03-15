@@ -34,7 +34,7 @@ const sortOptions = [
 
 export default function StaysListings() {
   return (
-    <div className="flex flex-col gap-8 min-h-screen py-12">
+    <div className="flex flex-col gap-8 min-h-screen pb-12 pt-34.5">
       <TravelSearch
         mode="stays"
         position="relative"

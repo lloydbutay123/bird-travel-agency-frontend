@@ -15,7 +15,7 @@ const sortOptions = [
 
 export default function FlightResults() {
   return (
-    <div className="flex flex-col gap-8 min-h-screen py-12">
+    <div className="flex flex-col gap-8 min-h-screen pb-12 pt-34.5">
       <TravelSearch position="relative" searchIcon={true} showActions={false} />
       <Container className="flex gap-6">
         <FlightFilterSidebar />

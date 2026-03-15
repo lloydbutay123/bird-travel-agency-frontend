@@ -39,7 +39,7 @@ export default function TravelSearch({
           ? { top: typeof top === "number" ? `${top}px` : top }
           : undefined
       }
-      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} w-81.75! lg:w-full! card rounded-2xl px-8 pt-4 pb-8 bg-white z-10`}
+      className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} w-81.75! md:w-full! card rounded-2xl px-8 pt-4 pb-8 bg-white z-10`}
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-12">
@@ -86,14 +86,14 @@ export default function TravelSearch({
             <Button
               onClick={onAddPromoCode}
               variant="ghost"
-              className="hidden lg:block"
+              className="hidden md:block"
             >
               + Add Promo Code
             </Button>
             <Button
               onClick={onShowFlights}
               variant="primary"
-              className="w-full"
+              className="w-full md:w-auto"
             >
               {btnIcon} {btnLabel}
             </Button>

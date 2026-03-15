@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -21,6 +21,9 @@ const images = [
 
 export default function AddPaymentMethodPage() {
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isAuth = pathname.includes("/auth");
 
   const [cardNumber, setCardNumber] = useState("");
   const [expDate, setExpDate] = useState("");
@@ -34,8 +37,10 @@ export default function AddPaymentMethodPage() {
   };
 
   return (
-    <div className="flex w-full min-h-screen items-center justify-center gap-26 p-22.5">
-      <div className=" w-full h-full max-w-122 min-h-204 rounded-[30px] overflow-hidden">
+    <div className="flex w-full min-h-screen items-center justify-center gap-26 p-6 md:p-22.5">
+      <div
+        className={`w-full h-full max-w-122 min-h-204 rounded-[30px] overflow-hidden ${isAuth && "hidden lg:block"}`}
+      >
         <Swiper
           modules={[Pagination, Autoplay]}
           slidesPerView={1}

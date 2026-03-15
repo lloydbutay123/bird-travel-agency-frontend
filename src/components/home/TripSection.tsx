@@ -10,7 +10,7 @@ export default function TripSection() {
         subtitle="Search Flights & Places Hire to our most popular destinations"
         btnLabel="See more places"
       />
-      <div className="grid lg:mx-auto lg:grid-cols-3 gap-8">
+      <div className="grid lg:mx-auto md:grid-cols-2 lg:grid-cols-3 gap-8">
         {trips.map((trip) => {
           return (
             <TripCard

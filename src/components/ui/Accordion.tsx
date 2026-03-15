@@ -7,12 +7,14 @@ type AccordionProps = {
   title: string;
   defaultOpen: boolean;
   children: React.ReactNode;
+  className?: string;
 };
 
 export default function Accordion({
   title,
   defaultOpen = false,
   children,
+  className,
 }: AccordionProps) {
   const [open, setOpen] = useState(defaultOpen);
   return (
@@ -21,7 +23,9 @@ export default function Accordion({
         className="flex justify-between w-full items-center mb-4"
         onClick={() => setOpen(!open)}
       >
-        <span className="font-semibold text-[16px] text-[#112211]">
+        <span
+          className={`font-semibold text-[16px] text-[#112211] ${className}`}
+        >
           {title}
         </span>
         <IoIosArrowDown

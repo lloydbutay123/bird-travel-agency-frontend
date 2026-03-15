@@ -18,10 +18,10 @@ export default function Button({
   disabled = false,
 }: ButtonProps) {
   const variants = {
-    primary: "bg-[#8dd3bb] text-[#112211] hover:bg-white",
-    secondary: "bg-white text-[#112211] hover:bg-black hover:text-white",
+    primary: "bg-[#8dd3bb] text-[#112211]",
+    secondary: "bg-white text-[#112211] hover:text-white",
     outline: "border border-[#8DD3BB] text-[#112211]",
-    ghost: "text-[#112211] hover:bg-gray-100",
+    ghost: "text-[#112211]",
     destructive: "bg-red-600 text-white hover:bg-red-700",
   };
   return (

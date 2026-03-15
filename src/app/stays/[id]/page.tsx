@@ -43,7 +43,7 @@ export default function StayDetailsPage() {
 
   return (
     <div className="min-h-screen">
-      <Container className="mt-12 pb-30">
+      <Container className="pt-34.5 pb-30">
         <BookingStepper steps={flow} currentStepIndex={stepIndex} />
         <BookingLayout>
           <div className="flex flex-col gap-8">

@@ -6,52 +6,56 @@ import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import Button from "../ui/Button";
 import Container from "../ui/Container";
 import { usePathname } from "next/navigation";
+import Accordion from "../ui/Accordion";
 
 export default function Footer() {
   const pathname = usePathname();
   const isAuth = pathname.includes("/auth");
 
+  if (isAuth) return null;
+
   return (
-    <footer className={`relative h-143.25 w-full ${isAuth && "hidden"}`}>
-      <Container className="absolute z-10 flex justify-between top-0 px-6 bg-[#CDEAE1] left-1/2 -translate-x-1/2 rounded-[20px]">
-        <div className="hidden lg:block py-6">
-          <p className="font-tradegothic leading-13.5 w-92 mb-6 text-[44px] font-bold">
-            Subscribe Newsletter
-          </p>
-          <p className="font-tradegothic text-[20px] font-bold">The Travel</p>
-          <p className="text-[16px] mb-3.75 font-medium text-[#112211]/70">
-            Get inspired! Receive travel discounts, tips and behind the scenes
-            stories.
-          </p>
-          <form className="flex gap-4">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="pl-4 py-2 rounded-sm bg-white w-full max-w-118.25 h-14 text-[16px]"
-            />
-            <Button
-              type="submit"
-              onClick={() => {}}
-              variant="secondary"
-              className="bg-black! text-white! h-14"
-            >
-              Subscribe
-            </Button>
-          </form>
+    <footer className="w-full pt-10 bg-[#8DD3BB]">
+      <Container className="px-6">
+        <div className="relative z-10 flex justify-between rounded-[20px] bg-[#CDEAE1] px-6 py-8">
+          <div className="hidden lg:block">
+            <p className="font-tradegothic leading-13.5 w-92 mb-6 text-[44px] font-bold">
+              Subscribe Newsletter
+            </p>
+            <p className="font-tradegothic text-[20px] font-bold">The Travel</p>
+            <p className="mb-3.75 text-[16px] font-medium text-[#112211]/70">
+              Get inspired! Receive travel discounts, tips and behind the scenes
+              stories.
+            </p>
+            <form className="flex gap-4">
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="h-14 w-full max-w-118.25 rounded-sm bg-white pl-4 text-[16px]"
+              />
+              <Button
+                type="submit"
+                onClick={() => {}}
+                variant="secondary"
+                className="bg-black! h-14 text-white!"
+              >
+                Subscribe
+              </Button>
+            </form>
+          </div>
+
+          <Image
+            src="/assets/images/emojione-v1_open-mailbox-with-lowered-flag.png"
+            alt=""
+            width={400}
+            height={400}
+            className="hidden h-auto w-100 lg:block"
+          />
         </div>
 
-        <Image
-          src="/assets/images/emojione-v1_open-mailbox-with-lowered-flag.png"
-          alt=""
-          width={400}
-          height={400}
-          className="hidden lg:block h-auto w-100"
-        />
-      </Container>
-      <div className="absolute bottom-0 w-full bg-[#8DD3BB] h-105.5">
-        <Container className="absolute flex gap-35 bottom-16 left-1/2 -translate-x-1/2">
-          <div>
-            <div className="relative h-12.5 w-25 mb-6">
+        <div className="pt-12 pb-16 md:flex md:gap-20">
+          <div className="mb-8 md:mb-0">
+            <div className="relative mb-6 h-12.5 w-25">
               <Image
                 src="/assets/images/logo-dark.png"
                 alt=""
@@ -59,6 +63,7 @@ export default function Footer() {
                 className="object-cover"
               />
             </div>
+
             <div className="flex items-center gap-3">
               <FaFacebook size={20} />
               <FaTwitter size={20} />
@@ -66,6 +71,7 @@ export default function Footer() {
               <FaInstagram size={20} />
             </div>
           </div>
+
           <div className="hidden xl:flex gap-6">
             {footerSections.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
@@ -77,7 +83,7 @@ export default function Footer() {
                     <Link
                       key={i}
                       href={link.href}
-                      className="text-[#112211]/70 text-[14px] min-w-[175.2px]"
+                      className="min-w-[175.2px] text-[14px] text-[#112211]/70"
                     >
                       {link.label}
                     </Link>
@@ -86,8 +92,30 @@ export default function Footer() {
               </div>
             ))}
           </div>
-        </Container>
-      </div>
+
+          <div className="xl:hidden w-full">
+            {footerSections.map((section) => (
+              <Accordion
+                key={section.title}
+                title={section.title}
+                defaultOpen={false}
+              >
+                <div className="flex flex-col gap-3 pb-4">
+                  {section.links.map((link, index) => (
+                    <Link
+                      key={index}
+                      href={link.href}
+                      className="text-[14px] text-[#112211]/70"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </Accordion>
+            ))}
+          </div>
+        </div>
+      </Container>
     </footer>
   );
 }

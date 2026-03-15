@@ -4,9 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaPlane } from "react-icons/fa";
-import { IoBed } from "react-icons/io5";
+import { IoBed, IoClose } from "react-icons/io5";
 import Container from "../ui/Container";
-import { MdMenu } from "react-icons/md";
+import { MdMenu, MdPerson } from "react-icons/md";
+import Button from "../ui/Button";
+import { useState } from "react";
+import Accordion from "../ui/Accordion";
+import { footerSections } from "@/data/footer";
+import Divider from "../ui/Divider";
 
 const actions = [
   { label: "Login", href: "/auth/login" },
@@ -33,9 +38,32 @@ export default function Navbar() {
   const isHome = pathname === "/";
   const isAuth = pathname.startsWith("/auth");
 
+  const [navOpen, setNavOpen] = useState(false);
+  const [actionsOpen, setActionsOpen] = useState(false);
+
+  const closeNavbar = () => {
+    setNavOpen(false);
+    setActionsOpen(false);
+  };
+
+  const handleNavbar = () => {
+    if (navOpen) {
+      closeNavbar();
+      return;
+    }
+
+    setNavOpen(true);
+    setActionsOpen(false);
+  };
+
+  const handleShowActions = () => {
+    setActionsOpen((prev) => !prev);
+    setNavOpen(false);
+  };
+
   return (
     <nav
-      className={`${isHome ? "fixed mt-7.5" : "relative bg-white mt-0 card"} ${isAuth && "hidden"} flex z-2 items-center justify-center w-full`}
+      className={`${isHome ? "lg:mt-7.5" : " bg-white mt-0 card"} ${isAuth && "hidden"} fixed flex z-999 items-center justify-center w-full`}
     >
       <Container
         className={`${isHome ? "py-6 max-w-345 px-6 lg:px-8" : "py-5.25 px-6"} flex items-center justify-between`}
@@ -65,7 +93,7 @@ export default function Navbar() {
             );
           })}
         </div>
-        <Link href="/" className="relative w-25 h-9">
+        <Link href="/" onClick={closeNavbar} className="relative w-25 h-9">
           <Image
             src={`${isHome ? "/assets/images/logo.png" : "/assets/images/logo-dark.png"}`}
             alt=""
@@ -73,10 +101,28 @@ export default function Navbar() {
             className="object-cover"
           />
         </Link>
-        <MdMenu
-          size={24}
-          className={`block lg:hidden ${!isHome && "text-black"}`}
-        />
+        <div className="flex items-center">
+          {navOpen && (
+            <Button variant="ghost" onClick={handleShowActions}>
+              <MdPerson color={isHome ? "white" : "black"} size={24} />
+            </Button>
+          )}
+          <Button variant="ghost" onClick={handleNavbar}>
+            {navOpen ? (
+              <IoClose
+                size={24}
+                color={isHome ? "white" : "black"}
+                className={`block lg:hidden`}
+              />
+            ) : (
+              <MdMenu
+                size={24}
+                color={isHome ? "white" : "black"}
+                className={`block lg:hidden`}
+              />
+            )}
+          </Button>
+        </div>
         <div className="hidden lg:flex items-center gap-8">
           {actions.map((action) => (
             <Link
@@ -93,6 +139,66 @@ export default function Navbar() {
           ))}
         </div>
       </Container>
+      {navOpen && (
+        <div
+          className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-6 pt-32 ${isHome ? "bg-[#112211]" : "bg-white"}`}
+        >
+          <div className="flex flex-col gap-1">
+            {navItems.map((nav, index) => (
+              <Link
+                key={index}
+                href={nav.href}
+                onClick={closeNavbar}
+                className={`text-[24px] ${isHome ? "text-white" : "text-[#112211]"}`}
+              >
+                {nav.label}
+              </Link>
+            ))}
+          </div>
+
+          <Divider className={`${isHome && "bg-white/35"}`} />
+
+          <div>
+            {footerSections.map((section) => (
+              <Accordion
+                key={section.title}
+                title={section.title}
+                defaultOpen={false}
+                className={`${isHome ? "text-white" : "text-[#112211]"}`}
+              >
+                <div className="flex flex-col gap-3 pb-4">
+                  {section.links.map((link, index) => (
+                    <Link
+                      key={index}
+                      href={link.href}
+                      className={`text-[14px] ${isHome ? "text-white/50" : "text-[#112211]/70"}`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </Accordion>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {actionsOpen && (
+        <div
+          className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-6 pt-32 ${isHome ? "bg-[#112211]" : "bg-white"}`}
+        >
+          {actions.map((action, index) => (
+            <Link
+              onClick={closeNavbar}
+              key={index}
+              href={action.href}
+              className={`text-[24px] ${isHome ? "text-white" : "text-[#112211]"}`}
+            >
+              {action.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }

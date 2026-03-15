@@ -19,7 +19,7 @@ export default function StaysPage() {
     router.push("/stays/listings");
   };
   return (
-    <div className="flex flex-col gap-80 lg:gap-69 min-h-screen">
+    <div className="flex flex-col gap-80 lg:gap-69 min-h-screen pt-19.5 lg:pt-22.5">
       <HeroBanner
         image="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         title="Make your travel whishlist, we'll do the rest"
@@ -37,7 +37,7 @@ export default function StaysPage() {
       <div className="flex flex-col gap-20 pb-30 px-6 xl:px-0">
         <Container>
           <SectionHeader title="Your recent searches" />
-          <div className="grid lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-8">
             {trips
               .filter((d) => d.recent)
               .map((recent) => (
@@ -56,7 +56,7 @@ export default function StaysPage() {
             subtitle="Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination."
             btnLabel="See all"
           />
-          <div className="grid lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
             {destinations.map((destination) => (
               <DestinationCard
                 key={destination.id}

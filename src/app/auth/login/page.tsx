@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -27,6 +27,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleForgotPassword = () => {
     router.push("/auth/forgot-password");
@@ -36,8 +37,10 @@ export default function LoginPage() {
     router.push("/");
   };
 
+  const isAuth = pathname.includes("/auth");
+
   return (
-    <div className="flex min-h-screen w-full items-center justify-center gap-26 p-25.5">
+    <div className="flex min-h-screen w-full items-center justify-center gap-26 p-6 md:p-25.5">
       <div className="w-full max-w-lg">
         <AuthHeader
           title="Login"
@@ -88,7 +91,9 @@ export default function LoginPage() {
           <SocialAuthButtons />
         </div>
       </div>
-      <div className="w-full h-full max-w-154.5 min-h-204 overflow-hidden rounded-[30px]">
+      <div
+        className={`w-full h-full max-w-154.5 min-h-204 overflow-hidden rounded-[30px] ${isAuth && "hidden lg:block"}`}
+      >
         <Swiper
           modules={[Pagination, Autoplay]}
           slidesPerView={1}
