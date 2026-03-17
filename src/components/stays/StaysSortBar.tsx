@@ -27,7 +27,7 @@ export default function StaysSortBar({
 }: StaysSortBarProps) {
   return (
     <>
-      <div className="card bg-white flex gap-6 rounded-xl px-6 py-4">
+      <div className="card bg-white hidden md:flex gap-6 rounded-xl px-6 py-4">
         {options.map((option, i) => (
           <div key={i} className="flex w-full justify-between">
             <div key={i} className="max-w-40 w-full">

@@ -18,7 +18,7 @@ export default function FlightPassengerDetailsStep({
         <h2 className="mb-6 text-[24px] font-bold text-[#112211]">
           Guest Details
         </h2>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           <input
             type="text"
             placeholder="First Name"

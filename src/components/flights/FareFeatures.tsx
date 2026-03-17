@@ -20,7 +20,7 @@ export default function FareFeatures({
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col md:flex-row items-center justify-between mb-6">
         <h3 className="font-tradegothic font-bold text-[24px] text-[#112211]">
           {selectedFare} Features
         </h3>
@@ -30,11 +30,13 @@ export default function FareFeatures({
           ))}
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-2">
         {selected?.features.gallery?.map((img, i) => (
           <div
             key={i}
-            className="relative w-30 h-30 overflow-hidden rounded-xl"
+            className={`relative w-30 h-30 overflow-hidden rounded-xl ${
+              i >= 3 ? "hidden  sm:block" : ""
+            }`}
           >
             <Image src={img} alt="" fill className="object-cover" />
           </div>

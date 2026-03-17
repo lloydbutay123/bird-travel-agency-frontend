@@ -31,7 +31,7 @@ export default function ListingHeader({
   const isStays = pathname.includes("/stays");
 
   return (
-    <div className="flex justify-between mb-8">
+    <div className="md:flex justify-between mb-8">
       <div>
         <div className="flex items-center gap-4 mb-4">
           <h2 className="font-tradegothic text-[24px] text-[#112211] font-bold">
@@ -67,7 +67,7 @@ export default function ListingHeader({
             <span className="text-[#FF8682] text-[14px]">/night</span>
           )}
         </h3>
-        <div className="flex gap-3.75">
+        <div className="flex gap-3.75 justify-end">
           <Button variant="outline" className="w-12">
             <FaRegHeart size={20} />
           </Button>

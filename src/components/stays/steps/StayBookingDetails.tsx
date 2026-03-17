@@ -68,7 +68,7 @@ export default function StayBookingDetailsPage({
               suites, are offered to its special guests as a wide variety of
               selection.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               <RatingOverviewCard
                 rating={3.5}
                 label="Very good"
@@ -116,7 +116,7 @@ export default function StayBookingDetailsPage({
         <Divider />
 
         <ListingSection title="Amenities">
-          <div className="w-full grid grid-cols-2 gap-x-75 gap-y-6">
+          <div className="w-full grid grid-cols-2 md:gap-x-75 gap-y-6">
             {amenities.map((amenity) => (
               <AmenityItem
                 key={amenity}

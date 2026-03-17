@@ -28,11 +28,11 @@ export default function StaysCard({
 }: StaysCardProps) {
   return (
     <div className="card flex bg-white rounded-xl">
-      <div className="relative w-75 h-auto overflow-hidden rounded-l-xl">
+      <div className="relative w-75 h-auto overflow-hidden rounded-l-xl hidden xl:block">
         <Image src={image} alt="Emirates" fill className="object-cover" />
       </div>
-      <div className="flex flex-col p-6 flex-1 w-full gap-6 px-6">
-        <div className="flex w-full items-start gap-6 justify-between">
+      <div className="flex flex-col p-6 flex-1 w-full gap-4 md:px-6">
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div>
             <h2 className="font-tradegothic text-[20px] font-bold mb-4">
               {name}
@@ -71,7 +71,7 @@ export default function StaysCard({
               </p>
             </div>
           </div>
-          <div className="">
+          <div className="self-end md:self-auto">
             <p className="text-[12px] font-medium text-[#112211]/75 leading-none">
               starting from
             </p>

@@ -28,7 +28,7 @@ export default function BookingStepper({
                 {index + 1}
               </div>
               <span
-                className={`text-sm font-medium ${
+                className={`hidden md:block text-sm font-medium ${
                   isActive ? "text-[#112211]" : "text-[#112211]/60"
                 }`}
               >

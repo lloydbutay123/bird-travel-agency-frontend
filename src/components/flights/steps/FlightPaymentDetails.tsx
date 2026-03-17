@@ -16,8 +16,8 @@ export default function FlightPaymentDetails() {
           { label: "Geeldmks" },
         ]}
       />
-      <div className="flex gap-10">
-        <div className="flex flex-col gap-10 w-full max-w-[790px]">
+      <div className="flex flex-col xl:flex-row gap-10">
+        <div className="flex order-2 xl:order-1 flex-col gap-10 w-full xl:max-w-[790px]">
           <FlightSegmentCard
             date="Return, Wed, Dec 8"
             duration="2h 28m"
@@ -34,7 +34,7 @@ export default function FlightPaymentDetails() {
           <PaymentOptionSection selected="full" onSelect={() => {}} />
           <AuthLoginCard />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 order-1 xl:order-2">
           <PriceSummaryCard
             category="Economy"
             image="https://images.unsplash.com/photo-1590600424262-38d39f98b898?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

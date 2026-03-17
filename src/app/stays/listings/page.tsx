@@ -44,8 +44,8 @@ export default function StaysListings() {
       <Container className="flex gap-6">
         <StayFilterSidebar />
         <div className="flex-1">
-          <div className="h-full min-h-340 flex gap-[15.5px]">
-            <Divider orientation="vertical" />
+          <div className="h-full min-h-340 px-6 xl:px-0 flex xl:gap-[15.5px]">
+            <Divider orientation="vertical" className="hidden xl:block" />
             <div className="flex w-full flex-col gap-6">
               <StaysSortBar
                 options={sortOptions}

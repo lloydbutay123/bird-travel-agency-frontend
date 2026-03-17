@@ -41,7 +41,7 @@ export default function TravelSearch({
       }
       className={`${position} ${position === "absolute" ? "left-1/2 -translate-x-1/2 " : "mx-auto"} w-81.75! md:w-full! card rounded-2xl px-8 pt-4 pb-8 bg-white z-10`}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col md:gap-8">
         <div className="flex flex-col gap-12">
           {header === "tabs" && (
             <div className="flex items-center gap-8">
@@ -70,14 +70,19 @@ export default function TravelSearch({
               </p>
             </div>
           )}
-          <div className="lg:flex gap-6 items-end">
+          <div className="lg:flex gap-6 items-end space-y-4 md:space-y-0">
             {mode === "flights" && <TravelSearchFields />}
             {mode === "stays" && <StaySearchFields />}
 
             {searchIcon && (
-              <Button className="h-14 w-14">
-                <FaSearch size={24} />
-              </Button>
+              <div>
+                <Button className="h-14 w-14 hidden md:block">
+                  <FaSearch size={24} />
+                </Button>
+                <Button className="w-full block md:hidden">
+                  Search Flight
+                </Button>
+              </div>
             )}
           </div>
         </div>

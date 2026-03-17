@@ -61,8 +61,8 @@ export default function FlightSegmentCard({
 
         <p className="text-[20px] font-medium text-[#112211]/75">{duration}</p>
       </div>
-      <div className="flex  items-center justify-between mb-10">
-        <div className="flex gap-6 items-center px-8 py-4 border border-[#8DD3BB] rounded-lg">
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-10">
+        <div className="flex gap-6 items-center px-8 py-4 border border-[#8DD3BB] rounded-lg w-full lg:w-auto">
           <div className="w-16 h-11.25 relative">
             <Image src={airlineLogo} alt="" fill className="object-contain" />
           </div>
@@ -85,13 +85,13 @@ export default function FlightSegmentCard({
         </div>
       </div>
       <div
-        className={`flex items-center ${!showPriceHeader ? "justify-center gap-20" : "justify-between"}`}
+        className={`flex items-center ${!showPriceHeader ? "justify-center" : "justify-between"}`}
       >
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col xl:flex-row items-center gap-4">
           <h4 className="text-[24px] text-[#112211] font-semibold">
             {departureTime}
           </h4>
-          <p className="text-[16px] text-[#112211]/60 font-medium">
+          <p className="text-[16px] text-[#112211]/60 font-medium line-clamp-1">
             {departureAirport}
           </p>
         </div>
@@ -104,11 +104,11 @@ export default function FlightSegmentCard({
             <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-black" />
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <h4 className="text-[24px] text-[#112211] font-semibold">
+        <div className="flex flex-col xl:flex-row items-center gap-4">
+          <h4 className="text-[24px] text-[#112211] font-semibold text-end">
             {arrivalTime}
           </h4>
-          <p className="text-[16px] text-[#112211]/60 font-medium">
+          <p className="text-[16px] text-[#112211]/60 font-medium line-clamp-1">
             {arrivalAirport}
           </p>
         </div>
