@@ -9,18 +9,15 @@ type User = {
 
 type AuthState = {
   user: User | null;
-  token: string | null;
   isAuthenticated: boolean;
 };
 const initialState: AuthState = {
   user: null,
-  token: null,
   isAuthenticated: false,
 };
 
 type SetCredentialPayload = {
   user: User;
-  token: string;
 };
 
 const authSlice = createSlice({
@@ -29,12 +26,10 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (state, action: PayloadAction<SetCredentialPayload>) => {
       state.user = action.payload.user;
-      state.token = action.payload.token;
       state.isAuthenticated = true;
     },
     logout: (state) => {
       state.user = null;
-      state.token = null;
       state.isAuthenticated = false;
     },
   },

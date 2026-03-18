@@ -1,7 +1,8 @@
 "use client";
 
-import { setCredentials } from "@/redux/slices/authSlice";
-import { useEffect } from "react";
+import { API_URL } from "@/lib/api";
+import { logout, setCredentials } from "@/redux/slices/authSlice";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export default function AuthInitializer({
@@ -10,20 +11,39 @@ export default function AuthInitializer({
   children: React.ReactNode;
 }) {
   const dispatch = useDispatch();
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
+    const restoreUser = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/v1/users/me`, {
+          method: "GET",
+          credentials: "include",
+        });
 
-    if (token && user) {
-      dispatch(
-        setCredentials({
-          token,
-          user: JSON.parse(user),
-        }),
-      );
-    }
+        if (!res.ok) {
+          dispatch(logout());
+          setHydrated(true);
+          return;
+        }
+
+        const user = await res.json();
+
+        dispatch(
+          setCredentials({
+            user,
+          }),
+        );
+      } catch (error) {
+        dispatch(logout());
+      } finally {
+        setHydrated(true);
+      }
+    };
+    restoreUser();
   }, [dispatch]);
+
+  if (!hydrated) return null;
 
   return <>{children}</>;
 }

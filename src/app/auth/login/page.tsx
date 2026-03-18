@@ -44,11 +44,12 @@ export default function LoginPage() {
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/users/login`, {
+      const res = await fetch("http://localhost:4000/api/v1/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           email,
           password,
@@ -65,11 +66,9 @@ export default function LoginPage() {
       dispatch(
         setCredentials({
           user: data.user,
-          token: data.token,
         }),
       );
 
-      localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
       router.push("/");

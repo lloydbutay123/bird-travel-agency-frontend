@@ -94,11 +94,9 @@ export default function SignupPage() {
       dispatch(
         setCredentials({
           user: data.user,
-          token: data.token,
         }),
       );
 
-      localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
       router.push("/");
