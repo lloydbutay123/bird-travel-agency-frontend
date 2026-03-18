@@ -1,3 +1,5 @@
+"use client";
+
 import TravelSearch from "@/components/search/TravelSearch";
 import StayFilterSidebar from "@/components/stays/StayFiltersSidebar";
 import StaysCard from "@/components/stays/StaysCard";

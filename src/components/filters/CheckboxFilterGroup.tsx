@@ -14,7 +14,7 @@ export default function CheckboxFilterGroup({
     <Accordion title={title} defaultOpen>
       <div className="flex flex-col gap-2">
         {options.map((option, i) => (
-          <Checkbox key={i} label={option} />
+          <Checkbox key={i} label={option} checked onChange={() => {}} />
         ))}
       </div>
     </Accordion>

@@ -1,3 +1,5 @@
+"use client";
+
 import FlightCard from "@/components/flights/FlightCard";
 import FlightFilterSidebar from "@/components/flights/FlightFiltersSidebar";
 import FlightSortBar from "@/components/flights/FlightsSortBar";
