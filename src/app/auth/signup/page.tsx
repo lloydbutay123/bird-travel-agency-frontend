@@ -15,6 +15,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { usePathname, useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/redux/slices/authSlice";
+import { API_URL } from "@/lib/api";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -23,19 +26,88 @@ const images = [
 ];
 
 export default function SignupPage() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
 
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [agree, setAgree] = useState(false);
 
-  const handleCreateAccount = () => {
-    router.push("/auth/signup/payment-method");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleCreateAccount = async () => {
+    try {
+      setLoading(true);
+
+      if (
+        !firstName.trim() ||
+        !lastName.trim() ||
+        !email.trim() ||
+        !phone.trim() ||
+        !password.trim() ||
+        !confirmPassword.trim()
+      ) {
+        setError("All fields are required.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setError("Passwords do not match.");
+        return;
+      }
+
+      if (!agree) {
+        setError("Please agree to the terms and privacy policy.");
+        return;
+      }
+
+      setError("");
+
+      const res = await fetch(`${API_URL}/api/v1/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          password,
+          confirmPassword,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Register failed");
+        return;
+      }
+
+      dispatch(
+        setCredentials({
+          user: data.user,
+          token: data.token,
+        }),
+      );
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      router.push("/");
+    } catch (error) {
+      setError("Something went wrong. Please try again");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const isAuth = pathname.includes("/auth");
@@ -75,7 +147,7 @@ export default function SignupPage() {
                 label="First Name"
                 name="fname"
                 type="text"
-                value={firstname}
+                value={firstName}
                 className="flex-1"
                 placeholder="Enter first name"
                 onChange={(e) => setFirstName(e.target.value)}
@@ -84,7 +156,7 @@ export default function SignupPage() {
                 label="Last Name"
                 name="lname"
                 type="text"
-                value={lastname}
+                value={lastName}
                 className="flex-1"
                 placeholder="Enter first name"
                 onChange={(e) => setLastName(e.target.value)}
@@ -128,12 +200,25 @@ export default function SignupPage() {
               placeholder="Enter your password"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <Checkbox label="I agree to all the Terms and Privacy Policies" />
+            <Checkbox
+              label="I agree to all the Terms and Privacy Policies"
+              checked={agree}
+              onChange={() => setAgree((prev) => !prev)}
+            />
           </div>
+          {error && <p className="text-sm text-red-500">{error}</p>}
           <div>
             <Button
               className="w-full mb-4 font-semibold"
               onClick={handleCreateAccount}
+              disabled={
+                loading ||
+                !firstName.trim() ||
+                !lastName.trim() ||
+                !email.trim() ||
+                !password.trim() ||
+                !agree
+              }
             >
               Create account
             </Button>

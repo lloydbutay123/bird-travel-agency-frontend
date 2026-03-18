@@ -12,6 +12,9 @@ import { useState } from "react";
 import Accordion from "../ui/Accordion";
 import { footerSections } from "@/data/footer";
 import Divider from "../ui/Divider";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
+import type { RootState } from "@/redux/store";
 
 const actions = [
   { label: "Login", href: "/auth/login" },
@@ -41,6 +44,12 @@ export default function Navbar() {
   const [navOpen, setNavOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const { user, isAuthenticated } = useSelector(
+    (state: RootState) => state.auth,
+  );
+
   const closeNavbar = () => {
     setNavOpen(false);
     setActionsOpen(false);
@@ -59,6 +68,15 @@ export default function Navbar() {
   const handleShowActions = () => {
     setActionsOpen((prev) => !prev);
     setNavOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    dispatch(logout());
+
+    closeNavbar();
   };
 
   return (
@@ -124,19 +142,38 @@ export default function Navbar() {
           </Button>
         </div>
         <div className="hidden lg:flex items-center gap-8">
-          {actions.map((action) => (
-            <Link
-              key={action.label}
-              href={action.href}
-              className={`
-                font-semibold text-[14px] 
-                ${isHome && action.label === "Login" ? "text-white" : "text-[#112211]"}
-                ${action.label === "Sign up" && !isHome && "bg-black! text-white px-4 py-[13.5px] rounded-lg"} 
-                ${action.label === "Sign up" && "bg-white px-4 py-[13.5px] rounded-lg"}`}
-            >
-              {action.label}
-            </Link>
-          ))}
+          {!isAuthenticated ? (
+            actions.map((action) => (
+              <Link
+                key={action.label}
+                href={action.href}
+                className={`
+          font-semibold text-[14px] 
+          ${isHome && action.label === "Login" ? "text-white" : "text-[#112211]"}
+          ${action.label === "Sign up" && !isHome && "bg-black! text-white px-4 py-[13.5px] rounded-lg"} 
+          ${action.label === "Sign up" && "bg-white px-4 py-[13.5px] rounded-lg"}`}
+              >
+                {action.label}
+              </Link>
+            ))
+          ) : (
+            <div className="flex items-center gap-4">
+              {/* Profile */}
+              <div className="flex items-center gap-2">
+                <MdPerson size={20} color={isHome ? "white" : "#112211"} />
+                <p
+                  className={`text-[14px] font-semibold ${
+                    isHome ? "text-white" : "text-[#112211]"
+                  }`}
+                >
+                  {user ? `${user.firstName} ${user.lastName}` : "User"}
+                </p>
+              </div>
+
+              {/* Logout */}
+              <Button onClick={handleLogout}>Logout</Button>
+            </div>
+          )}
         </div>
       </Container>
       {navOpen && (
@@ -185,18 +222,36 @@ export default function Navbar() {
 
       {actionsOpen && (
         <div
-          className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-6 pt-32 ${isHome ? "bg-[#112211]" : "bg-white"}`}
+          className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-6 pt-32 ${
+            isHome ? "bg-[#112211]" : "bg-white"
+          }`}
         >
-          {actions.map((action, index) => (
-            <Link
-              onClick={closeNavbar}
-              key={index}
-              href={action.href}
-              className={`text-[24px] ${isHome ? "text-white" : "text-[#112211]"}`}
-            >
-              {action.label}
-            </Link>
-          ))}
+          {!isAuthenticated ? (
+            actions.map((action, index) => (
+              <Link
+                onClick={closeNavbar}
+                key={index}
+                href={action.href}
+                className={`text-[24px] ${
+                  isHome ? "text-white" : "text-[#112211]"
+                }`}
+              >
+                {action.label}
+              </Link>
+            ))
+          ) : (
+            <>
+              <div
+                className={`text-[24px] ${
+                  isHome ? "text-white" : "text-[#112211]"
+                }`}
+              >
+                {user ? `${user.firstName} ${user.lastName}` : "User"}
+              </div>
+
+              <Button onClick={handleLogout}>Logout</Button>
+            </>
+          )}
         </div>
       )}
     </nav>

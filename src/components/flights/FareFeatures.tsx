@@ -26,7 +26,12 @@ export default function FareFeatures({
         </h3>
         <div className="flex items-center gap-6">
           {fareClasses.map((fare) => (
-            <Checkbox key={fare.name} label={fare.name} />
+            <Checkbox
+              key={fare.name}
+              label={fare.name}
+              checked
+              onChange={() => {}}
+            />
           ))}
         </div>
       </div>

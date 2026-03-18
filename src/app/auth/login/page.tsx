@@ -15,6 +15,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { usePathname, useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/redux/slices/authSlice";
+import { API_URL } from "@/lib/api";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -25,7 +28,10 @@ const images = [
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
+  const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -33,8 +39,46 @@ export default function LoginPage() {
     router.push("/auth/forgot-password");
   };
 
-  const handleLogin = () => {
-    router.push("/");
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const res = await fetch(`${API_URL}/api/v1/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Login failed");
+        return;
+      }
+
+      dispatch(
+        setCredentials({
+          user: data.user,
+          token: data.token,
+        }),
+      );
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      router.push("/");
+    } catch (error) {
+      setError("Something went wrong. Please try again");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const isAuth = pathname.includes("/auth");
@@ -58,7 +102,7 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
-              label="Pasword"
+              label="Password"
               name="password"
               type="password"
               value={password}
@@ -66,8 +110,10 @@ export default function LoginPage() {
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            {error && <p className="text-sm text-red-500">{error}</p>}
             <div className="flex items-center justify-between">
-              <Checkbox label="Remember me" />
+              <Checkbox label="Remember me" checked onChange={() => {}} />
               <Button
                 variant="ghost"
                 className="text-[#FF8682]"
@@ -78,7 +124,11 @@ export default function LoginPage() {
             </div>
           </div>
           <div>
-            <Button className="w-full mb-4" onClick={handleLogin}>
+            <Button
+              className="w-full mb-4"
+              onClick={handleLogin}
+              disabled={loading || !email.trim() || !password.trim()}
+            >
               Login
             </Button>
             <AuthFooterText

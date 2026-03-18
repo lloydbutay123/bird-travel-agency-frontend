@@ -4,7 +4,7 @@ import Container from "@/components/ui/Container";
 import React, { useEffect } from "react";
 import BookingStepper from "@/components/booking/BookingStepper";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import {
   nextStep,
   prevStep,

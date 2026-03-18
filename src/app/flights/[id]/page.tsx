@@ -9,7 +9,7 @@ import {
   prevStep,
   setProductType,
 } from "@/features/booking/bookingSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { bookingFlows } from "@/features/booking/booking-flow";

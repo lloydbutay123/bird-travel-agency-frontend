@@ -116,7 +116,11 @@ export default function AddPaymentMethodPage() {
               placeholder="Country or Region"
               onChange={(e) => setCountry(e.target.value)}
             />
-            <Checkbox label="Securely save my information for 1-click checkout" />
+            <Checkbox
+              label="Securely save my information for 1-click checkout"
+              checked
+              onChange={() => {}}
+            />
           </div>
           <div className="flex items-center flex-col gap-4">
             <Button

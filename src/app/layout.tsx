@@ -3,7 +3,8 @@ import { Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ReduxProvider from "@/store/ReduxProvider";
+import ReduxProvider from "@/redux/ReduxProvider";
+import AuthInitializer from "@/providers/AuthInitializer";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -26,16 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ReduxProvider>
-      <html lang="en">
-        <body
-          className={`${montserrat.variable} ${geistMono.variable} antialiased`}
-        >
-          <Navbar />
-          {children}
-          <Footer />
-        </body>
-      </html>
-    </ReduxProvider>
+    <html lang="en">
+      <body
+        className={`${montserrat.variable} ${geistMono.variable} antialiased`}
+      >
+        <ReduxProvider>
+          <AuthInitializer>
+            <Navbar />
+            {children}
+            <Footer />
+          </AuthInitializer>
+        </ReduxProvider>
+      </body>
+    </html>
   );
 }
