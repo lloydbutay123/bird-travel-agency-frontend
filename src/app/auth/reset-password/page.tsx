@@ -10,7 +10,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { API_URL } from "@/lib/api";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -21,14 +22,49 @@ const images = [
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const isAuth = pathname.includes("/auth");
+  const email = searchParams.get("email") || "";
+  const otp = searchParams.get("otp") || "";
 
-  const handleSetPassword = () => {
-    router.push("/auth/login");
+  const handleSetPassword = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      if (password !== confirmPassword) {
+        setError("Passwords do not match.");
+        return;
+      }
+
+      const res = await fetch(`${API_URL}/api/v1/users/reset-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, otp, password, confirmPassword }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Reset password failed");
+        return;
+      }
+
+      router.push("/auth/login");
+    } catch (error) {
+      setError("Something went wrong. Please try again");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,7 +93,12 @@ export default function ResetPasswordPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <Button className="w-full mb-4" onClick={handleSetPassword}>
+          <p className="text-sm text-red-500">{error}</p>
+          <Button
+            className="w-full mb-4"
+            onClick={handleSetPassword}
+            disabled={loading || !password || !confirmPassword}
+          >
             Set password
           </Button>
         </div>

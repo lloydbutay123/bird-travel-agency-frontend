@@ -10,7 +10,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { API_URL } from "@/lib/api";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -20,14 +21,73 @@ const images = [
 
 export default function VerifyOtpPage() {
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [error, setError] = useState("");
 
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const isAuth = pathname.includes("/auth");
+  const email = searchParams.get("email") || "";
 
-  const handleVerify = () => {
-    router.push("/auth/reset-password");
+  const handleVerify = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const res = await fetch(`${API_URL}/api/v1/users/verify-reset-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, otp }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "OTP verification failed");
+        return;
+      }
+
+      router.push(
+        `/auth/reset-password?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`,
+      );
+    } catch (error) {
+      setError("Something wen wrong. Please try again");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    try {
+      setResending(true);
+      setError("");
+
+      const res = await fetch(`${API_URL}/api/v1/users/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Failed to resend OTP");
+        return;
+      }
+    } catch (error) {
+      setError("Something went wrong. Please try again");
+      console.log(error);
+    } finally {
+      setResending(false);
+    }
   };
 
   return (
@@ -43,16 +103,19 @@ export default function VerifyOtpPage() {
             <TextField
               label="Enter Code"
               name="otp"
-              type="email"
+              type="text"
               value={otp}
-              placeholder="Enter your email"
+              placeholder="Enter OTP"
               onChange={(e) => setOtp(e.target.value)}
             />
-            <p className=" text-[14px] font-medium ">
+            <p className=" text-[14px] font-medium">
               Didn’t receive a code?{" "}
-              <span className="text-[#FF8682]">Resend</span>
+              <span className="text-[#FF8682]" onClick={handleResend}>
+                Resend
+              </span>
             </p>
           </div>
+          <p className="text-sm text-red-500">{error}</p>
           <Button className="w-full" onClick={handleVerify}>
             Verify
           </Button>

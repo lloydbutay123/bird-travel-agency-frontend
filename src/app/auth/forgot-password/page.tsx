@@ -15,6 +15,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { usePathname, useRouter } from "next/navigation";
+import { API_URL } from "@/lib/api";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -24,14 +25,41 @@ const images = [
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const router = useRouter();
   const pathname = usePathname();
 
   const isAuth = pathname.includes("/auth");
 
-  const handleSubmit = () => {
-    router.push("/auth/verify-otp");
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const res = await fetch(`${API_URL}/api/v1/users/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Failed");
+        return;
+      }
+
+      router.push(`/auth/verify-otp?email=${encodeURIComponent(email)}`);
+    } catch (error) {
+      setError("Something went wrong. Please try again");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,8 +81,13 @@ export default function ForgotPasswordPage() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+          <p className="text-sm text-red-500">{error}</p>
           <div>
-            <Button className="w-full" onClick={handleSubmit}>
+            <Button
+              className="w-full"
+              onClick={handleSubmit}
+              disabled={loading || !email}
+            >
               Submit
             </Button>
           </div>
