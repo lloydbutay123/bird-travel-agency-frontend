@@ -15,6 +15,7 @@ import Divider from "../ui/Divider";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
 import type { RootState } from "@/redux/store";
+import { API_URL } from "@/lib/api";
 
 const actions = [
   { label: "Login", href: "/auth/login" },
@@ -70,8 +71,12 @@ export default function Navbar() {
     setNavOpen(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
+  const handleLogout = async () => {
+    await fetch(`${API_URL}/api/v1/users/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+
     localStorage.removeItem("user");
 
     dispatch(logout());
