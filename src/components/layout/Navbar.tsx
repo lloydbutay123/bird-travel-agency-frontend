@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaPlane } from "react-icons/fa";
 import { IoBed, IoClose } from "react-icons/io5";
 import Container from "../ui/Container";
@@ -38,7 +38,9 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const pathname = usePathname();
+
   const isHome = pathname === "/";
   const isAuth = pathname.startsWith("/auth");
 
@@ -72,16 +74,20 @@ export default function Navbar() {
   };
 
   const handleLogout = async () => {
-    await fetch(`${API_URL}/api/v1/users/logout`, {
-      method: "POST",
-      credentials: "include",
-    });
+    try {
+      await fetch(`${API_URL}/api/v1/users/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      localStorage.removeItem("user");
 
-    localStorage.removeItem("user");
-
-    dispatch(logout());
-
-    closeNavbar();
+      dispatch(logout());
+      closeNavbar();
+      router.replace("/auth/login");
+    }
   };
 
   return (
