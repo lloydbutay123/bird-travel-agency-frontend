@@ -67,6 +67,7 @@ export default function Navbar() {
 
   const isHome = pathname === "/";
   const isAuth = pathname.startsWith("/auth");
+  const isOnboarding = pathname.startsWith("/onboarding");
 
   const [navOpen, setNavOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
@@ -119,9 +120,11 @@ export default function Navbar() {
     setProfileOpen((prev) => !prev);
   };
 
+  if (isAuth || isOnboarding) return null;
+
   return (
     <nav
-      className={`${isHome ? "lg:mt-7.5" : " bg-white mt-0 card"} ${isAuth && "hidden"} fixed flex z-999 items-center justify-center w-full`}
+      className={`${isHome ? "lg:mt-7.5" : " bg-white mt-0 card"} fixed flex z-999 items-center justify-center w-full`}
     >
       <Container
         className={`${isHome ? "py-6 max-w-345 px-6 lg:px-8" : "py-5.25 px-6"} flex items-center justify-between`}

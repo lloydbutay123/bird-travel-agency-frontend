@@ -9,9 +9,20 @@ type TextFieldProps = {
   value: string;
   className?: string;
   placeholder: string;
+  inputMode?:
+    | "text"
+    | "email"
+    | "search"
+    | "tel"
+    | "url"
+    | "none"
+    | "numeric"
+    | "decimal"
+    | undefined;
   required?: boolean;
   disabled?: boolean;
   readOnly?: boolean;
+  maxLength?: number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -22,9 +33,11 @@ export default function TextField({
   value,
   className,
   placeholder,
+  inputMode,
   required = false,
   disabled = false,
   readOnly = false,
+  maxLength,
   onChange,
 }: TextFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -45,10 +58,12 @@ export default function TextField({
         type={inputType}
         value={value}
         placeholder={placeholder}
+        inputMode={inputMode}
         required={required}
         disabled={disabled}
         readOnly={readOnly}
         onChange={onChange}
+        maxLength={maxLength}
         className="w-full rounded-md px-3 py-2 focus:outline-none"
       />
       {isPassword && (

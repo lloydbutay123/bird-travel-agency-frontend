@@ -11,8 +11,9 @@ import Accordion from "../ui/Accordion";
 export default function Footer() {
   const pathname = usePathname();
   const isAuth = pathname.includes("/auth");
+  const isOnboarding = pathname.startsWith("/onboarding");
 
-  if (isAuth) return null;
+  if (isAuth || isOnboarding) return null;
 
   return (
     <footer className="w-full pt-10 bg-[#8DD3BB]">
