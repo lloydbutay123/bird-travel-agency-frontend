@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ReduxProvider from "@/redux/ReduxProvider";
 import AuthInitializer from "@/providers/AuthInitializer";
+import Navbar from "@/components/layout/navbar/Navbar";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
