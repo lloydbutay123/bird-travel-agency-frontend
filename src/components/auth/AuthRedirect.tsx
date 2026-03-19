@@ -2,6 +2,7 @@ import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 
 export default function AuthRedirect({
   children,
@@ -9,18 +10,18 @@ export default function AuthRedirect({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-  const hydrated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated,
-  );
 
   useEffect(() => {
-    if (hydrated && isAuthenticated) {
-      router.replace("/");
-    }
-  }, [hydrated, isAuthenticated, router]);
+    if (!isAuthenticated) return;
 
-  if (hydrated && isAuthenticated) return null;
+    if (pathname.startsWith("/auth") {
+      router.replace("/");
+    })
+  }, [isAuthenticated, pathname, router]);
+
+  if (isAuthenticated && pathname.startsWith("/auth")) return null;
 
   return <>{children}</>;
 }
