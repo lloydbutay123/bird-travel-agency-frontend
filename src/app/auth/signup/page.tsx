@@ -101,7 +101,7 @@ export default function SignupPage() {
 
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      router.push("/account/setup/payment-method");
+      router.replace("/account/setup/payment-method");
     } catch (error) {
       setError("Something went wrong. Please try again");
       console.log(error);
