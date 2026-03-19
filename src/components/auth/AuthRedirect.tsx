@@ -16,9 +16,9 @@ export default function AuthRedirect({
   useEffect(() => {
     if (!isAuthenticated) return;
 
-    if (pathname.startsWith("/auth") {
+    if (pathname.startsWith("/auth")) {
       router.replace("/");
-    })
+    }
   }, [isAuthenticated, pathname, router]);
 
   if (isAuthenticated && pathname.startsWith("/auth")) return null;
