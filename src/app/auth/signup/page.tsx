@@ -100,7 +100,7 @@ export default function SignupPage() {
 
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      router.push("/");
+      router.push("/auth/signup/payment-method");
     } catch (error) {
       setError("Something went wrong. Please try again");
       console.log(error);
