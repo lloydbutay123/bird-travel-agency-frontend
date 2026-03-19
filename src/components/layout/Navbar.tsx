@@ -3,10 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FaPlane } from "react-icons/fa";
-import { IoBed, IoClose } from "react-icons/io5";
+import { FaCreditCard, FaHeart, FaPlane } from "react-icons/fa";
+import { IoBed, IoClose, IoLogOut } from "react-icons/io5";
 import Container from "../ui/Container";
-import { MdMenu, MdPerson } from "react-icons/md";
+import {
+  MdKeyboardArrowRight,
+  MdMenu,
+  MdPerson,
+  MdSupport,
+} from "react-icons/md";
 import Button from "../ui/Button";
 import { useState } from "react";
 import Accordion from "../ui/Accordion";
@@ -16,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
 import type { RootState } from "@/redux/store";
 import { API_URL } from "@/lib/api";
+import { IoMdSettings } from "react-icons/io";
 
 const actions = [
   { label: "Login", href: "/auth/login" },
@@ -37,6 +43,24 @@ const navItems = [
   },
 ];
 
+const profileActions = [
+  {
+    label: "My Account",
+    icon: MdPerson,
+    href: "",
+  },
+  {
+    label: "Payments",
+    icon: FaCreditCard,
+    href: "",
+  },
+  {
+    label: "Settings",
+    icon: IoMdSettings,
+    href: "",
+  },
+];
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -46,6 +70,7 @@ export default function Navbar() {
 
   const [navOpen, setNavOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -90,6 +115,10 @@ export default function Navbar() {
     }
   };
 
+  const handleProfileOpen = () => {
+    setProfileOpen((prev) => !prev);
+  };
+
   return (
     <nav
       className={`${isHome ? "lg:mt-7.5" : " bg-white mt-0 card"} ${isAuth && "hidden"} fixed flex z-999 items-center justify-center w-full`}
@@ -122,7 +151,11 @@ export default function Navbar() {
             );
           })}
         </div>
-        <Link href="/" onClick={closeNavbar} className="relative w-25 h-9">
+        <Link
+          href="/"
+          onClick={closeNavbar}
+          className="relative lg:absolute w-25 h-9 lg:left-1/2 lg:-translate-x-1/2"
+        >
           <Image
             src={`${isHome ? "/assets/images/logo.png" : "/assets/images/logo-dark.png"}`}
             alt=""
@@ -136,7 +169,11 @@ export default function Navbar() {
               <MdPerson color={isHome ? "white" : "black"} size={24} />
             </Button>
           )}
-          <Button variant="ghost" onClick={handleNavbar}>
+          <Button
+            variant="ghost"
+            onClick={handleNavbar}
+            className="block lg:hidden"
+          >
             {navOpen ? (
               <IoClose
                 size={24}
@@ -159,21 +196,107 @@ export default function Navbar() {
                 key={action.label}
                 href={action.href}
                 className={`
-          font-semibold text-[14px] 
-          ${isHome && action.label === "Login" ? "text-white" : "text-[#112211]"}
-          ${action.label === "Sign up" && !isHome && "bg-black! text-white px-4 py-[13.5px] rounded-lg"} 
-          ${action.label === "Sign up" && "bg-white px-4 py-[13.5px] rounded-lg"}`}
+                font-semibold text-[14px] 
+                ${isHome && action.label === "Login" ? "text-white" : "text-[#112211]"}
+                ${action.label === "Sign up" && !isHome && "bg-black! text-white px-4 py-[13.5px] rounded-lg"} 
+                ${action.label === "Sign up" && "bg-white px-4 py-[13.5px] rounded-lg"}`}
               >
                 {action.label}
               </Link>
             ))
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex relative  items-center gap-4">
               {/* Profile */}
-              <div className="flex items-center gap-2">
-                <MdPerson size={20} color={isHome ? "white" : "#112211"} />
+              <Link
+                href=""
+                className={`${isHome ? "text-white" : "text-black"} text-[14px] font-semibold`}
+              >
+                <p className="flex gap-1 items-center">
+                  <FaHeart size={24} color={isHome ? "white" : "black"} />
+                  Favorites
+                </p>
+              </Link>
+              <div className="h-3 w-0.5">
+                <Divider
+                  orientation="vertical"
+                  className={`${isHome ? "bg-white" : "bg-black"} w-full`}
+                />
+              </div>
+              <div
+                className="flex relative items-center gap-2 cursor-pointer"
+                onClick={handleProfileOpen}
+              >
+                {profileOpen && (
+                  <div className="card absolute flex flex-col gap-6 w-82.25 bg-white top-14 right-0 p-8 rounded-xl">
+                    <div className="flex items-center gap-4">
+                      <div className="relative h-16 w-16 rounded-full overflow-hidden">
+                        <Image
+                          src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt=""
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <h4 className="text-[16px] font-semibold truncate">
+                          {user?.firstName} {user?.lastName}
+                        </h4>
+                        <p className="text-[#112211]/75">Online</p>
+                      </div>
+                    </div>
+                    <Divider />
+                    <div className="flex flex-col gap-4">
+                      {profileActions.map((action, index) => {
+                        const Icon = action.icon;
+
+                        return (
+                          <Link
+                            href={action.href}
+                            className="flex items-center justify-between"
+                            key={index}
+                          >
+                            <div className="flex items-center gap-2">
+                              <Icon size={18} />
+                              <p className="text-[14px] font-medium">
+                                {action.label}
+                              </p>
+                            </div>
+                            <MdKeyboardArrowRight size={16} />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <Divider />
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <MdSupport size={18} />
+                          <p className="text-[14px] font-medium">Support</p>
+                        </div>
+                        <MdKeyboardArrowRight size={16} />
+                      </div>
+                      <div
+                        className="flex items-center justify-between"
+                        onClick={handleLogout}
+                      >
+                        <div className="flex items-center gap-2">
+                          <IoLogOut size={18} />
+                          <p className="text-[14px] font-medium">Logout</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className="relative rounded-full h-11.25 w-11.25 overflow-hidden">
+                  <Image
+                    src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt=""
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <p
-                  className={`text-[14px] font-semibold ${
+                  className={`text-[14px] font-semibold w-[55px] truncate ${
                     isHome ? "text-white" : "text-[#112211]"
                   }`}
                 >
@@ -182,7 +305,7 @@ export default function Navbar() {
               </div>
 
               {/* Logout */}
-              <Button onClick={handleLogout}>Logout</Button>
+              {/* <Button onClick={handleLogout}>Logout</Button> */}
             </div>
           )}
         </div>
@@ -251,17 +374,79 @@ export default function Navbar() {
               </Link>
             ))
           ) : (
-            <>
-              <div
-                className={`text-[24px] ${
-                  isHome ? "text-white" : "text-[#112211]"
-                }`}
-              >
-                {user ? `${user.firstName} ${user.lastName}` : "User"}
+            <div className="relative flex-1">
+              <div className="card flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="relative h-16 w-16 rounded-full overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <h4
+                      className={`${isHome ? "text-white" : "text-black"} text-[16px] font-semibold truncate`}
+                    >
+                      {user?.firstName} {user?.lastName}
+                    </h4>
+                    <p
+                      className={`${isHome ? "text-white/45" : "text-[#112211]/75"}`}
+                    >
+                      Online
+                    </p>
+                  </div>
+                </div>
+                <Divider className="bg-white/45" />
+                <div className="flex flex-col gap-4">
+                  {profileActions.map((action, index) => {
+                    const Icon = action.icon;
+
+                    return (
+                      <Link
+                        href={action.href}
+                        className="flex items-center justify-between"
+                        key={index}
+                      >
+                        <div className="flex items-center gap-2">
+                          <Icon size={18} color={isHome ? "white" : "black"} />
+                          <p
+                            className={`${isHome ? "text-white" : "text-black"} text-[14px] font-medium`}
+                          >
+                            {action.label}
+                          </p>
+                        </div>
+                        <MdKeyboardArrowRight
+                          size={16}
+                          color={isHome ? "white" : "black"}
+                        />
+                      </Link>
+                    );
+                  })}
+                </div>
+                <Divider className="bg-white/45" />
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <MdSupport size={18} color={isHome ? "white" : "black"} />
+                      <p
+                        className={`${isHome ? "text-white" : "text-black"} text-[14px] font-medium`}
+                      >
+                        Support
+                      </p>
+                    </div>
+                    <MdKeyboardArrowRight size={16} />
+                  </div>
+                </div>
               </div>
 
-              <Button onClick={handleLogout}>Logout</Button>
-            </>
+              <div className="fixed bottom-0 left-0 w-full p-6">
+                <Button onClick={handleLogout} className="w-full">
+                  Logout
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       )}

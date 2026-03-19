@@ -16,7 +16,7 @@ export default function FlightsPage() {
     router.push("/flights/results");
   };
   return (
-    <div className="flex flex-col gap-80 lg:gap-69 min-h-screen pt-19.5 lg:pt-22.5">
+    <div className="flex flex-col gap-80 lg:gap-69 min-h-screen pt-19.5 lg:pt-21.75">
       <HeroBanner
         image="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         title="Make your travel whishlist, we'll do the rest"
