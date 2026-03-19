@@ -10,7 +10,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { profileActions } from "./data";
 
-export default function AccountMenu({ onLogout }: { onLogout: () => void }) {
+export default function AccountMenu({
+  onLogout,
+  onClose,
+}: {
+  onLogout: () => void;
+  onClose: () => void;
+}) {
   const pathname = usePathname();
 
   const isHome = pathname === "/";
@@ -50,6 +56,7 @@ export default function AccountMenu({ onLogout }: { onLogout: () => void }) {
                 href={action.href}
                 className="flex items-center justify-between"
                 key={index}
+                onClick={onClose}
               >
                 <div className="flex items-center gap-2">
                   <Icon size={18} color={isHome ? "white" : "black"} />

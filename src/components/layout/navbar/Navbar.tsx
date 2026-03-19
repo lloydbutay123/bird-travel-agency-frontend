@@ -236,7 +236,7 @@ export default function Navbar() {
               </Link>
             ))
           ) : (
-            <AccountMenu onLogout={handleLogout} />
+            <AccountMenu onLogout={handleLogout} onClose={closeNavbar} />
           )}
         </div>
       )}
