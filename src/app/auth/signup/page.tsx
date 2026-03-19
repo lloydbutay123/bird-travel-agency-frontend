@@ -93,15 +93,17 @@ export default function SignupPage() {
         return;
       }
 
-      dispatch(
-        setCredentials({
-          user: data.user,
-        }),
-      );
-
       localStorage.setItem("user", JSON.stringify(data.user));
 
       router.replace("/account/setup/payment-method");
+
+      setTimeout(() => {
+        dispatch(
+          setCredentials({
+            user: data.user,
+          }),
+        );
+      }, 0);
     } catch (error) {
       setError("Something went wrong. Please try again");
       console.log(error);

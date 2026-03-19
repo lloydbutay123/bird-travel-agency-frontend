@@ -13,15 +13,18 @@ export default function AuthRedirect({
   const pathname = usePathname();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
+  const isAuthPage = pathname.startsWith("/auth");
+  const isSignupPage = pathname === "/auth/signup";
+
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated || !isAuthPage) return;
 
-    if (pathname.startsWith("/auth")) {
-      router.replace("/");
-    }
-  }, [isAuthenticated, pathname, router]);
+    if (isSignupPage) return;
 
-  if (isAuthenticated && pathname.startsWith("/auth")) return null;
+    router.replace("/");
+  }, [isAuthenticated, isAuthPage, isSignupPage, router]);
+
+  if (isAuthenticated && isAuthPage && !isSignupPage) return null;
 
   return <>{children}</>;
 }
