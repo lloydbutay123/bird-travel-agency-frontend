@@ -6,7 +6,7 @@ import { reviews } from "@/data/reviews";
 
 export default function ReviewsSection() {
   return (
-    <div className="gap-10 px-6 xl:px-0">
+    <div className="flex flex-col gap-6 px-6 xl:px-0">
       <SectionHeader
         title="Reviews"
         subtitle="What people says about Golobe facilities"

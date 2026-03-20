@@ -15,9 +15,13 @@ export default function SectionHeader({
   btnLabel,
 }: SearchButtonProps) {
   return (
-    <div className="lg:flex mx-auto items-center justify-between mb-10">
+    <div className="lg:flex items-center justify-between">
       <div className="mb-4 lg:mb-0">
-        <p className="mb-4 text-[32px] font-semibold">{title}</p>
+        <p
+          className={`${subtitle ? "mb-4" : "mb-0"} font-tradegothic text-[32px] font-semibold`}
+        >
+          {title}
+        </p>
         <p className="text-[16px] text-[#112211] w-full max-w-212.75">
           {subtitle}
         </p>

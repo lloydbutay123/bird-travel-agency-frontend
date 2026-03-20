@@ -35,7 +35,7 @@ export default function StaysPage() {
         btnIcon={<FaHotel size={16} />}
       />
       <div className="flex flex-col gap-20 pb-30 px-6 xl:px-0">
-        <Container>
+        <Container className="flex flex-col gap-6">
           <SectionHeader title="Your recent searches" />
           <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-8">
             {trips
@@ -50,7 +50,7 @@ export default function StaysPage() {
               ))}
           </div>
         </Container>
-        <Container>
+        <Container className="flex flex-col gap-6">
           <SectionHeader
             title="Fall into travel"
             subtitle="Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination."
@@ -70,7 +70,7 @@ export default function StaysPage() {
           </div>
         </Container>
 
-        <Container>
+        <Container className="flex flex-col gap-6">
           <SectionHeader
             title="Fall into travel"
             subtitle="Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination."

@@ -34,7 +34,7 @@ export default function FlightCard({
   onViewDetails,
 }: FlighCardProps) {
   return (
-    <div className="card flex bg-white rounded-xl">
+    <div className="card flex bg-white rounded-xl px-4 py-6">
       <div className="relative hidden md:block w-40">
         <Image
           src={airlineLogo}
@@ -44,7 +44,7 @@ export default function FlightCard({
           className="object-contain h-auto"
         />
       </div>
-      <div className="flex flex-col p-6 flex-1 w-full gap-4 md:px-6">
+      <div className="flex flex-col flex-1 w-full gap-4 md:px-6">
         <div className="flex w-full items-start justify-between">
           <div className="flex items-center gap-2">
             <RatingBadge rating={rating} />

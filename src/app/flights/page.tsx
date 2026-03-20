@@ -29,7 +29,7 @@ export default function FlightsPage() {
         position="absolute"
       />
       <div className="flex flex-col gap-20 pb-30">
-        <div>
+        <div className="flex flex-col gap-6">
           <Container className="px-6 xl:px-0">
             <SectionHeader
               title="Let's go places together"
@@ -47,7 +47,7 @@ export default function FlightsPage() {
           </div>
         </div>
 
-        <Container className="px-6 xl:px-0">
+        <Container className="flex flex-col gap-6 px-6 xl:px-0">
           <SectionHeader
             title="Fall into travel"
             subtitle="Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination."
@@ -66,7 +66,7 @@ export default function FlightsPage() {
           </div>
         </Container>
 
-        <Container className="px-6 xl:px-0">
+        <Container className="flex flex-col gap-6 px-6 xl:px-0">
           <SectionHeader
             title="Fall into travel"
             subtitle="Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination."
