@@ -1,6 +1,7 @@
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import Modal from "@/components/ui/Modal";
+import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
 import { API_URL } from "@/lib/api";
 import { logout } from "@/redux/slices/authSlice";
@@ -76,11 +77,12 @@ export default function EditPasswordModal({
   };
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
-      <div className="flex flex-col gap-4">
-        <h2 className="font-tradegothic text-[16px] font-semibold">
-          Change Password
-        </h2>
-        <Divider />
+      <div className="flex flex-col gap-10">
+        <SectionHeader
+          title="Change password"
+          subtitle="Update your password to keep your account secure."
+        />
+        {/* <Divider /> */}
         <div className="flex flex-col gap-6">
           <TextField
             label="Current password"
