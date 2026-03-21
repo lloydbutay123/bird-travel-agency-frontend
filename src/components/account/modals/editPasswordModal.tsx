@@ -1,5 +1,4 @@
 import Button from "@/components/ui/Button";
-import Divider from "@/components/ui/Divider";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
