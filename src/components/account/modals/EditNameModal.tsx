@@ -25,6 +25,8 @@ export default function EditNameModal({ onClose, isOpen }: EditNameModalProps) {
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setLastName] = useState(user?.lastName || "");
 
+  const isChanged = firstName !== user?.firstName || lastName !== user.lastName;
+
   const handleUpdateName = async () => {
     try {
       setLoading(true);
@@ -103,7 +105,7 @@ export default function EditNameModal({ onClose, isOpen }: EditNameModalProps) {
           <Button
             className="w-full max-w-37.5"
             onClick={handleUpdateName}
-            disabled={loading || !firstName || !lastName}
+            disabled={loading || !firstName || !lastName || !isChanged}
           >
             {loading ? <FaSpinner className="animate-spin" /> : "Submit"}
           </Button>

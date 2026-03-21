@@ -3,9 +3,11 @@ import AccountInfoItem from "./AccountInfoItem";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import EditPasswordModal from "./modals/editPasswordModal";
-import EditNameModal from "./modals/editNameModal";
 import EditPhoneModal from "./modals/editPhoneModal";
 import { useSelector } from "react-redux";
+import EditEmailModal from "./modals/EditEmailModal";
+import EditNameModal from "./modals/EditNameModal";
+import VerifyEmailOtpModal from "./modals/VerifyEmailOtpModal";
 
 export default function AccountDetailsSection() {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -13,6 +15,10 @@ export default function AccountDetailsSection() {
   const [editPasswordModal, setEditPasswordModal] = useState(false);
   const [editNameModal, setEditNameModal] = useState(false);
   const [editPhoneModal, setEditPhoneModal] = useState(false);
+  const [editEmailModal, setEditEmailModal] = useState(false);
+
+  const [verifyOtpModal, setVerifyOtpModal] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState("");
 
   const fullname = `${user?.firstName} ${user?.lastName}`;
   const email = `${user?.email}`;
@@ -27,7 +33,11 @@ export default function AccountDetailsSection() {
           value={fullname}
           onEdit={() => setEditNameModal(true)}
         />
-        <AccountInfoItem label="Email" value={email} onEdit={() => {}} />
+        <AccountInfoItem
+          label="Email"
+          value={email}
+          onEdit={() => setEditEmailModal(true)}
+        />
         <AccountInfoItem
           label="Password"
           value="************"
@@ -63,6 +73,22 @@ export default function AccountDetailsSection() {
       <EditPhoneModal
         onClose={() => setEditPhoneModal(false)}
         isOpen={editPhoneModal}
+      />
+
+      <EditEmailModal
+        onClose={() => setEditEmailModal(false)}
+        isOpen={editEmailModal}
+        currentEmail={user?.email || ""}
+        onOtpRequired={(email) => {
+          setPendingEmail(email);
+          setVerifyOtpModal(true);
+        }}
+      />
+
+      <VerifyEmailOtpModal
+        onClose={() => setVerifyOtpModal(false)}
+        isOpen={verifyOtpModal}
+        email={pendingEmail}
       />
     </div>
   );
