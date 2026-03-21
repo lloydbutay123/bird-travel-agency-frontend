@@ -3,22 +3,19 @@ import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
 import { API_URL } from "@/lib/api";
-import { updateUser } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function EditEmailModal({
   onClose,
   isOpen,
   onOtpRequired,
-  currentEmail,
 }: {
   onClose: () => void;
   isOpen: boolean;
   onOtpRequired: (email: string) => void;
-  currentEmail: string;
 }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -35,13 +32,15 @@ export default function EditEmailModal({
       setLoading(true);
       setError("");
 
+      const submittedEmail = email.trim();
+
       const res = await fetch(`${API_URL}/api/v1/users/change-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ email: email.trim(), password }),
+        body: JSON.stringify({ email: submittedEmail, password }),
       });
 
       const data = await res.json();
@@ -52,7 +51,7 @@ export default function EditEmailModal({
       }
 
       onClose();
-      onOtpRequired(email.trim());
+      onOtpRequired(submittedEmail);
     } catch (error) {
       setError("Something went wrong. Please try again.");
       console.log(error);
@@ -61,12 +60,24 @@ export default function EditEmailModal({
     }
   };
 
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+    setError("");
+    setLoading(false);
+  };
+
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
   return (
-    <Modal onClose={onClose} isOpen={isOpen}>
+    <Modal onClose={handleClose} isOpen={isOpen}>
       <div className="flex flex-col gap-10">
         <SectionHeader
           title="Update email"
-          subtitle="Enter your new email address. We’ll send a verification link."
+          subtitle="Enter your new email and current password. We’ll send a verification code to confirm the change."
         />
         <div className="flex flex-col gap-6">
           <TextField
@@ -90,7 +101,7 @@ export default function EditEmailModal({
         </div>
         {error && <p className="text-[16px] text-red-500">{error}</p>}
         <div className="flex gap-2 justify-end">
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" onClick={handleClose}>
             Cancel
           </Button>
           <Button
@@ -98,7 +109,7 @@ export default function EditEmailModal({
             onClick={handleUpdateEmail}
             disabled={loading || !email || !password || !isChanged}
           >
-            {loading ? <FaSpinner className="animate-spin" /> : "Continue"}
+            {loading ? <FaSpinner className="animate-spin" /> : "Send code"}
           </Button>
         </div>
       </div>

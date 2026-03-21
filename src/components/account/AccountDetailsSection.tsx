@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import EditEmailModal from "./modals/EditEmailModal";
 import EditNameModal from "./modals/EditNameModal";
 import VerifyEmailOtpModal from "./modals/VerifyEmailOtpModal";
+import EditDateOfBirthModal from "./modals/EditDateOfBirthModal";
+import EditAddressModal from "./modals/EditAddressModal";
 
 export default function AccountDetailsSection() {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -16,13 +18,25 @@ export default function AccountDetailsSection() {
   const [editNameModal, setEditNameModal] = useState(false);
   const [editPhoneModal, setEditPhoneModal] = useState(false);
   const [editEmailModal, setEditEmailModal] = useState(false);
+  const [editDateOfBirth, setEditDateOfBirth] = useState(false);
+  const [editAddress, setEditAddress] = useState(false);
 
   const [verifyOtpModal, setVerifyOtpModal] = useState(false);
   const [pendingEmail, setPendingEmail] = useState("");
 
   const fullname = `${user?.firstName} ${user?.lastName}`;
-  const email = `${user?.email}`;
-  const phone = `${user?.phone}`;
+  const email = user?.email;
+  const phone = user?.phone;
+  const dateOfBirth = user?.dateOfBirth;
+  const address = `${user?.address.barangay}, ${user?.address.city} ${user?.address.zipCode}, ${user?.address.province}, ${user?.address.region}`;
+
+  const formattedDb = dateOfBirth
+    ? new Date(dateOfBirth).toLocaleDateString("en-us", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "";
 
   return (
     <div className="flex flex-col gap-4">
@@ -35,7 +49,7 @@ export default function AccountDetailsSection() {
         />
         <AccountInfoItem
           label="Email"
-          value={email}
+          value={email || ""}
           onEdit={() => setEditEmailModal(true)}
         />
         <AccountInfoItem
@@ -45,18 +59,18 @@ export default function AccountDetailsSection() {
         />
         <AccountInfoItem
           label="Phone number"
-          value={phone}
+          value={phone || ""}
           onEdit={() => setEditPhoneModal(true)}
         />
         <AccountInfoItem
           label="Address"
-          value="St 32 main downtown, Los Angeles, California, USA"
-          onEdit={() => {}}
+          value={address}
+          onEdit={() => setEditAddress(true)}
         />
         <AccountInfoItem
           label="Date of birth"
-          value="01-01-1992"
-          onEdit={() => {}}
+          value={formattedDb}
+          onEdit={() => setEditDateOfBirth(true)}
         />
       </div>
 
@@ -78,11 +92,20 @@ export default function AccountDetailsSection() {
       <EditEmailModal
         onClose={() => setEditEmailModal(false)}
         isOpen={editEmailModal}
-        currentEmail={user?.email || ""}
         onOtpRequired={(email) => {
           setPendingEmail(email);
           setVerifyOtpModal(true);
         }}
+      />
+
+      <EditDateOfBirthModal
+        onClose={() => setEditDateOfBirth(false)}
+        isOpen={editDateOfBirth}
+      />
+
+      <EditAddressModal
+        onClose={() => setEditAddress(false)}
+        isOpen={editAddress}
       />
 
       <VerifyEmailOtpModal

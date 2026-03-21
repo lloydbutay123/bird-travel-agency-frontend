@@ -27,6 +27,18 @@ export default function EditPasswordModal({
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const resetForm = () => {
+    setCurrentPassword("");
+    setPassword("");
+    setConfirmPassword("");
+    setError("");
+  };
+
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
   const handleChangePassword = async () => {
     try {
       setLoading(true);
@@ -83,7 +95,7 @@ export default function EditPasswordModal({
     }
   };
   return (
-    <Modal onClose={onClose} isOpen={isOpen}>
+    <Modal onClose={handleClose} isOpen={isOpen}>
       <div className="flex flex-col gap-10">
         <SectionHeader
           title="Change password"
@@ -118,7 +130,7 @@ export default function EditPasswordModal({
         </div>
         {error && <p className="text-[16px] text-red-500">{error}</p>}
         <div className="flex gap-2 justify-end">
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" onClick={handleClose}>
             Cancel
           </Button>
           <Button

@@ -5,45 +5,58 @@ import TextField from "@/components/ui/TextField";
 import { API_URL } from "@/lib/api";
 import { updateUser } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
-type EditPhoneModalProps = {
+type EditDateOfBirthModalProps = {
   onClose: () => void;
   isOpen: boolean;
 };
 
-export default function EditPhoneModal({
+const formatDateForInput = (date?: string | Date | null) => {
+  if (!date) return "";
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return "";
+  return d.toISOString().split("T")[0];
+};
+
+export default function EditDateOfBirthModal({
   onClose,
   isOpen,
-}: EditPhoneModalProps) {
+}: EditDateOfBirthModalProps) {
   const dispatch = useDispatch();
+
   const { user } = useSelector((state: RootState) => state.auth);
+  const [dateOfBirth, setDateOfBirth] = useState(
+    formatDateForInput(user?.dateOfBirth),
+  );
+
+  useEffect(() => {
+    if (isOpen) {
+      setDateOfBirth(formatDateForInput(user?.dateOfBirth));
+      setError("");
+    }
+  }, [isOpen, user?.dateOfBirth]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const [phone, setPhone] = useState(user?.phone || "");
-
   const resetForm = () => {
-    setPhone(user?.phone || "");
+    setDateOfBirth(formatDateForInput(user?.dateOfBirth));
   };
+
+  const isChanged = dateOfBirth !== formatDateForInput(user?.dateOfBirth);
 
   const handleClose = () => {
     resetForm();
     onClose();
   };
 
-  const handleUpdatePhone = async () => {
+  const handleUpdateDateOfBirth = async () => {
     try {
       setLoading(true);
       setError("");
-
-      if (!phone.trim()) {
-        setError("Phone number is required");
-        return;
-      }
 
       const res = await fetch(`${API_URL}/api/v1/users/me`, {
         method: "PATCH",
@@ -51,7 +64,7 @@ export default function EditPhoneModal({
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ dateOfBirth }),
       });
 
       const data = await res.json();
@@ -65,7 +78,7 @@ export default function EditPhoneModal({
 
       dispatch(
         updateUser({
-          phone,
+          dateOfBirth,
         }),
       );
     } catch (error) {
@@ -79,16 +92,18 @@ export default function EditPhoneModal({
   return (
     <Modal onClose={handleClose} isOpen={isOpen}>
       <div className="flex flex-col gap-10">
-        <SectionHeader title="Update Phone Number" />
+        <SectionHeader
+          title="Date of birth"
+          subtitle="Your birth date is used for identity verification and personalization."
+        />
         <div className="flex flex-col gap-6">
           <TextField
-            label="Phone number"
-            name="phone"
-            type="tel"
-            inputMode="tel"
-            value={phone}
-            placeholder="Enter phone number"
-            onChange={(e) => setPhone(e.target.value)}
+            label="Date of Birth"
+            name="dateOfBirth"
+            type="date"
+            value={dateOfBirth || ""}
+            placeholder="Enter you date of birth"
+            onChange={(e) => setDateOfBirth(e.target.value)}
           />
         </div>
         {error && <p className="text-[16px] text-red-500">{error}</p>}
@@ -98,8 +113,8 @@ export default function EditPhoneModal({
           </Button>
           <Button
             className="w-full max-w-37.5"
-            onClick={handleUpdatePhone}
-            disabled={loading || !phone}
+            onClick={handleUpdateDateOfBirth}
+            disabled={loading || !dateOfBirth || !isChanged}
           >
             {loading ? <FaSpinner className="animate-spin" /> : "Submit"}
           </Button>
