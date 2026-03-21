@@ -23,7 +23,7 @@ export default function EditEmailModal({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const [email, setEmail] = useState(currentEmail || "");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { user } = useSelector((state: RootState) => state.auth);
