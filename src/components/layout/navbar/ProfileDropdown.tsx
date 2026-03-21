@@ -1,20 +1,22 @@
 "use client";
 
 import Divider from "@/components/ui/Divider";
-import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
 import Link from "next/link";
 import { IoLogOut } from "react-icons/io5";
 import { MdKeyboardArrowRight, MdSupport } from "react-icons/md";
 import { profileActions } from "./data";
+import { useSelector } from "react-redux";
 
 export default function ProfileDropdown({
   onLogout,
+  onClose,
 }: {
   onLogout: () => void;
+  onClose: () => void;
 }) {
-  const { user } = useAppSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   return (
     <div className="card absolute flex flex-col gap-6 w-82.25 bg-white top-14 right-0 p-8 rounded-xl">
@@ -44,6 +46,7 @@ export default function ProfileDropdown({
               href={action.href}
               className="flex items-center justify-between"
               key={index}
+              onClick={onClose}
             >
               <div className="flex items-center gap-2">
                 <Icon size={18} />

@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/redux/hooks";
 import SectionHeader from "../ui/SectionHeader";
 import AccountInfoItem from "./AccountInfoItem";
 import { RootState } from "@/redux/store";
@@ -6,9 +5,10 @@ import { useState } from "react";
 import EditPasswordModal from "./modals/editPasswordModal";
 import EditNameModal from "./modals/editNameModal";
 import EditPhoneModal from "./modals/editPhoneModal";
+import { useSelector } from "react-redux";
 
 export default function AccountDetailsSection() {
-  const { user } = useAppSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const [editPasswordModal, setEditPasswordModal] = useState(false);
   const [editNameModal, setEditNameModal] = useState(false);

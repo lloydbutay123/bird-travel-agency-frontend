@@ -1,7 +1,7 @@
-import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function ProtectedRoute({
   children,
@@ -10,7 +10,7 @@ export default function ProtectedRoute({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { isAuthenticated } = useAppSelector((state: RootState) => state.auth);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     if (!isAuthenticated) {

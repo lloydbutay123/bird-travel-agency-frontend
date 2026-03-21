@@ -11,10 +11,12 @@ type User = {
 type AuthState = {
   user: User | null;
   isAuthenticated: boolean;
+  isCheckingAuth: boolean;
 };
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
+  isCheckingAuth: true,
 };
 
 type SetCredentialPayload = {
@@ -33,6 +35,9 @@ const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
     },
+    setCheckingAuth: (state, action: PayloadAction<boolean>) => {
+      state.isCheckingAuth = action.payload;
+    },
     updateUser: (state, action: PayloadAction<Partial<User>>) => {
       if (state.user) {
         state.user = {
@@ -44,6 +49,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, updateUser, logout } = authSlice.actions;
+export const { setCredentials, updateUser, setCheckingAuth, logout } =
+  authSlice.actions;
 export default authSlice.reducer;
 export type { User, AuthState };

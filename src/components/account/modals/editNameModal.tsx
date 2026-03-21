@@ -3,11 +3,11 @@ import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
 import { API_URL } from "@/lib/api";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { updateUser } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 
 type EditNameModalProps = {
   onClose: () => void;
@@ -15,12 +15,12 @@ type EditNameModalProps = {
 };
 
 export default function EditNameModal({ onClose, isOpen }: EditNameModalProps) {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { user } = useAppSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setLastName] = useState(user?.lastName || "");

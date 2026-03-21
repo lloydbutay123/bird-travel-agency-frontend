@@ -1,9 +1,14 @@
 "use client";
 
 import { API_URL } from "@/lib/api";
-import { logout, setCredentials } from "@/redux/slices/authSlice";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import {
+  logout,
+  setCheckingAuth,
+  setCredentials,
+} from "@/redux/slices/authSlice";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AuthInitializer({
   children,
@@ -11,39 +16,46 @@ export default function AuthInitializer({
   children: React.ReactNode;
 }) {
   const dispatch = useDispatch();
-  const [hydrated, setHydrated] = useState(false);
+  const { isCheckingAuth } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const restoreUser = async () => {
+      dispatch(setCheckingAuth(true));
+
       try {
         const res = await fetch(`${API_URL}/api/v1/users/me`, {
-          method: "GET",
           credentials: "include",
         });
 
         if (!res.ok) {
           dispatch(logout());
-          setHydrated(true);
           return;
         }
 
-        const user = await res.json();
+        const data = await res.json();
 
         dispatch(
           setCredentials({
-            user,
+            user: data.user ?? data,
           }),
         );
       } catch (error) {
         dispatch(logout());
+        console.log(error);
       } finally {
-        setHydrated(true);
+        dispatch(setCheckingAuth(false));
       }
     };
     restoreUser();
   }, [dispatch]);
 
-  if (!hydrated) return null;
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return <>{children}</>;
 }

@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaHeart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { MdMenu, MdPerson } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
 import type { RootState } from "@/redux/store";
@@ -33,9 +33,28 @@ export default function Navbar() {
 
   const dispatch = useDispatch();
 
+  const profileRef = useRef<HTMLDivElement>(null);
+
   const { user, isAuthenticated } = useSelector(
     (state: RootState) => state.auth,
   );
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node)
+      ) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const closeNavbar = () => {
     setNavOpen(false);
@@ -184,7 +203,7 @@ export default function Navbar() {
                   className={`${isHome ? "bg-white" : "bg-black"} w-full`}
                 />
               </div>
-              <div className="relative">
+              <div className="relative" ref={profileRef}>
                 <button
                   type="button"
                   className="flex items-center gap-2 cursor-pointer"
@@ -208,7 +227,12 @@ export default function Navbar() {
                   </p>
                 </button>
 
-                {profileOpen && <ProfileDropdown onLogout={handleLogout} />}
+                {profileOpen && (
+                  <ProfileDropdown
+                    onLogout={handleLogout}
+                    onClose={() => setProfileOpen(false)}
+                  />
+                )}
               </div>
             </div>
           )}

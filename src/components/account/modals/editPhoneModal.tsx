@@ -3,12 +3,11 @@ import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
 import { API_URL } from "@/lib/api";
-import { useAppSelector } from "@/redux/hooks";
 import { updateUser } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 type EditPhoneModalProps = {
   onClose: () => void;
@@ -20,7 +19,7 @@ export default function EditPhoneModal({
   isOpen,
 }: EditPhoneModalProps) {
   const dispatch = useDispatch();
-  const { user } = useAppSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
