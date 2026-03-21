@@ -43,7 +43,7 @@ export default function ResetPasswordPageClient() {
         return;
       }
 
-      const res = await fetch(`${API_URL}/api/v1/users/reset-password`, {
+      const res = await fetch(`${API_URL}/api/v1/auth/reset-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

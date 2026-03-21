@@ -70,7 +70,7 @@ export default function SignupPageClient() {
 
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/users/register`, {
+      const res = await fetch(`${API_URL}/api/v1/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

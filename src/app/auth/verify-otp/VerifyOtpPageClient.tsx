@@ -37,7 +37,7 @@ export default function VerifyOtpPageClient() {
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/users/verify-reset-otp`, {
+      const res = await fetch(`${API_URL}/api/v1/auth/verify-reset-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export default function VerifyOtpPageClient() {
       setResending(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/users/forgot-password`, {
+      const res = await fetch(`${API_URL}/api/v1/auth/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

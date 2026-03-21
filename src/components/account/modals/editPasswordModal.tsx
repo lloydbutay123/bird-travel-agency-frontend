@@ -35,11 +35,19 @@ export default function EditPasswordModal({
 
       if (password !== confirmPassword) {
         setError("Passwords do not match");
-        setLoading(false);
+        return;
+      }
+      if (password.length < 8) {
+        setError("Password must be at least 8 characters");
         return;
       }
 
-      const res = await fetch(`${API_URL}/api/v1/users/change-password`, {
+      if (password !== confirmPassword) {
+        setError("Passwords do not match");
+        return;
+      }
+
+      const res = await fetch(`${API_URL}/api/v1/auth/change-password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -94,18 +102,18 @@ export default function EditPasswordModal({
           />
           <TextField
             label="New password"
-            name="currentPassword"
+            name="password"
             type="password"
             value={password}
-            placeholder="Input current password"
+            placeholder="Input new password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <TextField
             label="Confirm new password"
-            name="currentPassword"
+            name="confirmPassword"
             type="password"
             value={confirmPassword}
-            placeholder="Input current password"
+            placeholder="Confirm new password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>

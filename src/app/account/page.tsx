@@ -55,7 +55,9 @@ export default function AccountPage() {
             </div>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <h4 className="text-[24px] font-semibold">{fullname}</h4>
+            <h4 className="text-[24px] font-semibold text-center">
+              {fullname}
+            </h4>
             <p className="text-[16px] text-[#112211]/75">{email}</p>
           </div>
         </div>

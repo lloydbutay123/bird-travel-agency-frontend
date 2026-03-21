@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 type TextFieldProps = {
   label: string;
   name: string;
-  type: "text" | "email" | "password" | "number" | "date";
+  type: "text" | "email" | "password" | "number" | "date" | "tel";
   value: string;
   className?: string;
   placeholder: string;

@@ -4,11 +4,15 @@ import AccountInfoItem from "./AccountInfoItem";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import EditPasswordModal from "./modals/editPasswordModal";
+import EditNameModal from "./modals/editNameModal";
+import EditPhoneModal from "./modals/editPhoneModal";
 
 export default function AccountDetailsSection() {
   const { user } = useAppSelector((state: RootState) => state.auth);
 
   const [editPasswordModal, setEditPasswordModal] = useState(false);
+  const [editNameModal, setEditNameModal] = useState(false);
+  const [editPhoneModal, setEditPhoneModal] = useState(false);
 
   const fullname = `${user?.firstName} ${user?.lastName}`;
   const email = `${user?.email}`;
@@ -18,14 +22,22 @@ export default function AccountDetailsSection() {
     <div className="flex flex-col gap-4">
       <SectionHeader title="Account" />
       <div className="card flex flex-col gap-8 rounded-2xl px-6 py-8">
-        <AccountInfoItem label="Name" value={fullname} onEdit={() => {}} />
+        <AccountInfoItem
+          label="Name"
+          value={fullname}
+          onEdit={() => setEditNameModal(true)}
+        />
         <AccountInfoItem label="Email" value={email} onEdit={() => {}} />
         <AccountInfoItem
           label="Password"
           value="************"
           onEdit={() => setEditPasswordModal(true)}
         />
-        <AccountInfoItem label="Phone number" value={phone} onEdit={() => {}} />
+        <AccountInfoItem
+          label="Phone number"
+          value={phone}
+          onEdit={() => setEditPhoneModal(true)}
+        />
         <AccountInfoItem
           label="Address"
           value="St 32 main downtown, Los Angeles, California, USA"
@@ -41,6 +53,16 @@ export default function AccountDetailsSection() {
       <EditPasswordModal
         onClose={() => setEditPasswordModal(false)}
         isOpen={editPasswordModal}
+      />
+
+      <EditNameModal
+        onClose={() => setEditNameModal(false)}
+        isOpen={editNameModal}
+      />
+
+      <EditPhoneModal
+        onClose={() => setEditPhoneModal(false)}
+        isOpen={editPhoneModal}
       />
     </div>
   );
