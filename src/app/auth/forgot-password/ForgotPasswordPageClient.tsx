@@ -61,7 +61,7 @@ export default function ForgotPasswordPageClient() {
 
   return (
     <AuthRedirect>
-      <div className="flex min-h-screen w-full items-center justify-center gap-26 p-6 md:p-25.5">
+      <div className="flex min-h-screen w-full items-center justify-center gap-26 p-4 sm:p-6 md:p-25.5">
         <div className="w-full max-w-lg">
           <AuthHeader
             title="Forgot your password?"

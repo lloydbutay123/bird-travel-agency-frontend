@@ -114,7 +114,7 @@ export default function SignupPageClient() {
 
   return (
     <AuthRedirect>
-      <div className="flex w-full min-h-screen items-center justify-center gap-26 p-6 md:p-21.75">
+      <div className="flex w-full min-h-screen items-center justify-center gap-26 p-4 sm:p-6 md:p-21.75">
         <div className="hidden w-full h-full max-w-122 min-h-204 rounded-[30px] overflow-hidden lg:block">
           <Swiper
             modules={[Pagination, Autoplay]}

@@ -30,7 +30,7 @@ export default function FlightsPage() {
       />
       <div className="flex flex-col gap-20 pb-30">
         <div className="flex flex-col gap-6">
-          <Container className="px-6 xl:px-0">
+          <Container className="px-4 sm:px-6 xl:px-0">
             <SectionHeader
               title="Let's go places together"
               subtitle="Discover the latest offers and news and start planning your next trip with us."
@@ -47,13 +47,13 @@ export default function FlightsPage() {
           </div>
         </div>
 
-        <Container className="flex flex-col gap-6 px-6 xl:px-0">
+        <Container className="flex flex-col gap-5 md:gap-6 px-4 sm:px-6 xl:px-0">
           <SectionHeader
             title="Fall into travel"
             subtitle="Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination."
             btnLabel="See All"
           />
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
             {destinations.map((destination) => (
               <DestinationCard
                 key={destination.id}
@@ -66,13 +66,13 @@ export default function FlightsPage() {
           </div>
         </Container>
 
-        <Container className="flex flex-col gap-6 px-6 xl:px-0">
+        <Container className="flex flex-col gap-5 md:gap-6 px-4 sm:px-6 xl:px-0">
           <SectionHeader
             title="Fall into travel"
             subtitle="Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination."
             btnLabel="See All"
           />
-          <div>
+          <div className="flex flex-col gap-4 md:gap-6">
             {destinations
               .filter((d) => d.isFeatured)
               .map((destination) => (

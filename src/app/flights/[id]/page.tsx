@@ -44,7 +44,7 @@ export default function FlightDetails() {
 
   return (
     <div className="min-h-screen">
-      <Container className="px-6 xl:px-0 pt-34.5 pb-30">
+      <Container className="px-4 sm:px-6 xl:px-0 pt-34.5 pb-30">
         <BookingStepper steps={flow} currentStepIndex={stepIndex} />
         <BookingLayout>
           <div className="flex flex-col gap-8">

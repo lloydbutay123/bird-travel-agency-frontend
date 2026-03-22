@@ -29,12 +29,10 @@ export default function AuthHeader({
       </Link>
       <div className="flex flex-col gap-4">
         {hasBackButton && (
-          <div className="flex items-center gap-1">
+          <Link href={href} className="flex items-center gap-1">
             <FaAngleLeft size={24} />
-            <Link href={href}>
-              <p className="text-[14px] font-medium">{btnLabel}</p>
-            </Link>
-          </div>
+            <p className="text-[14px] font-medium">{btnLabel}</p>
+          </Link>
         )}
         <div className="mb-12">
           <h2 className="font-tradegothic text-[40px] font-bold mb-4">

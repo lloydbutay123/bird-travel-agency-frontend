@@ -17,7 +17,7 @@ export default function HeroBanner({
       <Image src={image} alt={title} fill className="object-cover object-top" />
       <div className="absolute top-0 left-0 w-full h-full bg-black/30" />
       <Container>
-        <div className="absolute max-w-110 w-full px-6 xl:px-0">
+        <div className="absolute max-w-110 w-full px-4 sm:px-6 xl:px-0">
           <h1 className="font-tradegothic text-white font-bold mb-2 text-[32px] md:text-[45px] leading-snug">
             {title}
           </h1>

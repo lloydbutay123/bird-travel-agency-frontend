@@ -15,7 +15,7 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-6 pt-32 ${isHome ? "bg-[#112211]" : "bg-white"}`}
+      className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-4 sm:px-6 pt-32 ${isHome ? "bg-[#112211]" : "bg-white"}`}
     >
       <div className="flex flex-col gap-1">
         {navItems.map((nav, index) => (

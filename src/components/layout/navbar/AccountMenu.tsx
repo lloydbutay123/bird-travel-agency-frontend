@@ -77,14 +77,14 @@ export default function AccountMenu({
         <Divider className="bg-white/45" />
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <Link href="" className="flex items-center gap-2">
               <MdSupport size={18} color={isHome ? "white" : "black"} />
               <p
                 className={`${isHome ? "text-white" : "text-black"} text-[14px] font-medium`}
               >
                 Support
               </p>
-            </div>
+            </Link>
             <MdKeyboardArrowRight size={16} />
           </div>
         </div>

@@ -34,7 +34,7 @@ export default function StaysPage() {
         btnLabel="Show Places"
         btnIcon={<FaHotel size={16} />}
       />
-      <div className="flex flex-col gap-20 pb-30 px-6 xl:px-0">
+      <div className="flex flex-col gap-20 pb-30 px-4 sm:px-6 xl:px-0">
         <Container className="flex flex-col gap-6">
           <SectionHeader title="Your recent searches" />
           <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-8">

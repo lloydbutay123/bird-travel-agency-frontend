@@ -70,16 +70,18 @@ export default function TravelSearch({
               </p>
             </div>
           )}
-          <div className="lg:flex gap-6 items-end space-y-4 md:space-y-0">
-            {mode === "flights" && <TravelSearchFields />}
-            {mode === "stays" && <StaySearchFields />}
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:gap-6">
+            <div className="flex flex-1 flex-col gap-4 lg:flex-row lg:gap-6 mb-4 md:mb-0">
+              {mode === "flights" && <TravelSearchFields />}
+              {mode === "stays" && <StaySearchFields />}
+            </div>
 
             {searchIcon && (
-              <div>
-                <Button className="h-14 w-14 hidden md:block">
+              <div className="shrink-0">
+                <Button className="hidden h-14 w-14 md:block">
                   <FaSearch size={24} />
                 </Button>
-                <Button className="w-full block md:hidden">
+                <Button className="block w-full md:hidden">
                   Search Flight
                 </Button>
               </div>

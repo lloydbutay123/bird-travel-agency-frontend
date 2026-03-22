@@ -17,8 +17,8 @@ export default function Footer() {
 
   return (
     <footer className="w-full pt-10 bg-[#8DD3BB]">
-      <Container className="px-6">
-        <div className="relative z-10 flex justify-between rounded-[20px] bg-[#CDEAE1] px-6 py-8">
+      <Container className="px-4 sm:px-6">
+        <div className="relative z-10 flex justify-between rounded-[20px] bg-[#CDEAE1] lg:px-6 lg:py-8">
           <div className="hidden lg:block">
             <p className="font-tradegothic leading-13.5 w-92 mb-6 text-[44px] font-bold">
               Subscribe Newsletter

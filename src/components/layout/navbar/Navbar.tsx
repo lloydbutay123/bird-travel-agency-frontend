@@ -105,7 +105,7 @@ export default function Navbar() {
       className={`${isHome ? "lg:mt-7.5" : " bg-white mt-0 card"} fixed flex z-999 items-center justify-center w-full`}
     >
       <Container
-        className={`${isHome ? "py-6 max-w-345 px-6 lg:px-8" : "py-5.25 px-6 xl:px-0"} flex items-center justify-between`}
+        className={`${isHome ? "py-6 max-w-345 lg:px-8" : "py-5.25 xl:px-0"} px-4 sm:px-6 flex items-center justify-between`}
       >
         <div className="hidden lg:flex gap-8">
           {navItems.map((nav) => {
@@ -186,7 +186,7 @@ export default function Navbar() {
               </Link>
             ))
           ) : (
-            <div className="flex relative  items-center gap-4">
+            <div className="flex relative items-center gap-4">
               {/* Profile */}
               <Link
                 href=""
@@ -242,7 +242,7 @@ export default function Navbar() {
 
       {actionsOpen && (
         <div
-          className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-6 pt-32 ${
+          className={`absolute flex flex-col gap-6 -z-10 h-screen w-full top-0 left-0 px-4 sm:px-6 pt-32 ${
             isHome ? "bg-[#112211]" : "bg-white"
           }`}
         >

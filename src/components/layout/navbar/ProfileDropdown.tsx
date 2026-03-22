@@ -59,16 +59,16 @@ export default function ProfileDropdown({
       </div>
       <Divider />
       <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between">
+        <Link href="" className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <MdSupport size={18} />
             <p className="text-[14px] font-medium">Support</p>
           </div>
           <MdKeyboardArrowRight size={16} />
-        </div>
+        </Link>
         <button
           type="button"
-          className="flex items-center justify-between"
+          className="flex items-center justify-between cursor-pointer"
           onClick={onLogout}
         >
           <div className="flex items-center gap-2">
