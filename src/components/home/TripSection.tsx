@@ -4,7 +4,7 @@ import TripCard from "./TripCard";
 
 export default function TripSection() {
   return (
-    <div className="flex flex-col gap-6 px-6 xl:px-0">
+    <div className="flex flex-col gap-6">
       <SectionHeader
         title="Plan your perfect trip"
         subtitle="Search Flights & Places Hire to our most popular destinations"

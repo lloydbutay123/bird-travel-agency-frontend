@@ -28,7 +28,7 @@ export default function Home() {
         onShowFlights={handleShowFlights}
       />
 
-      <Container className="flex flex-col gap-20 pt-7.5 mt-70.25 mb-22.5">
+      <Container className="flex flex-col gap-20 pt-7.5 mt-70.25 mb-22.5 px-4 sm:px-6 xl:px-0">
         <TripSection />
         <ServicesSection />
         <ReviewsSection />
