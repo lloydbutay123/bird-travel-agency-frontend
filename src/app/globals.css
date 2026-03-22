@@ -43,3 +43,43 @@ html {
 .card {
   @apply shadow-[2px_4px_16px_rgba(17,34,17,0.05)];
 }
+
+.svg-calLoader {
+  width: 230px;
+  height: 230px;
+  display: block;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: loader-spin 1.4s linear infinite;
+}
+
+.cal-loader__plane {
+  fill: #8dd3bb !important;
+}
+
+.cal-loader__path {
+  fill: none;
+  stroke: #8dd3bb !important;
+  animation: loader-path 1.4s ease-in-out infinite;
+}
+
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+  }
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+}
