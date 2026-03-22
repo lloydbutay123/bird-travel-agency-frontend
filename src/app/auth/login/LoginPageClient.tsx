@@ -89,7 +89,7 @@ export default function LoginPageClient() {
         <div className="w-full max-w-lg">
           <AuthHeader
             title="Login"
-            subtitle="Login to access your Golobe account"
+            subtitle="Login to access your Bird account"
           />
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-6">

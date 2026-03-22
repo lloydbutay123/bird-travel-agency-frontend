@@ -32,7 +32,7 @@ export default function StaySegmentCard({
     <div className="card bg-white rounded-xl px-6 py-8">
       {isBooking && (
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-[24px] font-bold font-tradegothic w-full max-w-122.75 text-[#112211]">
+          <h3 className="text-[24px] font-bold font-tradegothic w-full max-w-122.75">
             {roomName}
           </h3>
           <h4 className="text-[32px] text-[#FF8682] font-bold">
@@ -52,9 +52,7 @@ export default function StaySegmentCard({
           />
         </div>
         <div>
-          <h3 className="mb-2 text-[24px] font-semibold text-[#112211]">
-            {propertyName}
-          </h3>
+          <h3 className="mb-2 text-[24px] font-semibold">{propertyName}</h3>
           <p className="text-[14px] text-[#112211]/60">{propertyAddress}</p>
         </div>
       </div>
@@ -63,9 +61,7 @@ export default function StaySegmentCard({
         className={`flex items-center ${!isBooking ? "justify-center gap-20" : "justify-between"}`}
       >
         <div className="flex flex-col gap-2">
-          <h4 className="text-[20px] text-[#112211] font-semibold">
-            {checkInDate}
-          </h4>
+          <h4 className="text-[20px] font-semibold">{checkInDate}</h4>
           <p className="text-[14px] text-[#112211]/60 font-medium">Check-In</p>
         </div>
         <div className="flex items-center gap-6">
@@ -78,9 +74,7 @@ export default function StaySegmentCard({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h4 className="text-[20px] text-[#112211] font-semibold">
-            {checkOutDate}
-          </h4>
+          <h4 className="text-[20px] font-semibold">{checkOutDate}</h4>
           <p className="text-[14px] text-[#112211]/60 font-medium">Check-Out</p>
         </div>
       </div>

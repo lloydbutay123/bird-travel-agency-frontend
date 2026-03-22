@@ -22,9 +22,7 @@ export default function SectionHeader({
         >
           {title}
         </p>
-        <p className="text-[16px] text-[#112211] w-full max-w-212.75">
-          {subtitle}
-        </p>
+        <p className="text-[16px] w-full max-w-212.75">{subtitle}</p>
       </div>
       {btnLabel && (
         <Button onClick={onClick} variant="outline" className="ml-auto">

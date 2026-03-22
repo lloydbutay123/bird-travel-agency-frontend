@@ -46,7 +46,7 @@ export default function FlightSegmentCard({
     <div className="card bg-white rounded-xl px-6 py-8">
       {showPriceHeader && (
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-[24px] font-bold font-tradegothic text-[#112211]">
+          <h3 className="text-[24px] font-bold font-tradegothic">
             Emirates A350 Airbus
           </h3>
           <h4 className="text-[32px] text-[#FF8682] font-bold">$240</h4>
@@ -54,7 +54,7 @@ export default function FlightSegmentCard({
       )}
       <div className="flex items-center justify-between mb-6">
         <h4
-          className={`font-tradegothic ${!showPriceHeader ? "text-[20px]" : "text-[16px]"} font-bold text-[#112211]`}
+          className={`font-tradegothic ${!showPriceHeader ? "text-[20px]" : "text-[16px]"} font-bold`}
         >
           {date}
         </h4>
@@ -67,9 +67,7 @@ export default function FlightSegmentCard({
             <Image src={airlineLogo} alt="" fill className="object-contain" />
           </div>
           <div>
-            <h3 className="mb-2 text-[24px] font-semibold text-[#112211]">
-              {airline}
-            </h3>
+            <h3 className="mb-2 text-[24px] font-semibold">{airline}</h3>
             <p className="text-[14px] text-[#112211]/60">{aircraft}</p>
           </div>
         </div>
@@ -88,9 +86,7 @@ export default function FlightSegmentCard({
         className={`flex items-center ${!showPriceHeader ? "justify-center" : "justify-between"}`}
       >
         <div className="flex flex-col xl:flex-row items-center gap-4">
-          <h4 className="text-[24px] text-[#112211] font-semibold">
-            {departureTime}
-          </h4>
+          <h4 className="text-[24px] font-semibold">{departureTime}</h4>
           <p className="text-[16px] text-[#112211]/60 font-medium line-clamp-1">
             {departureAirport}
           </p>
@@ -105,9 +101,7 @@ export default function FlightSegmentCard({
           </div>
         </div>
         <div className="flex flex-col xl:flex-row items-center gap-4">
-          <h4 className="text-[24px] text-[#112211] font-semibold text-end">
-            {arrivalTime}
-          </h4>
+          <h4 className="text-[24px] font-semibold text-end">{arrivalTime}</h4>
           <p className="text-[16px] text-[#112211]/60 font-medium line-clamp-1">
             {arrivalAirport}
           </p>

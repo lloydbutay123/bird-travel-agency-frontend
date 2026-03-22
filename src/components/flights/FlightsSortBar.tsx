@@ -48,7 +48,7 @@ export default function FlightSortBar({
         </div>
       </div>
       <div className="flex items-center justify-between">
-        <p className="text-[14px] text-[#112211] font-semibold">
+        <p className="text-[14px] font-semibold">
           Showing {resultsShown} of
           <span className="text-[#FF8682]"> {totalResults} places</span>
         </p>

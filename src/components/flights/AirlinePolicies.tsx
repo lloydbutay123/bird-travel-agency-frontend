@@ -7,7 +7,7 @@ type AirlinePoliciesProps = {
 export default function AirlinePolicies({ policies }: AirlinePoliciesProps) {
   return (
     <div className="p-4 rounded-lg bg-[#8DD3BB]/60">
-      <h3 className="font-tradegothic mb-4 text-[24px] font-bold text-[#112211]">
+      <h3 className="font-tradegothic mb-4 text-[24px] font-bold">
         Emirates Airlines Policies
       </h3>
       <div className="flex items-center gap-4">

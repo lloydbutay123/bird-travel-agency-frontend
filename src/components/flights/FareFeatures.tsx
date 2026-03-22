@@ -21,7 +21,7 @@ export default function FareFeatures({
   return (
     <div>
       <div className="flex flex-col md:flex-row items-center justify-between mb-6">
-        <h3 className="font-tradegothic font-bold text-[24px] text-[#112211]">
+        <h3 className="font-tradegothic font-bold text-[24px]">
           {selectedFare} Features
         </h3>
         <div className="flex items-center gap-6">

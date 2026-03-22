@@ -23,9 +23,7 @@ export default function Accordion({
         className="flex justify-between w-full items-center mb-4"
         onClick={() => setOpen(!open)}
       >
-        <span
-          className={`font-semibold text-[16px] text-[#112211] ${className}`}
-        >
+        <span className={`font-semibold text-[16px] ${className}`}>
           {title}
         </span>
         <IoIosArrowDown

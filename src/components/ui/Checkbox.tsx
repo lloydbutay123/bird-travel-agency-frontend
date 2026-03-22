@@ -26,7 +26,7 @@ export default function Checkbox({
         id=""
         className="h-4.5 w-4.5 accent-[#8DD3BB]"
       />
-      <span className="text-[14px] font-medium text-[#112211]">{label}</span>
+      <span className="text-[14px] font-medium">{label}</span>
     </label>
   );
 }

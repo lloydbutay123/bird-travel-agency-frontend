@@ -21,12 +21,10 @@ export default function PaymentOptionCard({
       className={`flex items-center justify-between rounded-xl p-4 ${selected && "bg-[#8DD3BB]"}`}
     >
       <div className="flex flex-col gap-2 ">
-        <h4 className="font-tradegothic text-[#112211] text-[16px] font-bold">
-          {title}
-        </h4>
-        <p className="text-[14px] text-[#112211]">{description}</p>
+        <h4 className="font-tradegothic text-[16px] font-bold">{title}</h4>
+        <p className="text-[14px]">{description}</p>
         {moreInfo && (
-          <button className="self-start underline text-[12px] text-[#112211]">
+          <button className="self-start underline text-[12px]">
             More info
           </button>
         )}

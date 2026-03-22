@@ -1,7 +1,6 @@
 import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import Button from "../ui/Button";
 import { MdEmail } from "react-icons/md";
-import Divider from "../ui/Divider";
 import AuthDivider from "../auth/AuthDivider";
 
 export default function AuthLoginCard() {
@@ -18,7 +17,7 @@ export default function AuthLoginCard() {
             className="w-full h-10"
           />
         </div>
-        <p className="text-[14px] text-[#112211]">
+        <p className="text-[14px]">
           We’ll call or text you to confirm your number. Standard message and
           data rates apply. Privacy Policy
         </p>

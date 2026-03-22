@@ -23,7 +23,7 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
             key={index}
             href={nav.href}
             onClick={onClose}
-            className={`text-[24px] ${isHome ? "text-white" : "text-[#112211]"}`}
+            className={`text-[24px] ${isHome && "text-white"}`}
           >
             {nav.label}
           </Link>
@@ -39,7 +39,7 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
               key={index}
               href={nav.href}
               onClick={onClose}
-              className={`text-[24px] ${isHome ? "text-white" : "text-[#112211]"}`}
+              className={`text-[24px] ${isHome && "text-white"}`}
             >
               {nav.label}
             </Link>

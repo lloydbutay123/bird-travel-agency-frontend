@@ -34,9 +34,7 @@ export default function ListingHeader({
     <div className="md:flex justify-between mb-8">
       <div>
         <div className="flex items-center gap-4 mb-4">
-          <h2 className="font-tradegothic text-[24px] text-[#112211] font-bold">
-            {title}
-          </h2>
+          <h2 className="font-tradegothic text-[24px] font-bold">{title}</h2>
           {showHotelStars && (
             <div className="flex items-center gap-1">
               {Array.from({ length: hotelStars }).map((_, i) => (
@@ -54,7 +52,7 @@ export default function ListingHeader({
         </div>
         <div className="flex items-center gap-2">
           <RatingBadge rating={rating} />
-          <p className="text-[12px] text-[#112211] font-bold">
+          <p className="text-[12px] font-bold">
             Very Good
             <span className="font-medium"> {reviews} reviews</span>
           </p>

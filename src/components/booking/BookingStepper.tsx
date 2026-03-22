@@ -21,7 +21,7 @@ export default function BookingStepper({
               <div
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${
                   isActive || isDone
-                    ? "bg-[#8DD3BB] text-[#112211]"
+                    ? "bg-[#8DD3BB]"
                     : "bg-gray-200 text-gray-500"
                 }`}
               >
@@ -29,7 +29,7 @@ export default function BookingStepper({
               </div>
               <span
                 className={`hidden md:block text-sm font-medium ${
-                  isActive ? "text-[#112211]" : "text-[#112211]/60"
+                  !isActive && "text-[#112211]/60"
                 }`}
               >
                 {step.label}

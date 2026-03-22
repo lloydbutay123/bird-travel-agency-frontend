@@ -36,7 +36,7 @@ export default function PriceSummaryCard({
         </div>
         <div className="flex-1">
           <p className="text-[16px] font-medium mb-1">{category}</p>
-          <h4 className="text-[20px] font-semibold text-[#112211] mb-5">
+          <h4 className="text-[20px] font-semibold mb-5">
             {title} {subtitle}
           </h4>
           <div className="flex items-center gap-2">
@@ -49,7 +49,7 @@ export default function PriceSummaryCard({
         </div>
       </div>
       <Divider />
-      <p className="text-[#112211] text-[16px]">
+      <p className="text-[16px]">
         Your booking is protected by <span className="font-bold">BIRD</span>
       </p>
       <Divider />

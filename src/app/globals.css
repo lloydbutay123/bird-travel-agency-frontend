@@ -11,7 +11,7 @@
 
 :root {
   --background: #fafbfc;
-  --foreground: #171717;
+  --foreground: #112211;
   --font-sans: var(--font-montserrat);
 }
 
@@ -28,12 +28,14 @@
   }
 } */
 
-body,
-html {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
-  scroll-behavior: smooth;
+@layer {
+  body,
+  html {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+  }
 }
 
 .font-tradegothic {

@@ -76,7 +76,7 @@ export default function Footer() {
           <div className="hidden xl:flex gap-6">
             {footerSections.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
-                <h1 className="font-tradegothic text-[16px] font-bold text-[#112211]">
+                <h1 className="font-tradegothic text-[16px] font-bold">
                   {section.title}
                 </h1>
                 <div className="flex flex-col gap-3">

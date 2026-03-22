@@ -36,12 +36,12 @@ export default function SliderCoponent({
       </Slider.Root>
 
       <div className="flex justify-between">
-        <div className="text-[12px] font-medium text-[#112211]">
+        <p className="text-[12px] font-medium ">
           {formatLabel ? formatLabel(value[0]) : value[0]}
-        </div>
-        <div className="text-[12px] font-medium text-[#112211]">
+        </p>
+        <p className="text-[12px] font-medium">
           {formatLabel ? formatLabel(value[1]) : value[1]}
-        </div>
+        </p>
       </div>
     </div>
   );

@@ -13,8 +13,8 @@ export default function TripCard({ image, name, type }: TripCardProps) {
         <Image src={image} alt={name} fill className="object-cover" />
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-[16px] font-semibold text-[#112211]">{name}</p>
-        <p className="font-medium text-[14px] text-[#112211]">{type}</p>
+        <p className="text-[16px] font-semibold">{name}</p>
+        <p className="font-medium text-[14px]">{type}</p>
       </div>
     </div>
   );

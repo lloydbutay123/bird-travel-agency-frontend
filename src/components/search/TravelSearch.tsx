@@ -47,14 +47,14 @@ export default function TravelSearch({
             <div className="flex items-center gap-8">
               <div className="flex ">
                 <FaPlane size={24} color="black" className="mr-2" />
-                <p className="text-black font-semibold text-[14px] lg:text-[16px]">
+                <p className="font-semibold text-[14px] lg:text-[16px]">
                   Flights
                 </p>
               </div>
               <div className="w-px bg-[#D7E2EE] h-12" />
               <div className="flex ">
                 <IoBed size={24} color="black" className="mr-2" />
-                <p className="text-black font-semibold text-[14px] lg:text-[16px]">
+                <p className="font-semibold text-[14px] lg:text-[16px]">
                   Stays
                 </p>
               </div>

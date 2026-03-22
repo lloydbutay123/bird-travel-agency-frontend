@@ -116,11 +116,11 @@ export default function Navbar() {
                 <Link href={nav.href} className="flex ">
                   <Icon
                     size={24}
-                    color={`${isHome ? "white" : "#112211"}`}
+                    color={`${isHome && "white"}`}
                     className="mr-1"
                   />
                   <p
-                    className={`${isHome ? "text-white" : "text-[#112211]"} font-semibold text-[14px]`}
+                    className={`${isHome && "text-white"} font-semibold text-[14px]`}
                   >
                     {nav.label}
                   </p>
@@ -178,7 +178,7 @@ export default function Navbar() {
                 href={action.href}
                 className={`
                 font-semibold text-[14px] 
-                ${isHome && action.label === "Login" ? "text-white" : "text-[#112211]"}
+                ${isHome && action.label === "Login" && "text-white"}
                 ${action.label === "Sign up" && !isHome && "bg-black! text-white px-4 py-[13.5px] rounded-lg"} 
                 ${action.label === "Sign up" && "bg-white px-4 py-[13.5px] rounded-lg"}`}
               >
@@ -190,7 +190,7 @@ export default function Navbar() {
               {/* Profile */}
               <Link
                 href=""
-                className={`${isHome ? "text-white" : "text-black"} text-[14px] font-semibold`}
+                className={`${isHome && "text-white"} text-[14px] font-semibold`}
               >
                 <p className="flex gap-1 items-center">
                   <FaHeart size={24} color={isHome ? "white" : "black"} />
@@ -220,7 +220,7 @@ export default function Navbar() {
 
                   <p
                     className={`text-[14px] font-semibold w-13.75 truncate ${
-                      isHome ? "text-white" : "text-[#112211]"
+                      isHome && "text-white"
                     }`}
                   >
                     {user ? `${user.firstName} ${user.lastName}` : "User"}
@@ -252,9 +252,7 @@ export default function Navbar() {
                 onClick={closeNavbar}
                 key={index}
                 href={action.href}
-                className={`text-[24px] ${
-                  isHome ? "text-white" : "text-[#112211]"
-                }`}
+                className={`text-[24px] ${isHome && "text-white"}`}
               >
                 {action.label}
               </Link>

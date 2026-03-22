@@ -15,9 +15,7 @@ export default function FlightPassengerDetailsStep({
   return (
     <Container className="mt-12 pb-30">
       <div className="rounded-xl bg-white p-6">
-        <h2 className="mb-6 text-[24px] font-bold text-[#112211]">
-          Guest Details
-        </h2>
+        <h2 className="mb-6 text-[24px] font-bold">Guest Details</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <input
             type="text"
