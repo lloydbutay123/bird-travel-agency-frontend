@@ -18,11 +18,13 @@ export default function SectionHeader({
     <div className="lg:flex items-center justify-between">
       <div className="mb-4 lg:mb-0">
         <p
-          className={`${subtitle ? "mb-4" : "mb-0"} font-tradegothic text-[32px] font-semibold`}
+          className={`${subtitle ? "mb-4" : "mb-0"} font-tradegothic text-[22px] sm:text-[26px] lg:text-[32px] font-semibold`}
         >
           {title}
         </p>
-        <p className="text-[16px] w-full max-w-212.75">{subtitle}</p>
+        <p className="text-[14px] sm:text-[16px] w-full max-w-212.75">
+          {subtitle}
+        </p>
       </div>
       {btnLabel && (
         <Button onClick={onClick} variant="outline" className="ml-auto">

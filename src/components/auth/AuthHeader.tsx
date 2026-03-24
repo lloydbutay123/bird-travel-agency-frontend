@@ -35,10 +35,12 @@ export default function AuthHeader({
           </Link>
         )}
         <div className="mb-12">
-          <h2 className="font-tradegothic text-[40px] font-bold mb-4">
+          <h2 className="font-tradegothic text-[24px] sm:text-[32px] lg:text-[40px] font-bold mb-3 sm:mb-4">
             {title}
           </h2>
-          <p className="text-[16px] text-[#112211]/75">{subtitle}</p>
+          <p className="text-[14px] sm:text-[16px] text-[#112211]/75">
+            {subtitle}
+          </p>
         </div>
       </div>
     </>
