@@ -2,12 +2,11 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
-import { API_URL } from "@/lib/api";
-import { updateUser } from "@/redux/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updateUserProfileThunk } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 
 type EditPhoneModalProps = {
   onClose: () => void;
@@ -18,8 +17,8 @@ export default function EditPhoneModal({
   onClose,
   isOpen,
 }: EditPhoneModalProps) {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state: RootState) => state.auth);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -35,6 +34,8 @@ export default function EditPhoneModal({
     onClose();
   };
 
+  const isChanged = phone !== user?.phone;
+
   const handleUpdatePhone = async () => {
     try {
       setLoading(true);
@@ -45,29 +46,13 @@ export default function EditPhoneModal({
         return;
       }
 
-      const res = await fetch(`${API_URL}/api/v1/users/me`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ phone }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Update failed");
-        return;
-      }
-
-      onClose();
-
-      dispatch(
-        updateUser({
-          phone,
+      await dispatch(
+        updateUserProfileThunk({
+          phone: phone.trim(),
         }),
       );
+
+      onClose();
     } catch (error) {
       setError("Something went wrong. Please try again");
       console.log(error);
@@ -99,7 +84,7 @@ export default function EditPhoneModal({
           <Button
             className="w-full max-w-37.5"
             onClick={handleUpdatePhone}
-            disabled={loading || !phone}
+            disabled={loading || !phone || !isChanged}
           >
             {loading ? <FaSpinner className="animate-spin" /> : "Submit"}
           </Button>

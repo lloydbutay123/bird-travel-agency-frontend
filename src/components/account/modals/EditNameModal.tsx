@@ -2,12 +2,11 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
-import { API_URL } from "@/lib/api";
-import { updateUser } from "@/redux/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updateUserProfileThunk } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 
 type EditNameModalProps = {
   onClose: () => void;
@@ -15,12 +14,12 @@ type EditNameModalProps = {
 };
 
 export default function EditNameModal({ onClose, isOpen }: EditNameModalProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user } = useAppSelector((state: RootState) => state.auth);
 
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setLastName] = useState(user?.lastName || "");
@@ -48,30 +47,14 @@ export default function EditNameModal({ onClose, isOpen }: EditNameModalProps) {
         return;
       }
 
-      const res = await fetch(`${API_URL}/api/v1/users/me`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ firstName, lastName }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Update failed");
-        return;
-      }
+      await dispatch(
+        updateUserProfileThunk({
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+        }),
+      ).unwrap();
 
       onClose();
-
-      dispatch(
-        updateUser({
-          firstName,
-          lastName,
-        }),
-      );
     } catch (error) {
       setError("Something went wrong. Please try again");
       console.log(error);

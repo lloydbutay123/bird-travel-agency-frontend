@@ -15,11 +15,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "@/redux/slices/authSlice";
-import { API_URL } from "@/lib/api";
+import { loginThunk } from "@/redux/slices/authSlice";
 import AuthRedirect from "@/components/auth/AuthRedirect";
 import { FaSpinner } from "react-icons/fa";
+import { useAppDispatch } from "@/redux/hooks";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -33,7 +32,7 @@ export default function LoginPageClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
@@ -47,37 +46,20 @@ export default function LoginPageClient() {
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
+      await dispatch(
+        loginThunk({
           email,
           password,
         }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Login failed");
-        return;
-      }
-
-      dispatch(
-        setCredentials({
-          user: data.user,
-        }),
-      );
-
-      localStorage.setItem("user", JSON.stringify(data.user));
+      ).unwrap();
 
       router.replace(redirect && redirect.startsWith("/") ? redirect : "/");
-    } catch (error) {
-      setError("Something went wrong. Please try again");
-      console.log(error);
+    } catch (error: unknown) {
+      setError(
+        typeof error === "string"
+          ? error
+          : "Something went wrong. Please try again",
+      );
     } finally {
       setLoading(false);
     }

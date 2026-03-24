@@ -8,9 +8,8 @@ import { IoClose } from "react-icons/io5";
 import { MdMenu, MdPerson } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/redux/slices/authSlice";
+import { logout, logoutThunk } from "@/redux/slices/authSlice";
 import type { RootState } from "@/redux/store";
-import { API_URL } from "@/lib/api";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import Container from "@/components/ui/Container";
@@ -18,6 +17,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import MobileNav from "./MobileNav";
 import AccountMenu from "./AccountMenu";
 import { actions, navItems } from "./data";
+import { useAppDispatch } from "@/redux/hooks";
 
 export default function Navbar() {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function Navbar() {
   const [actionsOpen, setActionsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const profileRef = useRef<HTMLDivElement>(null);
 
@@ -79,18 +79,12 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch(`${API_URL}/api/v1/auth/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
+      await dispatch(logoutThunk()).unwrap();
+      router.replace("/auth/login");
     } catch (error) {
       console.log(error);
     } finally {
-      localStorage.removeItem("user");
-
-      dispatch(logout());
       closeNavbar();
-      router.replace("/auth/login");
     }
   };
 

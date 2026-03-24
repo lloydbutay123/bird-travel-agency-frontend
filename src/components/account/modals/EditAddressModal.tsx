@@ -2,12 +2,11 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
-import { API_URL } from "@/lib/api";
-import { updateUser } from "@/redux/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updateUserProfileThunk } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 
 type EditAddressModalProps = {
   onClose: () => void;
@@ -18,34 +17,34 @@ export default function EditAddressModal({
   onClose,
   isOpen,
 }: EditAddressModalProps) {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state: RootState) => state.auth);
 
-  const [region, setRegion] = useState(user?.address.region || "");
-  const [province, setProvince] = useState(user?.address.province || "");
-  const [city, setCity] = useState(user?.address.city || "");
-  const [barangay, setBarangay] = useState(user?.address.barangay || "");
-  const [zipCode, setZipCode] = useState(user?.address.zipCode || "");
+  const [region, setRegion] = useState(user?.address?.region || "");
+  const [province, setProvince] = useState(user?.address?.province || "");
+  const [city, setCity] = useState(user?.address?.city || "");
+  const [barangay, setBarangay] = useState(user?.address?.barangay || "");
+  const [zipCode, setZipCode] = useState(user?.address?.zipCode || "");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const resetForm = () => {
-    setRegion(user?.address.region || "");
-    setProvince(user?.address.province || "");
-    setCity(user?.address.city || "");
-    setBarangay(user?.address.barangay || "");
-    setZipCode(user?.address.zipCode || "");
+    setRegion(user?.address?.region || "");
+    setProvince(user?.address?.province || "");
+    setCity(user?.address?.city || "");
+    setBarangay(user?.address?.barangay || "");
+    setZipCode(user?.address?.zipCode || "");
 
     setError("");
   };
 
   const isChanged =
-    region !== user?.address.region ||
-    province !== user.address.province ||
-    city !== user.address.city ||
-    barangay !== user.address.barangay ||
-    zipCode !== user.address.zipCode;
+    region !== user?.address?.region ||
+    province !== user.address?.province ||
+    city !== user.address?.city ||
+    barangay !== user.address?.barangay ||
+    zipCode !== user.address?.zipCode;
 
   const handleClose = () => {
     resetForm();
@@ -57,43 +56,19 @@ export default function EditAddressModal({
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/users/me`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
+      await dispatch(
+        updateUserProfileThunk({
           address: {
-            region,
-            province,
-            city,
-            barangay,
-            zipCode,
-          },
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Update faild");
-        return;
-      }
-
-      onClose();
-
-      dispatch(
-        updateUser({
-          address: {
-            region,
-            province,
-            city,
-            barangay,
-            zipCode,
+            region: region.trim(),
+            province: province.trim(),
+            city: city.trim(),
+            barangay: barangay.trim(),
+            zipCode: zipCode.trim(),
           },
         }),
       );
+
+      onClose();
     } catch (error) {
       setError("Something went wrong. Please try agin.");
       console.log(error);

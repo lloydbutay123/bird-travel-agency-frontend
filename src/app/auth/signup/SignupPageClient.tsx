@@ -15,11 +15,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "@/redux/slices/authSlice";
-import { API_URL } from "@/lib/api";
+import { registerThunk } from "@/redux/slices/authSlice";
 import AuthRedirect from "@/components/auth/AuthRedirect";
 import { FaSpinner } from "react-icons/fa";
+import { useAppDispatch } from "@/redux/hooks";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -28,7 +27,7 @@ const images = [
 ];
 
 export default function SignupPageClient() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const [firstName, setFirstName] = useState("");
@@ -45,6 +44,7 @@ export default function SignupPageClient() {
   const handleCreateAccount = async () => {
     try {
       setLoading(true);
+      setError("");
 
       if (
         !firstName.trim() ||
@@ -68,15 +68,8 @@ export default function SignupPageClient() {
         return;
       }
 
-      setError("");
-
-      const res = await fetch(`${API_URL}/api/v1/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
+      await dispatch(
+        registerThunk({
           firstName,
           lastName,
           email,
@@ -84,29 +77,15 @@ export default function SignupPageClient() {
           password,
           confirmPassword,
         }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Register failed");
-        return;
-      }
-
-      localStorage.setItem("user", JSON.stringify(data.user));
+      );
 
       router.replace("/onboarding/payment-method");
-
-      setTimeout(() => {
-        dispatch(
-          setCredentials({
-            user: data.user,
-          }),
-        );
-      }, 0);
-    } catch (error) {
-      setError("Something went wrong. Please try again");
-      console.log(error);
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
     } finally {
       setLoading(false);
     }

@@ -1,8 +1,8 @@
+import { verifyEmailChange } from "@/apis/User";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
-import { API_URL } from "@/lib/api";
 import { updateUser } from "@/redux/slices/authSlice";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
@@ -30,32 +30,25 @@ export default function VerifyEmailOtpModal({
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/users/verify-email-change`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          email,
-          otp,
-        }),
+      await verifyEmailChange({
+        email,
+        otp,
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "OTP verification failed");
-        return;
-      }
-
       dispatch(
         updateUser({
           email,
         }),
       );
       onClose();
-    } catch (error) {}
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -13,9 +13,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useRouter } from "next/navigation";
-import { API_URL } from "@/lib/api";
 import AuthRedirect from "@/components/auth/AuthRedirect";
 import { FaSpinner } from "react-icons/fa";
+import { forgotPassword } from "@/apis/Auth";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -35,25 +35,17 @@ export default function ForgotPasswordPageClient() {
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/auth/forgot-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+      await forgotPassword({
+        email,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Failed");
-        return;
-      }
-
       router.push(`/auth/verify-otp?email=${encodeURIComponent(email)}`);
-    } catch (error) {
-      setError("Something went wrong. Please try again");
-      console.log(error);
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
     } finally {
       setLoading(false);
     }

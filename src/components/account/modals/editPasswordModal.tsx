@@ -2,12 +2,11 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
-import { API_URL } from "@/lib/api";
-import { logout } from "@/redux/slices/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { changePasswordThunk, logoutThunk } from "@/redux/slices/authSlice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 
 type EditPasswordModalProps = {
   onClose: () => void;
@@ -24,7 +23,7 @@ export default function EditPasswordModal({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const resetForm = () => {
@@ -53,42 +52,26 @@ export default function EditPasswordModal({
         return;
       }
 
-      if (password !== confirmPassword) {
-        setError("Passwords do not match");
-        return;
-      }
-
-      const res = await fetch(`${API_URL}/api/v1/auth/change-password`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
+      await dispatch(
+        changePasswordThunk({
           currentPassword,
           password,
           confirmPassword,
         }),
-      });
+      ).unwrap();
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Change password failed");
-        return;
-      }
+      await dispatch(logoutThunk()).unwrap();
 
       onClose();
-
-      setCurrentPassword("");
-      setPassword("");
-      setConfirmPassword("");
-
-      dispatch(logout());
-
-      router.push("/auth/login");
-    } catch (error) {
-      setError("Something went wrong. Please try again");
+      router.replace("/auth/login");
+    } catch (error: unknown) {
+      setError(
+        typeof error === "string"
+          ? error
+          : error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again",
+      );
       console.log(error);
     } finally {
       setLoading(false);

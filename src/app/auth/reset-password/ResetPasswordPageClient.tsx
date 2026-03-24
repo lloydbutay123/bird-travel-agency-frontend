@@ -14,6 +14,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { API_URL } from "@/lib/api";
 import AuthRedirect from "@/components/auth/AuthRedirect";
 import { FaSpinner } from "react-icons/fa";
+import { resetPassword } from "@/apis/Auth";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -43,25 +44,20 @@ export default function ResetPasswordPageClient() {
         return;
       }
 
-      const res = await fetch(`${API_URL}/api/v1/auth/reset-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, otp, password, confirmPassword }),
+      await resetPassword({
+        email,
+        otp,
+        password,
+        confirmPassword,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Reset password failed");
-        return;
-      }
-
       router.push("/auth/login");
-    } catch (error) {
-      setError("Something went wrong. Please try again");
-      console.log(error);
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
     } finally {
       setLoading(false);
     }

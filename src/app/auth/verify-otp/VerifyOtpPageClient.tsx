@@ -14,6 +14,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { API_URL } from "@/lib/api";
 import AuthRedirect from "@/components/auth/AuthRedirect";
 import { FaSpinner } from "react-icons/fa";
+import { forgotPassword, verifyOtp } from "@/apis/Auth";
 
 const images = [
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
@@ -37,26 +38,20 @@ export default function VerifyOtpPageClient() {
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/auth/verify-reset-otp`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, otp }),
+      await verifyOtp({
+        email,
+        otp,
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "OTP verification failed");
-        return;
-      }
 
       router.push(
         `/auth/reset-password?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`,
       );
-    } catch (error) {
-      setError("Something wen wrong. Please try again");
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
       console.log(error);
     } finally {
       setLoading(false);
@@ -68,22 +63,15 @@ export default function VerifyOtpPageClient() {
       setResending(true);
       setError("");
 
-      const res = await fetch(`${API_URL}/api/v1/auth/forgot-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+      await forgotPassword({
+        email,
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Failed to resend OTP");
-        return;
-      }
-    } catch (error) {
-      setError("Something went wrong. Please try again");
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
       console.log(error);
     } finally {
       setResending(false);

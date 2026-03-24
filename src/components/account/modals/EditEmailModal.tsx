@@ -1,3 +1,4 @@
+import { changeEmail } from "@/apis/User";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -32,29 +33,19 @@ export default function EditEmailModal({
       setLoading(true);
       setError("");
 
-      const submittedEmail = email.trim();
-
-      const res = await fetch(`${API_URL}/api/v1/users/change-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ email: submittedEmail, password }),
+      await changeEmail({
+        email: email.trim(),
+        password,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Update email failed");
-        return;
-      }
-
       onClose();
-      onOtpRequired(submittedEmail);
-    } catch (error) {
-      setError("Something went wrong. Please try again.");
-      console.log(error);
+      onOtpRequired(email);
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
     } finally {
       setLoading(false);
     }

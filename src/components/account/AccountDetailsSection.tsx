@@ -28,7 +28,9 @@ export default function AccountDetailsSection() {
   const email = user?.email;
   const phone = user?.phone;
   const dateOfBirth = user?.dateOfBirth;
-  const address = `${user?.address.barangay}, ${user?.address.city} ${user?.address.zipCode}, ${user?.address.province}, ${user?.address.region}`;
+  const address = user?.address
+    ? `${user.address.barangay}, ${user.address.city} ${user.address.zipCode}, ${user.address.province}, ${user.address.region}`
+    : "";
 
   const formattedDb = dateOfBirth
     ? new Date(dateOfBirth).toLocaleDateString("en-us", {
