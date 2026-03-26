@@ -7,9 +7,7 @@ import { FaHeart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { MdMenu, MdPerson } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, logoutThunk } from "@/redux/slices/authSlice";
-import type { RootState } from "@/redux/store";
+import { logoutThunk } from "@/redux/slices/authSlice";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import Container from "@/components/ui/Container";
@@ -17,7 +15,8 @@ import ProfileDropdown from "./ProfileDropdown";
 import MobileNav from "./MobileNav";
 import AccountMenu from "./AccountMenu";
 import { actions, navItems } from "./data";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectAuth } from "@/redux/selectors";
 
 export default function Navbar() {
   const router = useRouter();
@@ -35,9 +34,7 @@ export default function Navbar() {
 
   const profileRef = useRef<HTMLDivElement>(null);
 
-  const { user, isAuthenticated } = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const { user, isAuthenticated } = useAppSelector(selectAuth);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

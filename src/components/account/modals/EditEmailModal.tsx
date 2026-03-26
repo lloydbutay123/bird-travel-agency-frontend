@@ -3,11 +3,10 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
-import { API_URL } from "@/lib/api";
-import { RootState } from "@/redux/store";
+import { useAppSelector } from "@/redux/hooks";
+import { selectAuth, selectUser } from "@/redux/selectors";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useSelector } from "react-redux";
 
 export default function EditEmailModal({
   onClose,
@@ -24,7 +23,7 @@ export default function EditEmailModal({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { user } = useSelector((state: RootState) => state.auth);
+  const user = useAppSelector(selectUser);
 
   const isChanged = email.trim() !== user?.email;
 

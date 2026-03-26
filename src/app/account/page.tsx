@@ -3,18 +3,18 @@
 import AccountDetailsSection from "@/components/account/AccountDetailsSection";
 import AccountTabs from "@/components/account/AccountTabs";
 import Container from "@/components/ui/Container";
-import { RootState } from "@/redux/store";
+import { useAppSelector } from "@/redux/hooks";
+import { selectUser } from "@/redux/selectors";
 import Image from "next/image";
 import { useState } from "react";
 import { MdEdit } from "react-icons/md";
-import { useSelector } from "react-redux";
 
 type TabKey = "account" | "history" | "payment";
 
 export default function AccountPage() {
   const [activeTab, setActiveTab] = useState<TabKey>("account");
 
-  const { user } = useSelector((state: RootState) => state.auth);
+  const user = useAppSelector(selectUser);
 
   const fullname = user ? `${user?.firstName} ${user?.lastName}` : "User";
   const email = `${user?.email}`;

@@ -1,18 +1,18 @@
 import SectionHeader from "../ui/SectionHeader";
 import AccountInfoItem from "./AccountInfoItem";
-import { RootState } from "@/redux/store";
 import { useState } from "react";
 import EditPasswordModal from "./modals/editPasswordModal";
 import EditPhoneModal from "./modals/editPhoneModal";
-import { useSelector } from "react-redux";
 import EditEmailModal from "./modals/EditEmailModal";
 import EditNameModal from "./modals/EditNameModal";
 import VerifyEmailOtpModal from "./modals/VerifyEmailOtpModal";
 import EditDateOfBirthModal from "./modals/EditDateOfBirthModal";
 import EditAddressModal from "./modals/EditAddressModal";
+import { useAppSelector } from "@/redux/hooks";
+import { selectUser } from "@/redux/selectors";
 
 export default function AccountDetailsSection() {
-  const { user } = useSelector((state: RootState) => state.auth);
+  const user = useAppSelector(selectUser);
 
   const [editPasswordModal, setEditPasswordModal] = useState(false);
   const [editNameModal, setEditNameModal] = useState(false);

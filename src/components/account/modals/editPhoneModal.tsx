@@ -3,8 +3,8 @@ import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TextField from "@/components/ui/TextField";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectUser } from "@/redux/selectors";
 import { updateUserProfileThunk } from "@/redux/slices/authSlice";
-import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 
@@ -18,7 +18,7 @@ export default function EditPhoneModal({
   isOpen,
 }: EditPhoneModalProps) {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state: RootState) => state.auth);
+  const user = useAppSelector(selectUser);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

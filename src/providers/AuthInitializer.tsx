@@ -1,22 +1,22 @@
 "use client";
 
 import { API_URL } from "@/lib/api";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectIsCheckingAuth } from "@/redux/selectors";
 import {
   logout,
   setCheckingAuth,
   setCredentials,
 } from "@/redux/slices/authSlice";
-import { RootState } from "@/redux/store";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function AuthInitializer({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const dispatch = useDispatch();
-  const { isCheckingAuth } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const isCheckingAuth = useAppSelector(selectIsCheckingAuth);
 
   useEffect(() => {
     const restoreUser = async () => {

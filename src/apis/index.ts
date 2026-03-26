@@ -22,12 +22,12 @@ function isUnauthorized(error: unknown): boolean {
 }
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
   withCredentials: true,
 });
 
 export const apiRefreshToken = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
   withCredentials: true,
 });
 
@@ -38,7 +38,7 @@ export async function refreshAccesToken(): Promise<string> {
     throw new Error("No refresh token available");
   }
 
-  const { data } = await apiRefreshToken.post("/api/v1/auth/refresh-token", {
+  const { data } = await apiRefreshToken.post("/auth/refresh-token", {
     refreshToken,
   });
 

@@ -4,14 +4,14 @@ import Divider from "@/components/ui/Divider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { actions, navItems } from "./data";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useAppSelector } from "@/redux/hooks";
+import { selectIsAuthenticated } from "@/redux/selectors";
 
 export default function MobileNav({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   return (
     <div

@@ -5,32 +5,17 @@ import {
   registerUser,
 } from "@/apis/Auth";
 import { getCurrentUser, updateUserProfile } from "@/apis/User";
+import {
+  AuthState,
+  ChangePasswordPayload,
+  LoginPayload,
+  RegisterPayload,
+  SetCredentialPayload,
+  UpdateUserPayload,
+} from "@/types/auth.type";
+import { User } from "@/types/user.type";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-
-type User = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  dateOfBirth: string;
-  address: {
-    region: string;
-    province: string;
-    city: string;
-    barangay: string;
-    zipCode: string;
-  };
-};
-
-type AuthState = {
-  user: User | null;
-  isAuthenticated: boolean;
-  isCheckingAuth: boolean;
-  loading: boolean;
-  error: string | null;
-};
 
 const initialState: AuthState = {
   user: null,
@@ -38,44 +23,6 @@ const initialState: AuthState = {
   isCheckingAuth: true,
   loading: false,
   error: null,
-};
-
-type LoginPayload = {
-  email: string;
-  password: string;
-};
-
-type SetCredentialPayload = {
-  user: User;
-};
-
-type RegisterPayload = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-  confirmPassword: string;
-};
-
-type UpdateUserPayload = {
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
-  dateOfBirth?: string;
-  address?: {
-    region?: string;
-    province?: string;
-    city?: string;
-    barangay?: string;
-    zipCode?: string;
-  };
-};
-
-type ChangePasswordPayload = {
-  currentPassword: string;
-  password: string;
-  confirmPassword: string;
 };
 
 export const loginThunk = createAsyncThunk<
@@ -87,13 +34,12 @@ export const loginThunk = createAsyncThunk<
     const data = await loginUser(payload);
     return { user: data.user };
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      return thunkAPI.rejectWithValue(
-        error?.response?.data?.message || "Login failed",
-      );
-    }
+    return thunkAPI.rejectWithValue(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong. Please try again",
+    );
   }
-  return thunkAPI.rejectWithValue("Something went wrong. Please try again");
 });
 
 export const getMeThunk = createAsyncThunk<User, void, { rejectValue: string }>(
@@ -103,13 +49,12 @@ export const getMeThunk = createAsyncThunk<User, void, { rejectValue: string }>(
       const data = await getCurrentUser();
       return data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return thunkAPI.rejectWithValue(
-          error?.response?.data?.message || "Failed to fetch current user",
-        );
-      }
+      return thunkAPI.rejectWithValue(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again",
+      );
     }
-    return thunkAPI.rejectWithValue("Something went wrong. Please try again");
   },
 );
 
@@ -122,13 +67,12 @@ export const logoutThunk = createAsyncThunk<
     await logoutUser();
     return;
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      return thunkAPI.rejectWithValue(
-        error?.response?.data?.message || "Logout failed",
-      );
-    }
+    return thunkAPI.rejectWithValue(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong. Please try again",
+    );
   }
-  return thunkAPI.rejectWithValue("Something went wrong. Please try again");
 });
 
 export const registerThunk = createAsyncThunk<
@@ -140,13 +84,12 @@ export const registerThunk = createAsyncThunk<
     const data = await registerUser(payload);
     return { user: data.user };
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      return thunkAPI.rejectWithValue(
-        error?.response?.data?.message || "Failed to register user",
-      );
-    }
+    return thunkAPI.rejectWithValue(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong. Please try again",
+    );
   }
-  return thunkAPI.rejectWithValue("Something went wrong. Please try again");
 });
 
 export const updateUserProfileThunk = createAsyncThunk<
@@ -299,4 +242,3 @@ export const { setCredentials, updateUser, setCheckingAuth, logout } =
   authSlice.actions;
 
 export default authSlice.reducer;
-export type { User, AuthState };

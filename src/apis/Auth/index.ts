@@ -5,63 +5,63 @@ import {
 } from "@/utils/users";
 import { api } from "..";
 import axios from "axios";
+import {
+  ChangePasswordPayload,
+  ForgotPasswordPayload,
+  LoginPayload,
+  RegisterPayload,
+  ResetPasswordPayload,
+  VerifyOtpPayload,
+} from "@/types/auth.type";
 
-type LoginPayload = {
-  email: string;
-  password: string;
-};
+function getErrorMessage(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    return (
+      error.response?.data?.message || "Something went wrong. Please try again"
+    );
+  }
 
-type ForgotPasswordPayload = {
-  email: string;
-};
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "data" in error &&
+    typeof error.data === "object" &&
+    error.data !== null &&
+    "message" in error.data &&
+    typeof error.data.message === "string"
+  ) {
+    return error.data.message;
+  }
 
-type VerifyOtpPayload = {
-  email: string;
-  otp: string;
-};
+  if (error instanceof Error) {
+    return error.message;
+  }
 
-type ResetPasswordPayload = {
-  email: string;
-  otp: string;
-  password: string;
-  confirmPassword: string;
-};
-
-type RegisterUserPayload = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-  confirmPassword: string;
-};
-
-type ChangePasswordPayload = {
-  currentPassword: string;
-  password: string;
-  confirmPassword: string;
-};
+  return "Something went wrong. Please try again";
+}
 
 export async function loginUser(payload: LoginPayload) {
-  const { data } = await api.post("/api/v1/auth/login", payload);
+  try {
+    const { data } = await api.post("/auth/login", payload);
 
-  if (data.user) {
-    storeUserInfoToStorage(data.user);
+    if (data.user) {
+      storeUserInfoToStorage(data.user);
+    }
+    if (data.accessToken && data.refreshToken) {
+      storeUserTokens({
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      });
+    }
+    return data;
+  } catch (error: unknown) {
+    throw new Error(getErrorMessage(error));
   }
-
-  if (data.accessToken && data.refreshToken) {
-    storeUserTokens({
-      accessToken: data.accessToken,
-      refreshToken: data.refreshToken,
-    });
-  }
-
-  return data;
 }
 
 export async function logoutUser() {
   try {
-    await api.post("/api/v1/auth/logout");
+    await api.post("/auth/logout");
   } finally {
     clearUserInfoFromStorage();
   }
@@ -69,61 +69,43 @@ export async function logoutUser() {
 
 export async function forgotPassword(payload: ForgotPasswordPayload) {
   try {
-    const { data } = await api.post("/api/v1/auth/forgot-password", payload);
+    const { data } = await api.post("/auth/forgot-password", payload);
     return data;
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to send reset email",
-      );
-    }
-    throw new Error("Something went wrong. Please try again");
+    throw new Error(getErrorMessage(error));
   }
 }
 
 export async function verifyOtp(payload: VerifyOtpPayload) {
   try {
-    const { data } = await api.post("/api/v1/auth/verify-reset-otp", payload);
+    const { data } = await api.post("/auth/verify-reset-otp", payload);
     return data;
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || "Failed to verify OTP");
-    }
-    throw new Error("Something went wrong. Please try again");
+    throw new Error(getErrorMessage(error));
   }
 }
 
 export async function resetPassword(payload: ResetPasswordPayload) {
   try {
-    const { data } = await api.post("/api/v1/auth/reset-password", payload);
+    const { data } = await api.post("/auth/reset-password", payload);
     return data;
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to reset password",
-      );
-    }
-    throw new Error("Something went wrong. Please try again");
+    throw new Error(getErrorMessage(error));
   }
 }
 
 export async function changePassword(payload: ChangePasswordPayload) {
   try {
-    const { data } = await api.put("/api/v1/auth/change-password", payload);
+    const { data } = await api.put("/auth/change-password", payload);
     return data;
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to change password",
-      );
-    }
-    throw new Error("Something went wrong. Please try again");
+    throw new Error(getErrorMessage(error));
   }
 }
 
-export async function registerUser(payload: RegisterUserPayload) {
+export async function registerUser(payload: RegisterPayload) {
   try {
-    const { data } = await api.post("/api/v1/auth/register", payload);
+    const { data } = await api.post("/auth/register", payload);
     if (data.user) {
       storeUserInfoToStorage(data.user);
     }
@@ -136,11 +118,6 @@ export async function registerUser(payload: RegisterUserPayload) {
     }
     return data;
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to register user",
-      );
-    }
-    throw new Error("Something went wrong. Please try again");
+    throw new Error(getErrorMessage(error));
   }
 }

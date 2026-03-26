@@ -6,9 +6,9 @@ import Link from "next/link";
 import { MdKeyboardArrowRight, MdSupport } from "react-icons/md";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import { profileActions } from "./data";
+import { useAppSelector } from "@/redux/hooks";
+import { selectUser } from "@/redux/selectors";
 
 export default function AccountMenu({
   onLogout,
@@ -21,7 +21,7 @@ export default function AccountMenu({
 
   const isHome = pathname === "/";
 
-  const { user } = useSelector((state: RootState) => state.auth);
+  const user = useAppSelector(selectUser);
 
   return (
     <div className="relative flex-1">

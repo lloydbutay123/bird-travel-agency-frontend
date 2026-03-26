@@ -1,8 +1,8 @@
-import { RootState } from "@/redux/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import { selectIsAuthenticated } from "@/redux/selectors";
 
 export default function AuthRedirect({
   children,
@@ -12,7 +12,7 @@ export default function AuthRedirect({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const isAuthPage = pathname.startsWith("/auth");
   const redirect = searchParams.get("redirect");

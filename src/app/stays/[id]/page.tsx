@@ -3,7 +3,6 @@
 import Container from "@/components/ui/Container";
 import React, { useEffect } from "react";
 import BookingStepper from "@/components/booking/BookingStepper";
-import { useDispatch, useSelector } from "react-redux";
 import {
   nextStep,
   prevStep,
@@ -14,13 +13,12 @@ import BookingLayout from "@/components/booking/BookingLayout";
 import BookingNavigation from "@/components/booking/BookingNavigation";
 import { useRouter } from "next/navigation";
 import { bookingFlows } from "@/features/booking/booking-flow";
-import { RootState } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectBooking } from "@/redux/selectors";
 
 export default function StayDetailsPage() {
-  const dispatch = useDispatch();
-  const { productType, stepIndex } = useSelector(
-    (state: RootState) => state.booking,
-  );
+  const dispatch = useAppDispatch();
+  const { productType, stepIndex } = useAppSelector(selectBooking);
 
   useEffect(() => {
     dispatch(setProductType("stay"));

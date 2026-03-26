@@ -1,13 +1,13 @@
 "use client";
 
 import Divider from "@/components/ui/Divider";
-import { RootState } from "@/redux/store";
 import Image from "next/image";
 import Link from "next/link";
 import { IoLogOut } from "react-icons/io5";
 import { MdKeyboardArrowRight, MdSupport } from "react-icons/md";
 import { profileActions } from "./data";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/redux/hooks";
+import { selectUser } from "@/redux/selectors";
 
 export default function ProfileDropdown({
   onLogout,
@@ -16,7 +16,7 @@ export default function ProfileDropdown({
   onLogout: () => void;
   onClose: () => void;
 }) {
-  const { user } = useSelector((state: RootState) => state.auth);
+  const user = useAppSelector(selectUser);
 
   return (
     <div className="card absolute flex flex-col gap-6 w-82.25 bg-white top-14 right-0 p-8 rounded-xl">

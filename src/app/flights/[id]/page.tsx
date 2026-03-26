@@ -12,14 +12,12 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { bookingFlows } from "@/features/booking/booking-flow";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectBooking } from "@/redux/selectors";
 
 export default function FlightDetails() {
-  const dispatch = useDispatch();
-  const { productType, stepIndex } = useSelector(
-    (state: RootState) => state.booking,
-  );
+  const dispatch = useAppDispatch();
+  const { productType, stepIndex } = useAppSelector(selectBooking);
 
   useEffect(() => {
     dispatch(setProductType("flight"));
