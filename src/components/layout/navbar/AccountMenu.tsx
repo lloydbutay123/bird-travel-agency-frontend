@@ -25,7 +25,7 @@ export default function AccountMenu({
 
   return (
     <div className="relative flex-1">
-      <div className="card flex flex-col gap-6">
+      <div className="lg:card flex flex-col gap-6">
         <div className="flex items-center gap-4">
           <div className="relative h-16 w-16 rounded-full overflow-hidden">
             <Image
