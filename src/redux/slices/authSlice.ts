@@ -15,7 +15,6 @@ import {
 } from "@/types/auth.type";
 import { User } from "@/types/user.type";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
 
 const initialState: AuthState = {
   user: null,
