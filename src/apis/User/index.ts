@@ -27,7 +27,7 @@ type VerifyEmailChangePayload = {
 
 export async function updateUserProfile(payload: UpdateUserProfilePayload) {
   try {
-    const { data } = await api.patch("/api/v1/users/me", payload);
+    const { data } = await api.patch("/users/me", payload);
     return data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
@@ -69,6 +69,6 @@ export async function verifyEmailChange(payload: VerifyEmailChangePayload) {
 }
 
 export async function getCurrentUser() {
-  const { data } = await api.get("/api/v1/users/me");
+  const { data } = await api.get("/users/me");
   return data;
 }
